@@ -138,6 +138,6 @@ node,way   osm_timestamp timestamptz(0) linear
 * planet_osm_polygon
 * planet_osm_roads
 
-По ним [можно выполнять различные запросы над геоданными](/geo/postgis-examples)
+По ним [можно выполнять различные запросы над геоданными](/gis/postgis-examples)
 
 Более подробно про [опции использования osm2pgsql на странице репозитория](https://github.com/openstreetmap/osm2pgsql)
