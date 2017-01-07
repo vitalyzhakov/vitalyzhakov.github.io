@@ -6,6 +6,7 @@
 ## Требования
 
 Действия выполняются на системе
+
 * debian jessie 8.2
 * PostgreSQL 9.4
 * osm2pgsql 0.86
