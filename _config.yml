@@ -1,6 +1,9 @@
-theme: jekyll-theme-architect
+theme: jekyll-theme-minimal
 
 title: Идеальная архитектура
 description: и процессы ИТ
 
 google_analytics: UA-18959808-11
+
+gems:
+  - jekyll-sitemap
