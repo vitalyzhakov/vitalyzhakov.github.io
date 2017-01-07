@@ -2,7 +2,8 @@
 
 ## Здание (полигон), которое содержит точку с координатами $lng, $lat
 
-```php
+```
+<?php
     'SELECT * FROM planet_osm_polygon WHERE ' .
     'ST_contains(
         way,
