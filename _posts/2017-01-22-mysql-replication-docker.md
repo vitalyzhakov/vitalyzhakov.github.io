@@ -16,3 +16,34 @@
 отправлялось на SLAVE-сервера.
 
 ![Много приложений - одна база](/images/several-upstream-several-dbs.svg "Много приложений - много баз")
+
+## Настройка репликации
+
+### Изменение в my.cnf для каждого сервера
+
+Каждый сервер должен иметь свой номер.
+Master-сервер `server-id=1`.
+Slave-сервер `server-id>1`.
+
+Конфигурационный файл находится по адресу
+`/etc/mysql/conf.d/my.cnf`
+
+Конфигурация master-сервера
+```
+[mysqld]
+server-id=1
+binlog_format=ROW
+log-bin
+```
+
+Конфигурация slave1
+```
+[mysqld]
+server-id=2
+```
+
+Конфигурация slave2
+```
+[mysqld]
+server-id=2
+```
