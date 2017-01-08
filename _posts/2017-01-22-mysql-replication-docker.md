@@ -129,7 +129,7 @@ mysql> show master status;
 1 row in set (0.00 sec)
 ```
 
-В процессах master-сервера мы можем видеть подчключения со SLAVE
+В процессах master-сервера мы можем видеть подключения со SLAVE
 
 ```
 mysql> SHOW PROCESSLIST;  
