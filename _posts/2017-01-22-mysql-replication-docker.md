@@ -29,6 +29,7 @@ Slave-сервер `server-id>1`.
 `/etc/mysql/conf.d/my.cnf`
 
 Конфигурация master-сервера
+
 ```
 [mysqld]
 server-id=1
@@ -37,12 +38,14 @@ log-bin
 ```
 
 Конфигурация slave1
+
 ```
 [mysqld]
 server-id=2
 ```
 
 Конфигурация slave2
+
 ```
 [mysqld]
 server-id=2
