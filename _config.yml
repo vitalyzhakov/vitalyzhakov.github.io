@@ -6,4 +6,5 @@ description: и процессы ИТ
 google_analytics: UA-18959808-11
 
 gems:
+  - minima
   - jekyll-sitemap
