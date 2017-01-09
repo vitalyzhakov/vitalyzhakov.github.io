@@ -1,4 +1,9 @@
-# PostGIS - примеры использования
+---
+title:      Импорт данных OpenStreetMap в PostgreSQL средствами osm2pgsql
+categories: pgsql openstreetmap
+summary:    Примеры использования PostGIS
+---
+
 
 ## Здание (полигон), которое содержит точку с координатами $lng, $lat
 
