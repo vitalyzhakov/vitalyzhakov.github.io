@@ -1,8 +1,5 @@
 # Site settings
 title:       Инфраструктура ИТ
-email:       your_email@example.com
-author:      John Otander
-description: "A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff."
 baseurl:     ""
 url:         "/"
 date_format: "%b %-d, %Y"
@@ -71,8 +68,8 @@ share_hackernews: false
 
 text:
   pagination:
-    newer: 'Newer'
-    older: 'Older'
+    newer: 'Вперёд'
+    older: 'Назад'
   share_buttons:
     text:         'Share this post!'
     facebook:     'Share on Facebook'
