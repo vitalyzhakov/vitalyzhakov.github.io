@@ -1,6 +1,6 @@
 # Site settings
 title:       Инфраструктура ИТ
-baseurl:     ""
+baseurl:     "https://vitalyzhakov.github.io"
 url:         "/"
 date_format: "%b %-d, %Y"
 
@@ -104,7 +104,7 @@ markdown:     kramdown
 redcarpet:
   extensions: ['smart', 'tables', 'with_toc_data']
 permalink:    pretty
-paginate:     4
+paginate:     10
 sass:
   compressed: true
 gems:
