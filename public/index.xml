@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Инфраструктура ИТ on Инфраструктура ИТ</title>
+    <link>https://vitalyzhakov.github.io/</link>
+    <description>Recent content in Инфраструктура ИТ on Инфраструктура ИТ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru-ru</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0500</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Песочница (среда разработки) для веб-разработчиков</title>
+      <link>https://vitalyzhakov.github.io/post/sandbox-for-web-developers/</link>
+      <pubDate>Mon, 07 May 2018 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/sandbox-for-web-developers/</guid>
+      <description>
+
+&lt;p&gt;В системе контроля задач создаётся новый элемент с уникальным именем (порядковым номером).
+В репозитории проекта создаётся ветка с этим именем в нижнем регистре.&lt;/p&gt;
+
+&lt;p&gt;Раработчик вносит изменения в код и выполняет &lt;code&gt;push&lt;/code&gt; на удалённый сервер.
+CI-сервер (gitlab) подхватывает это событие и создаёт задание для &lt;code&gt;worker&lt;/code&gt; для песочниц.&lt;/p&gt;
+
+&lt;h2 id=&#34;конфигурация-worker&#34;&gt;Конфигурация worker:&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;много оперативной памяти (из расчёта количество задач в день, над которыми предстоит работать * количество контейнеров * количество потребляемой памяти на контейнер);&lt;/li&gt;
+&lt;li&gt;100 GB HDD;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker&lt;/code&gt;-демон;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker-compose&lt;/code&gt;;&lt;/li&gt;
+&lt;li&gt;хостовой nginx для проксирования сайтов;&lt;/li&gt;
+&lt;li&gt;хостовой &lt;a href=&#34;https://consul.io&#34; target=&#34;_blank&#34;&gt;consul&lt;/a&gt; для разрешения имён контейнеров в IP-адреса;&lt;/li&gt;
+&lt;li&gt;скрипты для ночного удаления контейнеров;&lt;/li&gt;
+&lt;li&gt;скрипты для ежедневного удаления песочниц.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Worker создаётся таким с целью:
+* выделения ресурсов по требованию (требование гибкости);
+* возврата ресурсов в общий пул, когда они становятся не нужны (ресурсы стоят денег).&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Репликация MySQL-серверов с помощью Docker</title>
+      <link>https://vitalyzhakov.github.io/post/mysql-replication-docker/</link>
+      <pubDate>Sun, 22 Jan 2017 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/mysql-replication-docker/</guid>
+      <description>
+
+&lt;h1 id=&#34;репликация-mysql-серверов-с-помощью-docker&#34;&gt;Репликация MySQL-серверов с помощью Docker&lt;/h1&gt;
+
+&lt;p&gt;До выхода приложения в бой, нужно смоделировать его поведение
+&lt;a href=&#34;https://vitalyzhakov.github.io/2017/01/09/sandbox-for-web-developers.html&#34;&gt;в тестовой среде&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Технология Docker Swarm позволяет легко масштабировать приложение горизонтально.
+Но приложению приходится обращаться к серверу баз данных, задача масшабировать который гораздо труднее.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/several-upstream-one-db.svg&#34; alt=&#34;Много приложений - одна база&#34; title=&#34;Много приложений - одна база&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;В нашем случае количество запросов на чтение информации гораздо меньше количества изменений
+(есть подозрение, что так на большинстве веб-проектов).
+Логичным способом увеличения такого бутылочного горлышка -
+увеличить количество баз на чтение и настроить приложение таким образом,
+чтобы большее количество запросов на чтение
+отправлялось на SLAVE-сервера.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/several-upstream-several-dbs.svg&#34; alt=&#34;Много приложений - одна база&#34; title=&#34;Много приложений - много баз&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;настройка-репликации&#34;&gt;Настройка репликации&lt;/h2&gt;
+
+&lt;h3 id=&#34;изменение-в-my-cnf-для-каждого-сервера&#34;&gt;Изменение в my.cnf для каждого сервера&lt;/h3&gt;
+
+&lt;p&gt;Каждый сервер должен иметь свой номер.
+Master-сервер &lt;code&gt;server-id=1&lt;/code&gt;.
+Slave-сервер &lt;code&gt;server-id&amp;gt;1&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Конфигурационный файл находится по адресу
+&lt;code&gt;/etc/mysql/conf.d/my.cnf&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Конфигурация master-сервера&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[mysqld]
+server-id=1
+binlog_format=ROW
+log-bin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Конфигурация slave1&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[mysqld]
+server-id=2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Конфигурация slave2&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[mysqld]
+server-id=2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;изменения-при-старте-сервера&#34;&gt;Изменения при старте сервера&lt;/h3&gt;
+
+&lt;p&gt;На master-сервере нужно выдать права пользователю для чтения файла лога&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;GRANT REPLICATION SLAVE ON *.* TO repl@&#39;%&#39; IDENTIFIED BY &#39;slavepass&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;На slave-сервере нужно указать координаты для подключения к master&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;CHANGE MASTER TO MASTER_HOST=&#39;${COMPOSE_PROJECT_NAME}-mysql&#39;, MASTER_USER=&#39;repl&#39;, MASTER_PASSWORD=&#39;slavepass&#39;, MASTER_LOG_FILE=&#39;mysqld-bin.000004&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;итоговый-код&#34;&gt;Итоговый код&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql:
+  image: &#39;percona:5.5&#39;
+  network_mode: &amp;quot;bridge&amp;quot;
+  container_name: ${COMPOSE_PROJECT_NAME}-mysql
+  volumes:
+    - ${PROJECT_DIR}/build_env/mysql/master.cnf:/etc/mysql/conf.d/my.cnf
+    - ${PROJECT_DIR}/build_env/mysql/master.sql:/docker-entrypoint-initdb.d/start.sql
+  environment:
+    MYSQL_DATABASE: ${MYSQL_DB}
+    MYSQL_USER: ${MYSQL_USER}
+    MYSQL_PASSWORD: &amp;quot;${MYSQL_PASSWORD}&amp;quot;
+    MYSQL_ROOT_PASSWORD: &amp;quot;${MYSQL_ROOT_PASSWORD}&amp;quot;
+    SERVICE_NAME: ${COMPOSE_PROJECT_NAME}-mysql
+
+mysqlread1:
+  image: &#39;percona:5.5&#39;
+  network_mode: &amp;quot;bridge&amp;quot;
+  container_name: ${COMPOSE_PROJECT_NAME}-mysqlread1
+  volumes:
+    - ${PROJECT_DIR}/build_env/mysql/server2.cnf:/etc/mysql/conf.d/my.cnf
+    - ${PROJECT_DIR}/build_env/mysql/slave.sql:/docker-entrypoint-initdb.d/start.sql
+  depends_on:
+    - mysql
+  environment:
+    MYSQL_DATABASE: ${MYSQL_DB}
+    MYSQL_USER: ${MYSQL_USER}
+    MYSQL_PASSWORD: &amp;quot;${MYSQL_PASSWORD}&amp;quot;
+    MYSQL_ROOT_PASSWORD: &amp;quot;${MYSQL_ROOT_PASSWORD}&amp;quot;
+    SERVICE_NAME: ${COMPOSE_PROJECT_NAME}-mysqlread1
+
+mysqlread2:
+  image: &#39;percona:5.5&#39;
+  network_mode: &amp;quot;bridge&amp;quot;
+  container_name: ${COMPOSE_PROJECT_NAME}-mysqlread2
+  volumes:
+    - ${PROJECT_DIR}/build_env/mysql/server2.cnf:/etc/mysql/conf.d/my.cnf
+    - ${PROJECT_DIR}/build_env/mysql/slave.sql:/docker-entrypoint-initdb.d/start.sql
+  depends_on:
+    - mysql
+  environment:
+    MYSQL_DATABASE: ${MYSQL_DB}
+    MYSQL_USER: ${MYSQL_USER}
+    MYSQL_PASSWORD: &amp;quot;${MYSQL_PASSWORD}&amp;quot;
+    MYSQL_ROOT_PASSWORD: &amp;quot;${MYSQL_ROOT_PASSWORD}&amp;quot;
+    SERVICE_NAME: ${COMPOSE_PROJECT_NAME}-mysqlread2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;диагностика&#34;&gt;Диагностика&lt;/h3&gt;
+
+&lt;p&gt;Для диагностики нужно иметь возможность подключения к консоли mysql. Для master-сервера вывод будет следующим:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; show master status;
++-------------------+----------+--------------+------------------+
+| File              | Position | Binlog_Do_DB | Binlog_Ignore_DB |
++-------------------+----------+--------------+------------------+
+| mysqld-bin.000004 |   119471 |              |                  |
++-------------------+----------+--------------+------------------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;В процессах master-сервера мы можем видеть подключения со SLAVE&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; SHOW PROCESSLIST;  
++-------+------+------------------+------+-------------+------+-----------------------------------------------------------------------+------------------+-----------+---------------+-----------+
+| Id    | User | Host             | db   | Command     | Time | State                                                                 | Info             | Rows_sent | Rows_examined | Rows_read |
++-------+------+------------------+------+-------------+------+-----------------------------------------------------------------------+------------------+-----------+---------------+-----------+
+| 24511 | root | localhost        | NULL | Query       |    0 | NULL                                                                  | SHOW PROCESSLIST |         0 |             0 |         0 |
+| 24919 | repl | 172.17.0.7:44536 | NULL | Binlog Dump |    0 | Master has sent all binlog to slave; waiting for binlog to be updated | NULL             |         0 |             0 |         0 |
++-------+------+------------------+------+-------------+------+-----------------------------------------------------------------------+------------------+-----------+---------------+-----------+
+2 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Для slave-сервера&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; SHOW SLAVE STATUS;
++----------------------------------------+-------------------------+-------------+-------------+---------------+-------------------+---------------------+-------------------------+---------------+-----------------------+------------------+-------------------+-----------------+---------------------+--------------------+------------------------+-------------------------+-----------------------------+------------+------------+--------------+---------------------+-----------------+-----------------+----------------+---------------+--------------------+--------------------+--------------------+-----------------+-------------------+----------------+-----------------------+-------------------------------+---------------+---------------+----------------+----------------+-----------------------------+------------------+
+| Slave_IO_State                         | Master_Host             | Master_User | Master_Port | Connect_Retry | Master_Log_File   | Read_Master_Log_Pos | Relay_Log_File          | Relay_Log_Pos | Relay_Master_Log_File | Slave_IO_Running | Slave_SQL_Running | Replicate_Do_DB | Replicate_Ignore_DB | Replicate_Do_Table | Replicate_Ignore_Table | Replicate_Wild_Do_Table | Replicate_Wild_Ignore_Table | Last_Errno | Last_Error | Skip_Counter | Exec_Master_Log_Pos | Relay_Log_Space | Until_Condition | Until_Log_File | Until_Log_Pos | Master_SSL_Allowed | Master_SSL_CA_File | Master_SSL_CA_Path | Master_SSL_Cert | Master_SSL_Cipher | Master_SSL_Key | Seconds_Behind_Master | Master_SSL_Verify_Server_Cert | Last_IO_Errno | Last_IO_Error | Last_SQL_Errno | Last_SQL_Error | Replicate_Ignore_Server_Ids | Master_Server_Id |
++----------------------------------------+-------------------------+-------------+-------------+---------------+-------------------+---------------------+-------------------------+---------------+-----------------------+------------------+-------------------+-----------------+---------------------+--------------------+------------------------+-------------------------+-----------------------------+------------+------------+--------------+---------------------+-----------------+-----------------+----------------+---------------+--------------------+--------------------+--------------------+-----------------+-------------------+----------------+-----------------------+-------------------------------+---------------+---------------+----------------+----------------+-----------------------------+------------------+
+| Queueing master event to the relay log | webcontentreplica-mysql | repl        |        3306 |            60 | mysqld-bin.000004 |              119471 | mysqld-relay-bin.007453 |           151 | mysqld-bin.000004     | Yes              | Yes               |                 |                     |                    |                        |                         |                             |          0 |            |            0 |              119471 |          112126 | None            |                |             0 | No                 |                    |                    |                 |                   |                |                   986 | No                            |             0 |               |              0 |                |                             |                1 |
++----------------------------------------+-------------------------+-------------+-------------+---------------+-------------------+---------------------+-------------------------+---------------+-----------------------+------------------+-------------------+-----------------+---------------------+--------------------+------------------------+-------------------------+-----------------------------+------------+------------+--------------+---------------------+-----------------+-----------------+----------------+---------------+--------------------+--------------------+--------------------+-----------------+-------------------+----------------+-----------------------+-------------------------------+---------------+---------------+----------------+----------------+-----------------------------+------------------+
+1 row in set (0.19 sec)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ВНытве.ru</title>
+      <link>https://vitalyzhakov.github.io/project/vnytve-ru/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/project/vnytve-ru/</guid>
+      <description>&lt;p&gt;Веб-сайт vnytve.ru содержит данные об организациях, зданиях, улицах г. Нытва Пермского края.&lt;/p&gt;
+
+&lt;p&gt;Работает на основе openstreetmap, yii2, php.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Примеры использования PostGis расширения в PostgreSQL</title>
+      <link>https://vitalyzhakov.github.io/post/postgis-examples/</link>
+      <pubDate>Tue, 23 Feb 2016 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/postgis-examples/</guid>
+      <description>
+
+&lt;h2 id=&#34;здание-полигон-которое-содержит-точку-с-координатами-lng-lat&#34;&gt;Здание (полигон), которое содержит точку с координатами $lng, $lat&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?php
+    &#39;SELECT * FROM planet_osm_polygon WHERE &#39; .
+    &#39;ST_contains(
+        way,
+        ST_Transform(
+            ST_SetSRID(
+                          ST_Point(&#39; . $lng . &#39;,&#39; . $lat . &#39;), 4326&#39; .
+                     &#39;), 900913
+                    )
+          )&#39; .
+    &amp;quot;AND building != &#39;&#39;&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;точки-организации-внутри-найденного-полигона&#34;&gt;Точки (организации) внутри найденного полигона&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;    &#39;SELECT point.* FROM planet_osm_point point, &#39;  .  
+    &#39;planet_osm_polygon polygon &#39;  .
+    &#39;WHERE polygon.osm_id = &#39; . $polygon-&amp;gt;osm_id . 
+    &#39; AND ST_Contains (polygon.way, point.way)&#39;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Импорт данных OpenStreetMap в PostgreSQL средствами osm2pgsql</title>
+      <link>https://vitalyzhakov.github.io/post/osm2pgsql/</link>
+      <pubDate>Tue, 02 Feb 2016 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/osm2pgsql/</guid>
+      <description>
+
+&lt;h1 id=&#34;импорт-данных-openstreetmap-в-postgresql-средствами-osm2pgsql&#34;&gt;Импорт данных OpenStreetMap в PostgreSQL средствами osm2pgsql&lt;/h1&gt;
+
+&lt;p&gt;На сайте бывает полезно отобразить географические данные, но простой интеграции с публичными проприетарными сервисами карт может не хватить.
+На помощь приходят открытые данные, для географических карт - это &lt;a href=&#34;http://www.openstreetmap.org/&#34; target=&#34;_blank&#34;&gt;Openstreet Map&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;требования&#34;&gt;Требования&lt;/h2&gt;
+
+&lt;p&gt;Действия выполняются на системе&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;debian jessie 8.2;&lt;/li&gt;
+&lt;li&gt;PostgreSQL 9.4;&lt;/li&gt;
+&lt;li&gt;osm2pgsql 0.86;&lt;/li&gt;
+&lt;li&gt;пользователь, от которого исполняется скрипт, должен иметь права на запись в целевую базу.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;подготовка-базы&#34;&gt;Подготовка базы&lt;/h2&gt;
+
+&lt;p&gt;Создаём БД gis, добавляем расширения &lt;em&gt;postgis&lt;/em&gt; и &lt;em&gt;hstore&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;createdb gis
+psql -d gis -c &#39;CREATE EXTENSION postgis; CREATE EXTENSION hstore&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;импорт-данных&#34;&gt;Импорт данных&lt;/h2&gt;
+
+&lt;p&gt;Найти географические координаты прямоугольника, который мы хотим импортировать можно на &lt;a href=&#34;http://www.openstreetmap.org&#34; target=&#34;_blank&#34;&gt;http://www.openstreetmap.org&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Для примера взяты &lt;a href=&#34;http://vnytve.ru/&#34; target=&#34;_blank&#34;&gt;координаты города Нытва&lt;/a&gt; в Пермском крае&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/bash
+FULL_PATH=$(readlink -f $0);
+DIR=$(dirname $FULL_PATH);
+STYLE_FILE=$DIR/vndb.style;
+
+#проинициализировать переменные настоящими значениями
+HOST=&#39;&#39;; # хост базы данных
+PORT=&#39;&#39;; # порт базы данных
+DB=&#39;&#39;; # название базы данных на сервере
+USER=&#39;&#39;; # пользователь базы данных
+
+XMLFILE_PATH=/tmp/data.xml
+wget &amp;quot;http://overpass-api.de/api/interpreter?data=(node(57.90, 55.30,57.96, 55.37);&amp;lt;;);out;&amp;quot; -O $XMLFILE_PATH;
+
+osm2pgsql --create --database $DB -H $HOST -P $PORT -U $USER -W -S $STYLE_FILE /tmp/data.xml
+rm $XMLFILE_PATH;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Настройки импорта (какие теги импортировать, к каким типам геометрий привязывать) хранятся в файле стилей (задаётся &lt;em&gt;опцией -S&lt;/em&gt; команды &lt;em&gt;osm2pgsql&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;Содержимое файла gis.style&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# OsmType  Tag          DataType     Flags
+node,way   access       text         linear
+node,way   addr:housename      text  linear
+node,way   addr:housenumber    text  linear
+node,way   addr:street    text       linear
+node       addr:door     text        linear
+node,way   amenity      text         polygon
+node,way   area         text         polygon # hard coded support for area=1/yes =&amp;gt; polygon is in osm2pgsql
+node,way   building     text         polygon
+node,way   construction text         linear
+node,way   covered      text         linear
+node,way   culvert      text         linear
+node,way   cutting      text         linear
+node,way   denomination text         linear
+node,way   disused      text         linear
+node       ele          text         linear
+node,way   embankment   text         linear
+node,way   foot         text         linear
+node,way   generator:source    text  linear
+node,way   harbour      text         polygon
+node,way   highway      text         linear
+node,way   historic     text         polygon
+node,way   horse        text         linear
+node,way   intermittent text         linear
+node,way   junction     text         linear
+node,way   landuse      text         polygon
+node,way   layer        text         linear
+node,way   leisure      text         polygon
+node,way   lock         text         linear
+node,way   man_made     text         polygon
+node,way   military     text         polygon
+node,way   motorcar     text         linear
+node,way   name         text         linear
+node,way   natural      text         polygon  # natural=coastline tags are discarded by a hard coded rule in osm2pgsql
+node,way   office       text         polygon
+node,way   oneway       text         linear
+node,way   operator     text         linear
+node,way   place        text         polygon
+node       poi          text         linear
+node,way   population   text         linear
+node,way   power        text         polygon
+node,way   power_source text         linear
+node,way   public_transport text     polygon
+node,way   railway      text         linear
+node,way   ref          text         linear
+node,way   religion     text         linear
+node,way   route        text         linear
+node,way   service      text         linear
+node,way   shop         text         polygon
+node,way   sport        text         polygon
+node,way   surface      text         linear
+node,way   toll         text         linear
+node,way   tourism      text         polygon
+node,way   tower:type   text         linear
+way        tracktype    text         linear
+node,way   tunnel       text         linear
+node,way   water        text         polygon
+node,way   waterway     text         polygon
+node,way   wetland      text         polygon
+node,way   width        text         linear
+node,way   wood         text         linear
+node,way   z_order      int4         linear # This is calculated during import
+way        way_area     real         linear # This is calculated during import
+node       opening_hours text        linear
+node       phone        text         linear
+node       craft        text         linear
+node       description        text         linear
+way        building:levels int4      polygon
+node       level        text         linear
+node       email        text         linear
+node       website      text         linear
+node       seasonal     text         linear
+node,way   internet_access     text         linear
+node,way   osm_timestamp timestamptz(0) linear
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/openstreetmap/osm2pgsql/blob/master/default.style&#34; target=&#34;_blank&#34;&gt;Оригинальный файл стилей&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;результат&#34;&gt;Результат&lt;/h2&gt;
+
+&lt;p&gt;После выполнения скрипта в базе данных появляются 4 таблицы:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;planet_osm_line&lt;/li&gt;
+&lt;li&gt;planet_osm_point&lt;/li&gt;
+&lt;li&gt;planet_osm_polygon&lt;/li&gt;
+&lt;li&gt;planet_osm_roads&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;По ним &lt;a href=&#34;https://vitalyzhakov.github.io/post/postgis-examples/&#34;&gt;можно выполнять различные запросы над геоданными&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Более подробно про &lt;a href=&#34;https://github.com/openstreetmap/osm2pgsql&#34; target=&#34;_blank&#34;&gt;опции использования osm2pgsql на странице репозитория&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
