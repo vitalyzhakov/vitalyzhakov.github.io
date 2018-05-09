@@ -220,6 +220,13 @@
     <h1>Недавние публикации</h1>
     
     
+    <p class="view-all">
+      <a href="https://vitalyzhakov.github.io/post/">
+        Больше статей
+        <i class="fa fa-angle-double-right"></i>
+      </a>
+    </p>
+    
 
   </div>
   <div class="col-xs-12 col-md-8">
@@ -230,6 +237,150 @@
       
 
       
+      
+
+        
+
+        
+        
+
+        
+        
+          
+      
+          
+      
+
+      
+      
+        
+        
+          
+
+<div class="card-simple" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
+  
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2018-05-09 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      May 9, 2018
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Lena Smith">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    2 
+  </span>
+  
+
+  
+  
+
+  
+
+  
+
+</div>
+
+
+  
+  
+  <h3 class="article-title" itemprop="headline">
+    <a href="https://vitalyzhakov.github.io/post/autotesting/" itemprop="url">Автоматическое тестирование</a>
+  </h3>
+  <div class="article-style" itemprop="articleBody">
+    
+    <p>Взвешиваем за и против автоматических тестов</p>
+    
+  </div>
+  <p class="read-more" itemprop="mainEntityOfPage">
+    <a href="https://vitalyzhakov.github.io/post/autotesting/" class="btn btn-primary btn-outline">
+      Читать далее
+    </a>
+  </p>
+</div>
+
+        
+      
+
+      
+
+        
+
+        
+        
+
+        
+        
+          
+      
+          
+      
+
+      
+      
+        
+        
+          
+
+<div class="card-simple" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
+  
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2018-05-09 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      May 9, 2018
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Lena Smith">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    2 
+  </span>
+  
+
+  
+  
+
+  
+
+  
+
+</div>
+
+
+  
+  
+  <h3 class="article-title" itemprop="headline">
+    <a href="https://vitalyzhakov.github.io/post/autotesting-in-sandbox/" itemprop="url">Автоматическое тестирование в среде разработки</a>
+  </h3>
+  <div class="article-style" itemprop="articleBody">
+    
+    <p>Моё видение процесса</p>
+    
+  </div>
+  <p class="read-more" itemprop="mainEntityOfPage">
+    <a href="https://vitalyzhakov.github.io/post/autotesting-in-sandbox/" class="btn btn-primary btn-outline">
+      Читать далее
+    </a>
+  </p>
+</div>
+
+        
+      
+
       
 
         
@@ -268,7 +419,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 
+    2 
   </span>
   
 
@@ -289,9 +440,7 @@
   </h3>
   <div class="article-style" itemprop="articleBody">
     
-    В системе контроля задач создаётся новый элемент с уникальным именем (порядковым номером). В репозитории проекта создаётся ветка с этим именем в нижнем регистре.
-Раработчик вносит изменения в код и выполняет push на удалённый сервер. CI-сервер (gitlab) подхватывает это событие и создаёт задание для worker для песочниц.
-Конфигурация worker:  много оперативной памяти (из расчёта количество задач в день, над которыми предстоит работать * количество контейнеров * количество потребляемой памяти на контейнер); 100 GB HDD; docker-демон; docker-compose; хостовой nginx для проксирования сайтов; хостовой consul для разрешения имён контейнеров в IP-адреса; скрипты для ночного удаления контейнеров; скрипты для ежедневного удаления песочниц.
+    <p>Обеспечиваем изолированный процесс разработки сотен задач параллельно</p>
     
   </div>
   <p class="read-more" itemprop="mainEntityOfPage">
@@ -365,7 +514,7 @@
   </h3>
   <div class="article-style" itemprop="articleBody">
     
-    Репликация MySQL-серверов с помощью Docker До выхода приложения в бой, нужно смоделировать его поведение в тестовой среде.
+    До выхода приложения в бой, нужно смоделировать его поведение в тестовой среде.
 Технология Docker Swarm позволяет легко масштабировать приложение горизонтально. Но приложению приходится обращаться к серверу баз данных, задача масшабировать который гораздо труднее.
 В нашем случае количество запросов на чтение информации гораздо меньше количества изменений (есть подозрение, что так на большинстве веб-проектов). Логичным способом увеличения такого бутылочного горлышка - увеличить количество баз на чтение и настроить приложение таким образом, чтобы большее количество запросов на чтение отправлялось на SLAVE-сервера.
     
@@ -447,81 +596,6 @@
   </div>
   <p class="read-more" itemprop="mainEntityOfPage">
     <a href="https://vitalyzhakov.github.io/post/postgis-examples/" class="btn btn-primary btn-outline">
-      Читать далее
-    </a>
-  </p>
-</div>
-
-        
-      
-
-      
-
-        
-
-        
-        
-
-        
-        
-          
-      
-          
-      
-
-      
-      
-        
-        
-          
-
-<div class="card-simple" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
-  
-
-<div class="article-metadata">
-
-  <span class="article-date">
-    
-    <time datetime="2016-02-02 00:10:06 &#43;0500 &#43;0500" itemprop="datePublished dateModified">
-      Feb 2, 2016
-    </time>
-  </span>
-  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Lena Smith">
-  </span>
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    3 
-  </span>
-  
-
-  
-  
-
-  
-  
-  
-  
-
-  
-
-</div>
-
-
-  
-  
-  <h3 class="article-title" itemprop="headline">
-    <a href="https://vitalyzhakov.github.io/post/osm2pgsql/" itemprop="url">Импорт данных OpenStreetMap в PostgreSQL средствами osm2pgsql</a>
-  </h3>
-  <div class="article-style" itemprop="articleBody">
-    
-    <p>Как получить данные карты для работы с ними в реляционной базе данных</p>
-    
-  </div>
-  <p class="read-more" itemprop="mainEntityOfPage">
-    <a href="https://vitalyzhakov.github.io/post/osm2pgsql/" class="btn btn-primary btn-outline">
       Читать далее
     </a>
   </p>

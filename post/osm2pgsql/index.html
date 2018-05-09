@@ -17,9 +17,10 @@
       
     
   
-  <meta name="description" content="Импорт данных OpenStreetMap в PostgreSQL средствами osm2pgsql На сайте бывает полезно отобразить географические данные, но простой интеграции с публичными проприетарными сервисами карт может не хватить. На помощь приходят открытые данные, для географических карт - это Openstreet Map.
+  <meta name="description" content="На сайте бывает полезно отобразить географические данные, но простой интеграции с публичными проприетарными сервисами карт может не хватить. На помощь приходят открытые данные, для географических карт - это Openstreet Map.
 Требования Действия выполняются на системе
- debian jessie 8.2; PostgreSQL 9.4; osm2pgsql 0.86; пользователь, от которого исполняется скрипт, должен иметь права на запись в целевую базу.  Подготовка базы Создаём БД gis, добавляем расширения postgis и hstore">
+ debian jessie 8.2; PostgreSQL 9.4; osm2pgsql 0.86; пользователь, от которого исполняется скрипт, должен иметь права на запись в целевую базу.  Подготовка базы Создаём БД gis, добавляем расширения postgis и hstore
+createdb gis psql -d gis -c &#39;CREATE EXTENSION postgis; CREATE EXTENSION hstore&#39;  Импорт данных Найти географические координаты прямоугольника, который мы хотим импортировать можно на http://www.">
 
   
   <link rel="alternate" hreflang="ru-ru" href="https://vitalyzhakov.github.io/post/osm2pgsql/">
@@ -95,9 +96,10 @@
   <meta property="og:site_name" content="Инфраструктура ИТ">
   <meta property="og:url" content="https://vitalyzhakov.github.io/post/osm2pgsql/">
   <meta property="og:title" content="Импорт данных OpenStreetMap в PostgreSQL средствами osm2pgsql | Инфраструктура ИТ">
-  <meta property="og:description" content="Импорт данных OpenStreetMap в PostgreSQL средствами osm2pgsql На сайте бывает полезно отобразить географические данные, но простой интеграции с публичными проприетарными сервисами карт может не хватить. На помощь приходят открытые данные, для географических карт - это Openstreet Map.
+  <meta property="og:description" content="На сайте бывает полезно отобразить географические данные, но простой интеграции с публичными проприетарными сервисами карт может не хватить. На помощь приходят открытые данные, для географических карт - это Openstreet Map.
 Требования Действия выполняются на системе
- debian jessie 8.2; PostgreSQL 9.4; osm2pgsql 0.86; пользователь, от которого исполняется скрипт, должен иметь права на запись в целевую базу.  Подготовка базы Создаём БД gis, добавляем расширения postgis и hstore">
+ debian jessie 8.2; PostgreSQL 9.4; osm2pgsql 0.86; пользователь, от которого исполняется скрипт, должен иметь права на запись в целевую базу.  Подготовка базы Создаём БД gis, добавляем расширения postgis и hstore
+createdb gis psql -d gis -c &#39;CREATE EXTENSION postgis; CREATE EXTENSION hstore&#39;  Импорт данных Найти географические координаты прямоугольника, который мы хотим импортировать можно на http://www.">
   <meta property="og:locale" content="ru-ru">
   
   <meta property="article:published_time" content="2016-02-02T00:10:06&#43;05:00">
@@ -290,8 +292,6 @@
 
     <div class="article-style" itemprop="articleBody">
       
-
-<h1 id="импорт-данных-openstreetmap-в-postgresql-средствами-osm2pgsql">Импорт данных OpenStreetMap в PostgreSQL средствами osm2pgsql</h1>
 
 <p>На сайте бывает полезно отобразить географические данные, но простой интеграции с публичными проприетарными сервисами карт может не хватить.
 На помощь приходят открытые данные, для географических карт - это <a href="http://www.openstreetmap.org/" target="_blank">Openstreet Map</a>.</p>

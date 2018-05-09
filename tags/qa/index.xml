@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>QA on Инфраструктура ИТ</title>
+    <link>https://vitalyzhakov.github.io/tags/qa/</link>
+    <description>Recent content in QA on Инфраструктура ИТ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru-ru</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Wed, 09 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://vitalyzhakov.github.io/tags/qa/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Автоматическое тестирование</title>
+      <link>https://vitalyzhakov.github.io/post/autotesting/</link>
+      <pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/autotesting/</guid>
+      <description>На хорошем производстве существует входной и выходной контроль. Наверное, многие видели на технически сложных изделиях отметки ОТК, PASSED, QUALITY CHECK PASSED.
+Приложение, упакованное в контейнер, тоже является технически сложным изделием. До развёртывания в боевой среде стоит смоделировать его поведение и протестировать.
+Протестировать можно несколькими вариантами: * отдать заказчику; * проверить самому; * написать карточку тестирования; * написать автоматический тест.
+Рассмотрим задачу публикации предварительно подготовленной промо-страницы в сети Интернет. Стандартная промо-страница состоит из картинок и текста с относительно неплохим дизайном.</description>
+    </item>
+    
+    <item>
+      <title>Автоматическое тестирование в среде разработки</title>
+      <link>https://vitalyzhakov.github.io/post/autotesting-in-sandbox/</link>
+      <pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/autotesting-in-sandbox/</guid>
+      <description>На хорошем производстве существует входной и выходной контроль. Наверное, многие видели на технически сложных изделиях отметки ОТК, PASSED, QUALITY CHECK PASSED.
+Приложение, упакованное в контейнер, тоже является технически сложным изделием. До развёртывания в боевой среде стоит смоделировать его поведение и протестировать.
+Протестировать можно несколькими вариантами: * отдать заказчику; * проверить самому; * написать карточку тестирования; * написать автоматический тест.
+Рассмотрим задачу публикации предварительно подготовленной промо-страницы в сети Интернет. Стандартная промо-страница состоит из картинок и текста с относительно неплохим дизайном.</description>
+    </item>
+    
+  </channel>
+</rss>
