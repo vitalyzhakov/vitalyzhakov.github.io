@@ -22,9 +22,18 @@
     </item>
     
     <item>
+      <title>Nginx</title>
+      <link>https://vitalyzhakov.github.io/tags/nginx/</link>
+      <pubDate>Fri, 11 May 2018 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Openstreetmap</title>
       <link>https://vitalyzhakov.github.io/tags/openstreetmap/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 11 May 2018 00:10:06 +0500</pubDate>
       
       <guid>https://vitalyzhakov.github.io/tags/openstreetmap/</guid>
       <description></description>
@@ -33,7 +42,7 @@
     <item>
       <title>Pgsql</title>
       <link>https://vitalyzhakov.github.io/tags/pgsql/</link>
-      <pubDate>Tue, 23 Feb 2016 00:10:06 +0500</pubDate>
+      <pubDate>Fri, 11 May 2018 00:10:06 +0500</pubDate>
       
       <guid>https://vitalyzhakov.github.io/tags/pgsql/</guid>
       <description></description>
