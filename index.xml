@@ -173,9 +173,9 @@ node,way   osm_timestamp timestamptz(0) linear
 клиент -&amp;gt; nginx -&amp;gt; php-fpm -&amp;gt; процесс php-fpm&lt;/p&gt;
 
 &lt;p&gt;В случае с &lt;code&gt;nginx unit&lt;/code&gt; процесс может быть упрощён до
-клиент -&amp;gt; nginx unit&lt;/p&gt;
+клиент -&amp;gt; &lt;code&gt;nginx unit&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;nginx unit позволит убрать дополнительную прослойку, которая может генерировать ошибки &lt;sup&gt;502&lt;/sup&gt;&amp;frasl;&lt;sub&gt;504&lt;/sub&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;nginx unit&lt;/code&gt; позволит убрать дополнительную прослойку, которая может генерировать ошибки &lt;sup&gt;502&lt;/sup&gt;&amp;frasl;&lt;sub&gt;504&lt;/sub&gt;.&lt;/p&gt;
 </description>
     </item>
     

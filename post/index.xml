@@ -31,7 +31,7 @@ createdb gis psql -d gis -c &#39;CREATE EXTENSION postgis; CREATE EXTENSION hsto
       
       <guid>https://vitalyzhakov.github.io/post/nginx-unit/</guid>
       <description>Стандартное web-приложение строится следующим образом клиент -&amp;gt; nginx -&amp;gt; php-fpm -&amp;gt; процесс php-fpm
-В случае с nginx unit процесс может быть упрощён до клиент -&amp;gt; nginx unit
+В случае с nginx unit процесс может быть упрощён до клиент -&amp;gt; nginx unit.
 nginx unit позволит убрать дополнительную прослойку, которая может генерировать ошибки 502&amp;frasl;504.</description>
     </item>
     
