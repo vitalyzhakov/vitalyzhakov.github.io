@@ -13,6 +13,18 @@
     
     
     <item>
+      <title>Преимущества nginx unit</title>
+      <link>https://vitalyzhakov.github.io/post/nginx-unit/</link>
+      <pubDate>Mon, 14 May 2018 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/nginx-unit/</guid>
+      <description>Упрощение архитектуры веб-сервера Стандартное web-приложение строится следующим образом
+ клиент -&amp;gt; nginx -&amp;gt; php-fpm -&amp;gt; процесс php-fpm клиент -&amp;gt; nginx -&amp;gt; gunicorn клиент -&amp;gt; nginx -&amp;gt; uwsgi  В случае с nginx unit процесс может быть упрощён до клиент -&amp;gt; nginx unit с поддержкой соответствующего языка программирования.
+nginx unit позволит убрать дополнительную прослойку, которая может генерировать ошибки 502&amp;frasl;504.
+Конфигурация с помощью RESTful JSON API На некоторых проектах с частым внесением изменений опция может быть достаточно удобной.</description>
+    </item>
+    
+    <item>
       <title>Импорт данных OpenStreetMap в PostgreSQL средствами osm2pgsql</title>
       <link>https://vitalyzhakov.github.io/post/osm2pgsql/</link>
       <pubDate>Fri, 11 May 2018 00:10:06 +0500</pubDate>
@@ -22,17 +34,6 @@
 Требования Действия выполняются на системе
  debian jessie 8.2; PostgreSQL 9.4; osm2pgsql 0.86; пользователь, от которого исполняется скрипт, должен иметь права на запись в целевую базу.  Подготовка базы Создаём БД gis, добавляем расширения postgis и hstore
 createdb gis psql -d gis -c &#39;CREATE EXTENSION postgis; CREATE EXTENSION hstore&#39;  Импорт данных Найти географические координаты прямоугольника, который мы хотим импортировать можно на http://www.</description>
-    </item>
-    
-    <item>
-      <title>Преимущества nginx unit</title>
-      <link>https://vitalyzhakov.github.io/post/nginx-unit/</link>
-      <pubDate>Fri, 11 May 2018 00:10:06 +0500</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/nginx-unit/</guid>
-      <description>Стандартное web-приложение строится следующим образом клиент -&amp;gt; nginx -&amp;gt; php-fpm -&amp;gt; процесс php-fpm
-В случае с nginx unit процесс может быть упрощён до клиент -&amp;gt; nginx unit.
-nginx unit позволит убрать дополнительную прослойку, которая может генерировать ошибки 502&amp;frasl;504.</description>
     </item>
     
     <item>

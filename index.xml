@@ -11,6 +11,35 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Преимущества nginx unit</title>
+      <link>https://vitalyzhakov.github.io/post/nginx-unit/</link>
+      <pubDate>Mon, 14 May 2018 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/nginx-unit/</guid>
+      <description>
+
+&lt;h2 id=&#34;упрощение-архитектуры-веб-сервера&#34;&gt;Упрощение архитектуры веб-сервера&lt;/h2&gt;
+
+&lt;p&gt;Стандартное web-приложение строится следующим образом&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;клиент -&amp;gt; nginx -&amp;gt; php-fpm -&amp;gt; процесс php-fpm&lt;/li&gt;
+&lt;li&gt;клиент -&amp;gt; nginx -&amp;gt; gunicorn&lt;/li&gt;
+&lt;li&gt;клиент -&amp;gt; nginx -&amp;gt; uwsgi&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;В случае с &lt;code&gt;nginx unit&lt;/code&gt; процесс может быть упрощён до
+клиент -&amp;gt; &lt;code&gt;nginx unit&lt;/code&gt; с поддержкой соответствующего языка программирования.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;nginx unit&lt;/code&gt; позволит убрать дополнительную прослойку, которая может генерировать ошибки &lt;sup&gt;502&lt;/sup&gt;&amp;frasl;&lt;sub&gt;504&lt;/sub&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;конфигурация-с-помощью-restful-json-api&#34;&gt;Конфигурация с помощью RESTful JSON API&lt;/h2&gt;
+
+&lt;p&gt;На некоторых проектах с частым внесением изменений опция может быть достаточно удобной.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Импорт данных OpenStreetMap в PostgreSQL средствами osm2pgsql</title>
       <link>https://vitalyzhakov.github.io/post/osm2pgsql/</link>
       <pubDate>Fri, 11 May 2018 00:10:06 +0500</pubDate>
@@ -160,22 +189,6 @@ node,way   osm_timestamp timestamptz(0) linear
 &lt;p&gt;По ним &lt;a href=&#34;https://vitalyzhakov.github.io/post/postgis-examples/&#34;&gt;можно выполнять различные запросы над геоданными&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Более подробно про &lt;a href=&#34;https://github.com/openstreetmap/osm2pgsql&#34; target=&#34;_blank&#34;&gt;опции использования osm2pgsql на странице репозитория&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Преимущества nginx unit</title>
-      <link>https://vitalyzhakov.github.io/post/nginx-unit/</link>
-      <pubDate>Fri, 11 May 2018 00:10:06 +0500</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/nginx-unit/</guid>
-      <description>&lt;p&gt;Стандартное web-приложение строится следующим образом
-клиент -&amp;gt; nginx -&amp;gt; php-fpm -&amp;gt; процесс php-fpm&lt;/p&gt;
-
-&lt;p&gt;В случае с &lt;code&gt;nginx unit&lt;/code&gt; процесс может быть упрощён до
-клиент -&amp;gt; &lt;code&gt;nginx unit&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;nginx unit&lt;/code&gt; позволит убрать дополнительную прослойку, которая может генерировать ошибки &lt;sup&gt;502&lt;/sup&gt;&amp;frasl;&lt;sub&gt;504&lt;/sub&gt;.&lt;/p&gt;
 </description>
     </item>
     

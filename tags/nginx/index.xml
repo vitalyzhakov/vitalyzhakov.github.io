@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Fri, 11 May 2018 00:10:06 +0500</lastBuildDate>
+    <lastBuildDate>Mon, 14 May 2018 00:10:06 +0500</lastBuildDate>
     
 	<atom:link href="https://vitalyzhakov.github.io/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,12 +15,13 @@
     <item>
       <title>Преимущества nginx unit</title>
       <link>https://vitalyzhakov.github.io/post/nginx-unit/</link>
-      <pubDate>Fri, 11 May 2018 00:10:06 +0500</pubDate>
+      <pubDate>Mon, 14 May 2018 00:10:06 +0500</pubDate>
       
       <guid>https://vitalyzhakov.github.io/post/nginx-unit/</guid>
-      <description>Стандартное web-приложение строится следующим образом клиент -&amp;gt; nginx -&amp;gt; php-fpm -&amp;gt; процесс php-fpm
-В случае с nginx unit процесс может быть упрощён до клиент -&amp;gt; nginx unit.
-nginx unit позволит убрать дополнительную прослойку, которая может генерировать ошибки 502&amp;frasl;504.</description>
+      <description>Упрощение архитектуры веб-сервера Стандартное web-приложение строится следующим образом
+ клиент -&amp;gt; nginx -&amp;gt; php-fpm -&amp;gt; процесс php-fpm клиент -&amp;gt; nginx -&amp;gt; gunicorn клиент -&amp;gt; nginx -&amp;gt; uwsgi  В случае с nginx unit процесс может быть упрощён до клиент -&amp;gt; nginx unit с поддержкой соответствующего языка программирования.
+nginx unit позволит убрать дополнительную прослойку, которая может генерировать ошибки 502&amp;frasl;504.
+Конфигурация с помощью RESTful JSON API На некоторых проектах с частым внесением изменений опция может быть достаточно удобной.</description>
     </item>
     
   </channel>
