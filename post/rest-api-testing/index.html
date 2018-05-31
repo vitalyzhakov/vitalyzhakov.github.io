@@ -17,12 +17,15 @@
       
     
   
-  <meta name="description" content="В небольших проектах для воспроизведения тестов можно пользоваться следующим шагами:
- создать виртуальную машину (контейнер) с СУБД; восстановить СУБД с продуктовой среды из дампа; применить миграции.  Суть проблемы При больших базах даннных время восстановления может измеряться часами. Если мы ставим целью прохождение тестов в течение короткого интервала времени (до 10 минут), нам нужен другой подход.
-Решение При написании обычного API программисты backend также пишут API для тестирования, которое создаёт сущности в бек-енде.">
+  <meta name="description" content="Постановка задачи Протестировать автоматическими скриптами валидность ответов API над большой системой.
+Решение Для решения нам понадобится QA API.
+В общем случае процесс выглядит следующим образом:
+ скрипт с помощью QA API создаёт элемент данных, над которым будем проводить операции в проверяемом API. скрипт выполняет API-запросы с созданными элементами данных, для которых заранее известен ответ.  Пример системы - личный кабинет Протестируем API баланса личного кабинета пользователя.
+Для этого:
+ С помощью QA API создадим пользователя с указанным начальным значением баланса; С помощью rest API авторизуемся под пользователем; С помощью rest API проверим текущий баланс пользователя, сравним с балансом в пункте 1.">
 
   
-  <link rel="alternate" hreflang="ru-ru" href="https://vitalyzhakov.github.io/post/qa-api/">
+  <link rel="alternate" hreflang="ru-ru" href="https://vitalyzhakov.github.io/post/rest-api-testing/">
 
   
 
@@ -85,7 +88,7 @@
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="https://vitalyzhakov.github.io/post/qa-api/">
+  <link rel="canonical" href="https://vitalyzhakov.github.io/post/rest-api-testing/">
 
   <meta property="twitter:card" content="summary_large_image">
   
@@ -93,22 +96,25 @@
   <meta property="twitter:creator" content="@GeorgeCushen">
   
   <meta property="og:site_name" content="Инфраструктура ИТ">
-  <meta property="og:url" content="https://vitalyzhakov.github.io/post/qa-api/">
-  <meta property="og:title" content="Тестирование интерфейсов над большими системами | Инфраструктура ИТ">
-  <meta property="og:description" content="В небольших проектах для воспроизведения тестов можно пользоваться следующим шагами:
- создать виртуальную машину (контейнер) с СУБД; восстановить СУБД с продуктовой среды из дампа; применить миграции.  Суть проблемы При больших базах даннных время восстановления может измеряться часами. Если мы ставим целью прохождение тестов в течение короткого интервала времени (до 10 минут), нам нужен другой подход.
-Решение При написании обычного API программисты backend также пишут API для тестирования, которое создаёт сущности в бек-енде.">
+  <meta property="og:url" content="https://vitalyzhakov.github.io/post/rest-api-testing/">
+  <meta property="og:title" content="Тестирование API-интерфейсов над большими системами | Инфраструктура ИТ">
+  <meta property="og:description" content="Постановка задачи Протестировать автоматическими скриптами валидность ответов API над большой системой.
+Решение Для решения нам понадобится QA API.
+В общем случае процесс выглядит следующим образом:
+ скрипт с помощью QA API создаёт элемент данных, над которым будем проводить операции в проверяемом API. скрипт выполняет API-запросы с созданными элементами данных, для которых заранее известен ответ.  Пример системы - личный кабинет Протестируем API баланса личного кабинета пользователя.
+Для этого:
+ С помощью QA API создадим пользователя с указанным начальным значением баланса; С помощью rest API авторизуемся под пользователем; С помощью rest API проверим текущий баланс пользователя, сравним с балансом в пункте 1.">
   <meta property="og:locale" content="ru-ru">
   
-  <meta property="article:published_time" content="2018-05-16T00:00:00&#43;00:00">
+  <meta property="article:published_time" content="2018-05-31T00:00:00&#43;00:00">
   
-  <meta property="article:modified_time" content="2018-05-16T00:00:00&#43;00:00">
-  
-
-  
+  <meta property="article:modified_time" content="2018-05-31T00:00:00&#43;00:00">
   
 
-  <title>Тестирование интерфейсов над большими системами | Инфраструктура ИТ</title>
+  
+  
+
+  <title>Тестирование API-интерфейсов над большими системами | Инфраструктура ИТ</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
@@ -210,7 +216,7 @@
 
 
   <div class="article-container">
-    <h1 itemprop="name">Тестирование интерфейсов над большими системами</h1>
+    <h1 itemprop="name">Тестирование API-интерфейсов над большими системами</h1>
 
     
 
@@ -218,8 +224,8 @@
 
   <span class="article-date">
     
-    <time datetime="2018-05-16 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
-      May 16, 2018
+    <time datetime="2018-05-31 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      May 31, 2018
     </time>
   </span>
   <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
@@ -244,35 +250,35 @@
   <ul class="share">
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=%d0%a2%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5%20%d0%b8%d0%bd%d1%82%d0%b5%d1%80%d1%84%d0%b5%d0%b9%d1%81%d0%be%d0%b2%20%d0%bd%d0%b0%d0%b4%20%d0%b1%d0%be%d0%bb%d1%8c%d1%88%d0%b8%d0%bc%d0%b8%20%d1%81%d0%b8%d1%81%d1%82%d0%b5%d0%bc%d0%b0%d0%bc%d0%b8&amp;url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fqa-api%2f"
+         href="https://twitter.com/intent/tweet?text=%d0%a2%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5%20API-%d0%b8%d0%bd%d1%82%d0%b5%d1%80%d1%84%d0%b5%d0%b9%d1%81%d0%be%d0%b2%20%d0%bd%d0%b0%d0%b4%20%d0%b1%d0%be%d0%bb%d1%8c%d1%88%d0%b8%d0%bc%d0%b8%20%d1%81%d0%b8%d1%81%d1%82%d0%b5%d0%bc%d0%b0%d0%bc%d0%b8&amp;url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2frest-api-testing%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-twitter"></i>
       </a>
     </li>
     <li>
       <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fqa-api%2f"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2frest-api-testing%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-facebook"></i>
       </a>
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fqa-api%2f&amp;title=%d0%a2%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5%20%d0%b8%d0%bd%d1%82%d0%b5%d1%80%d1%84%d0%b5%d0%b9%d1%81%d0%be%d0%b2%20%d0%bd%d0%b0%d0%b4%20%d0%b1%d0%be%d0%bb%d1%8c%d1%88%d0%b8%d0%bc%d0%b8%20%d1%81%d0%b8%d1%81%d1%82%d0%b5%d0%bc%d0%b0%d0%bc%d0%b8"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2frest-api-testing%2f&amp;title=%d0%a2%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5%20API-%d0%b8%d0%bd%d1%82%d0%b5%d1%80%d1%84%d0%b5%d0%b9%d1%81%d0%be%d0%b2%20%d0%bd%d0%b0%d0%b4%20%d0%b1%d0%be%d0%bb%d1%8c%d1%88%d0%b8%d0%bc%d0%b8%20%d1%81%d0%b8%d1%81%d1%82%d0%b5%d0%bc%d0%b0%d0%bc%d0%b8"
          target="_blank" rel="noopener">
         <i class="fa fa-linkedin"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fqa-api%2f&amp;title=%d0%a2%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5%20%d0%b8%d0%bd%d1%82%d0%b5%d1%80%d1%84%d0%b5%d0%b9%d1%81%d0%be%d0%b2%20%d0%bd%d0%b0%d0%b4%20%d0%b1%d0%be%d0%bb%d1%8c%d1%88%d0%b8%d0%bc%d0%b8%20%d1%81%d0%b8%d1%81%d1%82%d0%b5%d0%bc%d0%b0%d0%bc%d0%b8"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2frest-api-testing%2f&amp;title=%d0%a2%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5%20API-%d0%b8%d0%bd%d1%82%d0%b5%d1%80%d1%84%d0%b5%d0%b9%d1%81%d0%be%d0%b2%20%d0%bd%d0%b0%d0%b4%20%d0%b1%d0%be%d0%bb%d1%8c%d1%88%d0%b8%d0%bc%d0%b8%20%d1%81%d0%b8%d1%81%d1%82%d0%b5%d0%bc%d0%b0%d0%bc%d0%b8"
          target="_blank" rel="noopener">
         <i class="fa fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=%d0%a2%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5%20%d0%b8%d0%bd%d1%82%d0%b5%d1%80%d1%84%d0%b5%d0%b9%d1%81%d0%be%d0%b2%20%d0%bd%d0%b0%d0%b4%20%d0%b1%d0%be%d0%bb%d1%8c%d1%88%d0%b8%d0%bc%d0%b8%20%d1%81%d0%b8%d1%81%d1%82%d0%b5%d0%bc%d0%b0%d0%bc%d0%b8&amp;body=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fqa-api%2f">
+         href="mailto:?subject=%d0%a2%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5%20API-%d0%b8%d0%bd%d1%82%d0%b5%d1%80%d1%84%d0%b5%d0%b9%d1%81%d0%be%d0%b2%20%d0%bd%d0%b0%d0%b4%20%d0%b1%d0%be%d0%bb%d1%8c%d1%88%d0%b8%d0%bc%d0%b8%20%d1%81%d0%b8%d1%81%d1%82%d0%b5%d0%bc%d0%b0%d0%bc%d0%b8&amp;body=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2frest-api-testing%2f">
         <i class="fa fa-envelope"></i>
       </a>
     </li>
@@ -288,37 +294,34 @@
     <div class="article-style" itemprop="articleBody">
       
 
-<p>В небольших проектах для воспроизведения тестов можно пользоваться следующим шагами:</p>
+<h2 id="постановка-задачи">Постановка задачи</h2>
 
-<ol>
-<li>создать виртуальную машину (контейнер) с СУБД;</li>
-<li>восстановить СУБД с продуктовой среды из дампа;</li>
-<li>применить миграции.</li>
-</ol>
-
-<h2 id="суть-проблемы">Суть проблемы</h2>
-
-<p>При больших базах даннных время восстановления может измеряться часами.
-Если мы ставим целью прохождение тестов в течение короткого интервала времени (до 10 минут), нам нужен другой подход.</p>
+<p>Протестировать автоматическими скриптами валидность ответов API над большой системой.</p>
 
 <h2 id="решение">Решение</h2>
 
-<p>При написании обычного API программисты backend также пишут API для тестирования, которое создаёт сущности в бек-енде.</p>
+<p>Для решения нам понадобится <a href="/post/qa-api">QA API</a>.</p>
 
-<p>Например, для социальной сети это может быть содание <code>аккаунта пользователя</code>
-с нужными для проведения тестировния атрибуами (возраст, пол, вес, интересы).</p>
-
-<p>В случае оператора связи сущностью может быть <code>договор на оказание услуг</code> с атрибутами баланс, подключенные услуги.</p>
-
-<p>Тогда цикл работы теста может быть описан следующим образом:</p>
+<p>В общем случае процесс выглядит следующим образом:</p>
 
 <ol>
-<li>Подготовка тестовых данных с помощью API для тестирования;</li>
-<li>Выполнение интеграционных тестов в интерфейсном приложении (участвует обычное API);</li>
-<li>Проверка результата выполнения с помощью API для тестирования.</li>
+<li>скрипт с помощью <a href="/post/qa-api">QA API</a> создаёт элемент данных, над которым будем проводить операции в проверяемом API.</li>
+<li>скрипт выполняет API-запросы с созданными элементами данных, для которых заранее известен ответ.</li>
 </ol>
 
-<p>Таким образом мы можем автоматизировать тестирование в процессах с участием больших баз данных.</p>
+<h2 id="пример-системы-личный-кабинет">Пример системы - личный кабинет</h2>
+
+<p>Протестируем API баланса личного кабинета пользователя.</p>
+
+<p>Для этого:</p>
+
+<ol>
+<li>С помощью <a href="/post/qa-api">QA API</a> создадим пользователя с указанным начальным значением баланса;</li>
+<li>С помощью rest API авторизуемся под пользователем;</li>
+<li>С помощью rest API проверим текущий баланс пользователя, сравним с балансом в пункте 1. Значения должны совпадать.</li>
+</ol>
+
+<p>Замечу, что при выполнении на непродуктовой базе влияния на сервис нет совсем (ни по нагрузке, ни по изменяемым данным). Последним обычно грешат стандартные способы проверки без использования <a href="/post/qa-api">QA API</a>.</p>
 
     </div>
 
@@ -326,8 +329,6 @@
 
 
 <div class="article-tags">
-  
-  <a class="btn btn-primary btn-outline" href="https://vitalyzhakov.github.io/tags/%D1%81%D1%80%D0%B5%D0%B4%D0%B0-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8/">Среда разработки</a>
   
   <a class="btn btn-primary btn-outline" href="https://vitalyzhakov.github.io/tags/qa/">QA</a>
   
@@ -343,13 +344,11 @@
       <h3></h3>
       <ul>
         
-        <li><a href="/post/autotesting-in-sandbox/">Автоматическое UI-тестирование в среде разработки</a></li>
+        <li><a href="/post/qa-api/">Тестирование интерфейсов над большими системами</a></li>
         
         <li><a href="/post/autotesting/">Автоматическое тестирование</a></li>
         
-        <li><a href="/post/sandbox-for-web-developers/">Песочница (среда разработки) для веб-разработчиков</a></li>
-        
-        <li><a href="/post/mysql-replication-docker/">Репликация MySQL-серверов с помощью Docker</a></li>
+        <li><a href="/post/autotesting-in-sandbox/">Автоматическое UI-тестирование в среде разработки</a></li>
         
       </ul>
     </div>

@@ -7,10 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Wed, 16 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 31 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://vitalyzhakov.github.io/tags/qa/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Тестирование API-интерфейсов над большими системами</title>
+      <link>https://vitalyzhakov.github.io/post/rest-api-testing/</link>
+      <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/rest-api-testing/</guid>
+      <description>Постановка задачи Протестировать автоматическими скриптами валидность ответов API над большой системой.
+Решение Для решения нам понадобится QA API.
+В общем случае процесс выглядит следующим образом:
+ скрипт с помощью QA API создаёт элемент данных, над которым будем проводить операции в проверяемом API. скрипт выполняет API-запросы с созданными элементами данных, для которых заранее известен ответ.  Пример системы - личный кабинет Протестируем API баланса личного кабинета пользователя.
+Для этого:
+ С помощью QA API создадим пользователя с указанным начальным значением баланса; С помощью rest API авторизуемся под пользователем; С помощью rest API проверим текущий баланс пользователя, сравним с балансом в пункте 1.</description>
+    </item>
     
     <item>
       <title>Тестирование интерфейсов над большими системами</title>
