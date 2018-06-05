@@ -7,10 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Thu, 31 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 05 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://vitalyzhakov.github.io/tags/qa/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Автоматическая проверка  с помощью Codeception</title>
+      <link>https://vitalyzhakov.github.io/post/redirect-autotest/</link>
+      <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/redirect-autotest/</guid>
+      <description>Рассмотрим реализацию теста, который подтверждает (проверяет) переадресацию пользователя на определённый URL.
+На самом деле нам не нужно проверять, что пользователь перешёл на целевой URL. Задача веб-сервера заключается в том, чтобы отправить клиенту верный http-ответ с корректным заголовком и правильным статусом.
+Далее уже клиент решает, переходить ему по этому URL или нет.
+Пример конфигурации rest.suite.yml
+actor: RestTester modules: enabled: - REST: depends: PhpBrowser url: http://адрес-сервера  Пример автоматической проверки
+class RedirectCest{ public function autodiscoverRedirect(RestTester $I) { $I-&amp;gt;stopFollowingRedirects(); // запрещаем переходить по URL, чтобы отследить ответ сервера $I-&amp;gt;sendGET(&#39;/autodiscover/autodiscover.</description>
+    </item>
     
     <item>
       <title>Тестирование API-интерфейсов над большими системами</title>

@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Mon, 07 May 2018 00:10:06 +0500</lastBuildDate>
+    <lastBuildDate>Tue, 05 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://vitalyzhakov.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Codeception</title>
+      <link>https://vitalyzhakov.github.io/tags/codeception/</link>
+      <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/tags/codeception/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Docker</title>
@@ -60,7 +69,7 @@
     <item>
       <title>QA</title>
       <link>https://vitalyzhakov.github.io/tags/qa/</link>
-      <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>https://vitalyzhakov.github.io/tags/qa/</guid>
       <description></description>

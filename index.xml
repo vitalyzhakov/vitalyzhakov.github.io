@@ -11,6 +11,47 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Автоматическая проверка  с помощью Codeception</title>
+      <link>https://vitalyzhakov.github.io/post/redirect-autotest/</link>
+      <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/redirect-autotest/</guid>
+      <description>&lt;p&gt;Рассмотрим реализацию теста, который подтверждает (проверяет) переадресацию пользователя на определённый URL.&lt;/p&gt;
+
+&lt;p&gt;На самом деле нам не нужно проверять, что пользователь перешёл на целевой URL.
+Задача веб-сервера заключается в том, чтобы отправить клиенту
+верный http-ответ с корректным заголовком и правильным статусом.&lt;/p&gt;
+
+&lt;p&gt;Далее уже клиент решает, переходить ему по этому URL или нет.&lt;/p&gt;
+
+&lt;p&gt;Пример конфигурации &lt;code&gt;rest.suite.yml&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;actor: RestTester
+modules:
+    enabled:
+        - REST:
+            depends: PhpBrowser
+            url: http://адрес-сервера
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Пример автоматической проверки&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class RedirectCest{
+    public function autodiscoverRedirect(RestTester $I) {
+        $I-&amp;gt;stopFollowingRedirects(); // запрещаем переходить по URL, чтобы отследить ответ сервера
+        $I-&amp;gt;sendGET(&#39;/autodiscover/autodiscover.xml&#39;); // делаем запрос
+        $I-&amp;gt;seeResponseCodeIs(302); // Проверяем код ответа (302 или 301)
+        $I-&amp;gt;seeHttpHeader(&#39;Location&#39;, &#39;https://vnytve.ru&#39;); // Проверяем целевой URL для клиента
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Таким образом мы убеждаемся в присутствии переадресации при определённом запросе пользователя на веб-сервер.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Оптимизация обращений к базе данных</title>
       <link>https://vitalyzhakov.github.io/post/db-optimization/</link>
       <pubDate>Fri, 01 Jun 2018 00:10:06 +0500</pubDate>
