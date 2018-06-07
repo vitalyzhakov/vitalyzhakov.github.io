@@ -97,7 +97,7 @@ class RedirectCest{ public function autodiscoverRedirect(RestTester $I) { $I-&gt
   
   <meta property="og:site_name" content="Инфраструктура ИТ">
   <meta property="og:url" content="https://vitalyzhakov.github.io/post/redirect-autotest/">
-  <meta property="og:title" content="Автоматическая проверка  с помощью Codeception | Инфраструктура ИТ">
+  <meta property="og:title" content="Автоматическая проверка переадресации с помощью Codeception | Инфраструктура ИТ">
   <meta property="og:description" content="Рассмотрим реализацию теста, который подтверждает (проверяет) переадресацию пользователя на определённый URL.
 На самом деле нам не нужно проверять, что пользователь перешёл на целевой URL. Задача веб-сервера заключается в том, чтобы отправить клиенту верный http-ответ с корректным заголовком и правильным статусом.
 Далее уже клиент решает, переходить ему по этому URL или нет.
@@ -114,7 +114,7 @@ class RedirectCest{ public function autodiscoverRedirect(RestTester $I) { $I-&gt
   
   
 
-  <title>Автоматическая проверка  с помощью Codeception | Инфраструктура ИТ</title>
+  <title>Автоматическая проверка переадресации с помощью Codeception | Инфраструктура ИТ</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
@@ -216,7 +216,7 @@ class RedirectCest{ public function autodiscoverRedirect(RestTester $I) { $I-&gt
 
 
   <div class="article-container">
-    <h1 itemprop="name">Автоматическая проверка  с помощью Codeception</h1>
+    <h1 itemprop="name">Автоматическая проверка переадресации с помощью Codeception</h1>
 
     
 
@@ -250,7 +250,7 @@ class RedirectCest{ public function autodiscoverRedirect(RestTester $I) { $I-&gt
   <ul class="share">
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=%d0%90%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b0%d1%8f%20%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0%20%20%d1%81%20%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e%20Codeception&amp;url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fredirect-autotest%2f"
+         href="https://twitter.com/intent/tweet?text=%d0%90%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b0%d1%8f%20%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0%20%d0%bf%d0%b5%d1%80%d0%b5%d0%b0%d0%b4%d1%80%d0%b5%d1%81%d0%b0%d1%86%d0%b8%d0%b8%20%d1%81%20%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e%20Codeception&amp;url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fredirect-autotest%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-twitter"></i>
       </a>
@@ -264,21 +264,21 @@ class RedirectCest{ public function autodiscoverRedirect(RestTester $I) { $I-&gt
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fredirect-autotest%2f&amp;title=%d0%90%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b0%d1%8f%20%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0%20%20%d1%81%20%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e%20Codeception"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fredirect-autotest%2f&amp;title=%d0%90%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b0%d1%8f%20%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0%20%d0%bf%d0%b5%d1%80%d0%b5%d0%b0%d0%b4%d1%80%d0%b5%d1%81%d0%b0%d1%86%d0%b8%d0%b8%20%d1%81%20%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e%20Codeception"
          target="_blank" rel="noopener">
         <i class="fa fa-linkedin"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fredirect-autotest%2f&amp;title=%d0%90%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b0%d1%8f%20%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0%20%20%d1%81%20%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e%20Codeception"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fredirect-autotest%2f&amp;title=%d0%90%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b0%d1%8f%20%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0%20%d0%bf%d0%b5%d1%80%d0%b5%d0%b0%d0%b4%d1%80%d0%b5%d1%81%d0%b0%d1%86%d0%b8%d0%b8%20%d1%81%20%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e%20Codeception"
          target="_blank" rel="noopener">
         <i class="fa fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=%d0%90%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b0%d1%8f%20%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0%20%20%d1%81%20%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e%20Codeception&amp;body=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fredirect-autotest%2f">
+         href="mailto:?subject=%d0%90%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b0%d1%8f%20%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0%20%d0%bf%d0%b5%d1%80%d0%b5%d0%b0%d0%b4%d1%80%d0%b5%d1%81%d0%b0%d1%86%d0%b8%d0%b8%20%d1%81%20%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e%20Codeception&amp;body=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fredirect-autotest%2f">
         <i class="fa fa-envelope"></i>
       </a>
     </li>
