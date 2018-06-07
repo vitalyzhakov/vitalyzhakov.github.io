@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Инфраструктура ИТ</title>
+    <link>https://vitalyzhakov.github.io/post/</link>
+    <description>Recent content in Posts on Инфраструктура ИТ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru-ru</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://vitalyzhakov.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Прокидываем протокол клиента в исполняемый скрипт для веб-сервера</title>
+      <link>https://vitalyzhakov.github.io/post/https-to-container/</link>
+      <pubDate>Thu, 07 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/https-to-container/</guid>
+      <description>Иногда приложению нужно знать, по какому протоколу соединяется Клиент. Но при этом приложение скрыто за балансировщиком (SSL терминируется на балансировщике, апстримы работают по HTTP).
+Суть в следующем - подменить параметр HTTPS информацией с балансировщика.
+Тогда конфигруация балансировщика может быть
+server { listen 80; rewrite ^(.*)$ https://$server_name$1 permanent; } server { listen 443; ssl on; ssl_certificate /etc/nginx/ssl/server.crt; ssl_certificate_key /etc/nginx/ssl/server.key; location / { proxy_pass http://upstream.addr; proxy_set_header X-Forwarded-Proto $https; proxy_set_header Host $host; } }  Конфигурация nginx на апстриме</description>
+    </item>
+    
+    <item>
+      <title>Автоматическая проверка переадресации с помощью Codeception</title>
+      <link>https://vitalyzhakov.github.io/post/redirect-autotest/</link>
+      <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/redirect-autotest/</guid>
+      <description>Рассмотрим реализацию теста, который подтверждает (проверяет) переадресацию пользователя на определённый URL.
+На самом деле нам не нужно проверять, что пользователь перешёл на целевой URL. Задача веб-сервера заключается в том, чтобы отправить клиенту верный http-ответ с корректным заголовком и правильным статусом.
+Далее уже клиент решает, переходить ему по этому URL или нет.
+Пример конфигурации rest.suite.yml
+actor: RestTester modules: enabled: - REST: depends: PhpBrowser url: http://адрес-сервера  Пример автоматической проверки
+class RedirectCest{ public function autodiscoverRedirect(RestTester $I) { $I-&amp;gt;stopFollowingRedirects(); // запрещаем переходить по URL, чтобы отследить ответ сервера $I-&amp;gt;sendGET(&#39;/autodiscover/autodiscover.</description>
+    </item>
+    
+    <item>
+      <title>Оптимизация обращений к базе данных</title>
+      <link>https://vitalyzhakov.github.io/post/db-optimization/</link>
+      <pubDate>Fri, 01 Jun 2018 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/db-optimization/</guid>
+      <description>При разборе времени генерации ответа от сервера иногда узким местом может быть обращение к СУБД. Оптимизацию времени доступа к СУБД можно разделить на несколько видов:
+Использование параметризованных запросов Некоторые программисты совершают ошибку, вписывая параметры (например, идентификаторы) запроса сразу в запрос. Первым шагом СУБД пытается проанализировать запрос. Если параметры приходят в запросе, в кеш запрос не складывается. Но если параметры прикладывать к запросу, структура запроса не меняется. Значит, при следующем запросе, есть вероятность нахождения проанализированной структуры в кеше, что позволит ускорить выполнение.</description>
+    </item>
+    
+    <item>
+      <title>Тестирование API-интерфейсов над большими системами</title>
+      <link>https://vitalyzhakov.github.io/post/rest-api-testing/</link>
+      <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/rest-api-testing/</guid>
+      <description>Постановка задачи Протестировать автоматическими скриптами валидность ответов API над большой системой.
+Решение Для решения нам понадобится QA API.
+В общем случае процесс выглядит следующим образом:
+ скрипт с помощью QA API создаёт элемент данных, над которым будем проводить операции в проверяемом API. скрипт выполняет API-запросы с созданными элементами данных, для которых заранее известен ответ.  Пример системы - личный кабинет Протестируем API баланса личного кабинета пользователя.
+Для этого:
+ С помощью QA API создадим пользователя с указанным начальным значением баланса; С помощью rest API авторизуемся под пользователем; С помощью rest API проверим текущий баланс пользователя, сравним с балансом в пункте 1.</description>
+    </item>
+    
+    <item>
+      <title>Тестирование интерфейсов над большими системами</title>
+      <link>https://vitalyzhakov.github.io/post/qa-api/</link>
+      <pubDate>Wed, 16 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/qa-api/</guid>
+      <description>В небольших проектах для воспроизведения тестов можно пользоваться следующим шагами:
+ создать виртуальную машину (контейнер) с СУБД; восстановить СУБД с продуктовой среды из дампа; применить миграции.  Суть проблемы При больших базах даннных время восстановления может измеряться часами. Если мы ставим целью прохождение тестов в течение короткого интервала времени (до 10 минут), нам нужен другой подход.
+Решение При написании обычного API программисты backend также пишут API для тестирования, которое создаёт сущности в бек-енде.</description>
+    </item>
+    
+    <item>
+      <title>Преимущества nginx unit</title>
+      <link>https://vitalyzhakov.github.io/post/nginx-unit/</link>
+      <pubDate>Mon, 14 May 2018 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/nginx-unit/</guid>
+      <description>Упрощение архитектуры веб-сервера Стандартное web-приложение строится следующим образом
+ клиент -&amp;gt; nginx -&amp;gt; php-fpm -&amp;gt; процесс php-fpm клиент -&amp;gt; nginx -&amp;gt; gunicorn клиент -&amp;gt; nginx -&amp;gt; uwsgi  В случае с nginx unit процесс может быть упрощён до клиент -&amp;gt; nginx unit с поддержкой соответствующего языка программирования.
+nginx unit позволит убрать дополнительную прослойку, которая может генерировать ошибки 502&amp;frasl;504.
+Конфигурация с помощью RESTful JSON API На некоторых проектах с частым внесением изменений опция может быть достаточно удобной.</description>
+    </item>
+    
+    <item>
+      <title>Импорт данных OpenStreetMap в PostgreSQL средствами osm2pgsql</title>
+      <link>https://vitalyzhakov.github.io/post/osm2pgsql/</link>
+      <pubDate>Fri, 11 May 2018 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/osm2pgsql/</guid>
+      <description>На сайте бывает полезно отобразить географические данные, но простой интеграции с публичными проприетарными сервисами карт может не хватить. На помощь приходят открытые данные, для географических карт - это Openstreet Map.
+Требования Действия выполняются на системе
+ debian jessie 8.2; PostgreSQL 9.4; osm2pgsql 0.86; пользователь, от которого исполняется скрипт, должен иметь права на запись в целевую базу.  Подготовка базы Создаём БД gis, добавляем расширения postgis и hstore
+createdb gis psql -d gis -c &#39;CREATE EXTENSION postgis; CREATE EXTENSION hstore&#39;  Импорт данных Найти географические координаты прямоугольника, который мы хотим импортировать можно на http://www.</description>
+    </item>
+    
+    <item>
+      <title>Автоматическое UI-тестирование в среде разработки</title>
+      <link>https://vitalyzhakov.github.io/post/autotesting-in-sandbox/</link>
+      <pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/autotesting-in-sandbox/</guid>
+      <description>Для комплексного тестирования приложения с веб-интерфейсом требуется selenium.
+Суть проблемы Допустим, параллельно ведётся разработка 30 задач. Каждая задача требует индивидуальный контейнер с selenium для тестирования. Каждый контейнер с selenium требует 1-2 GB RAM и глючит, если его не перезапускать долгое время.
+Решение До проведения тестов в CI прописывается удаление контейнера с selenium. После проведения тестов в CI прописывается удаление контейнера с selenium.
+Теперь у нас память расходуется &amp;ldquo;по потребности&amp;rdquo;. Но при этом все пользователи обеспечены необходимым браузером для тестирования.</description>
+    </item>
+    
+    <item>
+      <title>Автоматическое тестирование</title>
+      <link>https://vitalyzhakov.github.io/post/autotesting/</link>
+      <pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/autotesting/</guid>
+      <description>На хорошем производстве существует входной и выходной контроль. Наверное, многие видели на технически сложных изделиях отметки ОТК, PASSED, QUALITY CHECK PASSED.
+Приложение, упакованное в контейнер, тоже является технически сложным изделием. До развёртывания в боевой среде стоит смоделировать его поведение и протестировать.
+Протестировать можно несколькими вариантами: * отдать заказчику; * проверить самому; * написать карточку тестирования; * написать автоматический тест.
+Рассмотрим задачу публикации предварительно подготовленной промо-страницы в сети Интернет. Стандартная промо-страница состоит из картинок и текста с относительно неплохим дизайном.</description>
+    </item>
+    
+    <item>
+      <title>Песочница (среда разработки) для веб-разработчиков</title>
+      <link>https://vitalyzhakov.github.io/post/sandbox-for-web-developers/</link>
+      <pubDate>Mon, 07 May 2018 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/sandbox-for-web-developers/</guid>
+      <description>В системе контроля задач создаётся новый элемент с уникальным именем (порядковым номером). В репозитории проекта создаётся ветка с этим именем в нижнем регистре.
+Раработчик вносит изменения в код и выполняет push на удалённый сервер. CI-сервер (gitlab) подхватывает это событие и создаёт задание worker для песочниц. Worker выполняет задание - разворачивает песочницу и добавляет в конфигурацию nginx уникальный домен, с которым может работать заказчик/тестировщик и другие участники процесса.
+Конфигурация worker:  много оперативной памяти (из расчёта количество задач в день, над которыми предстоит работать * количество контейнеров * количество потребляемой памяти на контейнер); 200 GB HDD в разделе /var/lib/docker для сборки контейнеров; docker-демон; docker-compose; хостовой nginx для проксирования сайтов - должен быть по умолчанию закрыт из внешки для коммерческих проектов; его конфигурация должна автоматически подтягивать конфигурации песочниц; хостовой consul для разрешения имён контейнеров в IP-адреса; скрипты для ночного удаления контейнеров; скрипты для ночного удаления песочниц.</description>
+    </item>
+    
+    <item>
+      <title>Репликация MySQL-серверов с помощью Docker</title>
+      <link>https://vitalyzhakov.github.io/post/mysql-replication-docker/</link>
+      <pubDate>Sun, 22 Jan 2017 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/mysql-replication-docker/</guid>
+      <description>До выхода приложения в бой, нужно смоделировать его поведение в тестовой среде.
+Технология Docker Swarm позволяет легко масштабировать приложение горизонтально. Но приложению приходится обращаться к серверу баз данных, задача масшабировать который гораздо труднее.
+В нашем случае количество запросов на чтение информации гораздо меньше количества изменений (есть подозрение, что так на большинстве веб-проектов). Логичным способом увеличения такого бутылочного горлышка - увеличить количество баз на чтение и настроить приложение таким образом, чтобы большее количество запросов на чтение отправлялось на SLAVE-сервера.</description>
+    </item>
+    
+    <item>
+      <title>Примеры использования PostGis расширения в PostgreSQL</title>
+      <link>https://vitalyzhakov.github.io/post/postgis-examples/</link>
+      <pubDate>Tue, 23 Feb 2016 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/postgis-examples/</guid>
+      <description>Здание (полигон), которое содержит точку с координатами $lng, $lat &amp;lt;?php &#39;SELECT * FROM planet_osm_polygon WHERE &#39; . &#39;ST_contains( way, ST_Transform( ST_SetSRID( ST_Point(&#39; . $lng . &#39;,&#39; . $lat . &#39;), 4326&#39; . &#39;), 900913 ) )&#39; . &amp;quot;AND building != &#39;&#39;&amp;quot;  Точки (организации) внутри найденного полигона &#39;SELECT point.* FROM planet_osm_point point, &#39; . &#39;planet_osm_polygon polygon &#39; . &#39;WHERE polygon.osm_id = &#39; . $polygon-&amp;gt;osm_id . &#39; AND ST_Contains (polygon.way, point.</description>
+    </item>
+    
+  </channel>
+</rss>

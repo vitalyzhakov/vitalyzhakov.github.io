@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>QA on Инфраструктура ИТ</title>
+    <link>https://vitalyzhakov.github.io/tags/qa/</link>
+    <description>Recent content in QA on Инфраструктура ИТ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru-ru</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Thu, 07 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://vitalyzhakov.github.io/tags/qa/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Прокидываем протокол клиента в исполняемый скрипт для веб-сервера</title>
+      <link>https://vitalyzhakov.github.io/post/https-to-container/</link>
+      <pubDate>Thu, 07 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/https-to-container/</guid>
+      <description>Иногда приложению нужно знать, по какому протоколу соединяется Клиент. Но при этом приложение скрыто за балансировщиком (SSL терминируется на балансировщике, апстримы работают по HTTP).
+Суть в следующем - подменить параметр HTTPS информацией с балансировщика.
+Тогда конфигруация балансировщика может быть
+server { listen 80; rewrite ^(.*)$ https://$server_name$1 permanent; } server { listen 443; ssl on; ssl_certificate /etc/nginx/ssl/server.crt; ssl_certificate_key /etc/nginx/ssl/server.key; location / { proxy_pass http://upstream.addr; proxy_set_header X-Forwarded-Proto $https; proxy_set_header Host $host; } }  Конфигурация nginx на апстриме</description>
+    </item>
+    
+    <item>
+      <title>Автоматическая проверка переадресации с помощью Codeception</title>
+      <link>https://vitalyzhakov.github.io/post/redirect-autotest/</link>
+      <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/redirect-autotest/</guid>
+      <description>Рассмотрим реализацию теста, который подтверждает (проверяет) переадресацию пользователя на определённый URL.
+На самом деле нам не нужно проверять, что пользователь перешёл на целевой URL. Задача веб-сервера заключается в том, чтобы отправить клиенту верный http-ответ с корректным заголовком и правильным статусом.
+Далее уже клиент решает, переходить ему по этому URL или нет.
+Пример конфигурации rest.suite.yml
+actor: RestTester modules: enabled: - REST: depends: PhpBrowser url: http://адрес-сервера  Пример автоматической проверки
+class RedirectCest{ public function autodiscoverRedirect(RestTester $I) { $I-&amp;gt;stopFollowingRedirects(); // запрещаем переходить по URL, чтобы отследить ответ сервера $I-&amp;gt;sendGET(&#39;/autodiscover/autodiscover.</description>
+    </item>
+    
+    <item>
+      <title>Тестирование API-интерфейсов над большими системами</title>
+      <link>https://vitalyzhakov.github.io/post/rest-api-testing/</link>
+      <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/rest-api-testing/</guid>
+      <description>Постановка задачи Протестировать автоматическими скриптами валидность ответов API над большой системой.
+Решение Для решения нам понадобится QA API.
+В общем случае процесс выглядит следующим образом:
+ скрипт с помощью QA API создаёт элемент данных, над которым будем проводить операции в проверяемом API. скрипт выполняет API-запросы с созданными элементами данных, для которых заранее известен ответ.  Пример системы - личный кабинет Протестируем API баланса личного кабинета пользователя.
+Для этого:
+ С помощью QA API создадим пользователя с указанным начальным значением баланса; С помощью rest API авторизуемся под пользователем; С помощью rest API проверим текущий баланс пользователя, сравним с балансом в пункте 1.</description>
+    </item>
+    
+    <item>
+      <title>Тестирование интерфейсов над большими системами</title>
+      <link>https://vitalyzhakov.github.io/post/qa-api/</link>
+      <pubDate>Wed, 16 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/qa-api/</guid>
+      <description>В небольших проектах для воспроизведения тестов можно пользоваться следующим шагами:
+ создать виртуальную машину (контейнер) с СУБД; восстановить СУБД с продуктовой среды из дампа; применить миграции.  Суть проблемы При больших базах даннных время восстановления может измеряться часами. Если мы ставим целью прохождение тестов в течение короткого интервала времени (до 10 минут), нам нужен другой подход.
+Решение При написании обычного API программисты backend также пишут API для тестирования, которое создаёт сущности в бек-енде.</description>
+    </item>
+    
+    <item>
+      <title>Автоматическое UI-тестирование в среде разработки</title>
+      <link>https://vitalyzhakov.github.io/post/autotesting-in-sandbox/</link>
+      <pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/autotesting-in-sandbox/</guid>
+      <description>Для комплексного тестирования приложения с веб-интерфейсом требуется selenium.
+Суть проблемы Допустим, параллельно ведётся разработка 30 задач. Каждая задача требует индивидуальный контейнер с selenium для тестирования. Каждый контейнер с selenium требует 1-2 GB RAM и глючит, если его не перезапускать долгое время.
+Решение До проведения тестов в CI прописывается удаление контейнера с selenium. После проведения тестов в CI прописывается удаление контейнера с selenium.
+Теперь у нас память расходуется &amp;ldquo;по потребности&amp;rdquo;. Но при этом все пользователи обеспечены необходимым браузером для тестирования.</description>
+    </item>
+    
+    <item>
+      <title>Автоматическое тестирование</title>
+      <link>https://vitalyzhakov.github.io/post/autotesting/</link>
+      <pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/autotesting/</guid>
+      <description>На хорошем производстве существует входной и выходной контроль. Наверное, многие видели на технически сложных изделиях отметки ОТК, PASSED, QUALITY CHECK PASSED.
+Приложение, упакованное в контейнер, тоже является технически сложным изделием. До развёртывания в боевой среде стоит смоделировать его поведение и протестировать.
+Протестировать можно несколькими вариантами: * отдать заказчику; * проверить самому; * написать карточку тестирования; * написать автоматический тест.
+Рассмотрим задачу публикации предварительно подготовленной промо-страницы в сети Интернет. Стандартная промо-страница состоит из картинок и текста с относительно неплохим дизайном.</description>
+    </item>
+    
+  </channel>
+</rss>
