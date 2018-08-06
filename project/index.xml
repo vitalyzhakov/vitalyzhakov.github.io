@@ -19,7 +19,7 @@
       
       <guid>https://vitalyzhakov.github.io/project/vnytve-ru/</guid>
       <description>Веб-сайт vnytve.ru содержит данные об организациях, зданиях, улицах г. Нытва Пермского края.
-Работает на основе openstreetmap, yii2, php.</description>
+Работает на основе openstreetmap, yii2, php, postgreSQL, docker-compose.</description>
     </item>
     
   </channel>

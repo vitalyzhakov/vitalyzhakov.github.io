@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Скорость загрузки on Инфраструктура ИТ</title>
+    <link>https://vitalyzhakov.github.io/tags/%D1%81%D0%BA%D0%BE%D1%80%D0%BE%D1%81%D1%82%D1%8C-%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B8/</link>
+    <description>Recent content in Скорость загрузки on Инфраструктура ИТ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru-ru</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Mon, 06 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://vitalyzhakov.github.io/tags/%D1%81%D0%BA%D0%BE%D1%80%D0%BE%D1%81%D1%82%D1%8C-%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Замеры скорости загрузки вебсайтов</title>
+      <link>https://vitalyzhakov.github.io/post/sitespeed/</link>
+      <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/sitespeed/</guid>
+      <description>Наиболее продвинутые компании на высококонкуретном рынке B2C понимают, что высокая скорость загрузки сайта положительно сказывается не только на имидже, но и на показателях конверсии.
+Для того, чтобы что-то оптимизировать, нужно это замерить. В измерениях нам поможет инструмент под названием sitespeed.io.
+В упрощённом варианте можно использовать всего 2 машины - 1 сервер и 1 клиент. Машины нужны изолированные, так как на измерения клиента не должны влиять операции на сервере.
+Если потребуется, можно нарастить количество клиентов.</description>
+    </item>
+    
+  </channel>
+</rss>
