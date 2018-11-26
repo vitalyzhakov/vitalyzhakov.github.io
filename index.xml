@@ -11,6 +11,109 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Переход от монолита к микросервисам</title>
+      <link>https://vitalyzhakov.github.io/post/microservices/</link>
+      <pubDate>Mon, 26 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/microservices/</guid>
+      <description>
+
+&lt;h2 id=&#34;проблематика-больших-монолитных-систем&#34;&gt;Проблематика больших монолитных систем&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Плохое горизонтальное масштабирование&lt;/li&gt;
+&lt;li&gt;Плохая отказоустойчивость&lt;/li&gt;
+&lt;li&gt;Сложность внедрения новых технологий&lt;/li&gt;
+&lt;li&gt;Сложность рефакторинга legacy&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://www.pvsm.ru/images/2016/04/11/mikroservisnaya-arhitektura-Spring-Cloud-i-Docker-3.png&#34; alt=&#34;Микросервисный подход&#34; title=&#34;Деление по доменам&#34; /&gt;&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Плюсы&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Минусы&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Горизонтальное масштабирование только нужных частей&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Дополнительная сложность&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Отказоустойчивость&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Как следствие - выше начальная стоимость&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Масштабирование команд&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Несогласованные данные&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Гибкость стека&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Неочевидность разделения&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Вам не нужны микросервисы, если&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Вы делаете стартап (MVP)&lt;/li&gt;
+&lt;li&gt;Нет или не предполагается рост нагрузки&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Вам нужны микросервисы, если&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Высокая нагрузка&lt;/li&gt;
+&lt;li&gt;Система растет&lt;/li&gt;
+&lt;li&gt;Команда растет&lt;/li&gt;
+&lt;li&gt;Нужна отказоустойчивость&lt;/li&gt;
+&lt;li&gt;Необходимо сократить TTM&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;разбиение&#34;&gt;Разбиение&lt;/h2&gt;
+
+&lt;p&gt;Не разрезайте по слоям, разрезайте по бизнес-контекстам&lt;/p&gt;
+
+&lt;h2 id=&#34;размер-сервиса&#34;&gt;Размер сервиса&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;На основе бизнес-контекста&lt;/li&gt;
+&lt;li&gt;На основе сетевых запросов (чем меньше, тем лучше)&lt;/li&gt;
+&lt;li&gt;На основе транзакций (транзакция внутри одного сервиса)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;база-данных&#34;&gt;База данных&lt;/h2&gt;
+
+&lt;p&gt;Один сервис - одна база. Её выбор зависит от сервиса.&lt;/p&gt;
+
+&lt;h2 id=&#34;взаимодействие-между-сервисами&#34;&gt;Взаимодействие между сервисами&lt;/h2&gt;
+
+&lt;p&gt;Асинхронное на основе сервиса очередей&lt;/p&gt;
+
+&lt;p&gt;Протокол обмена сообщениями основан на независимом стандарте.&lt;/p&gt;
+
+&lt;h2 id=&#34;проблемы-и-решения&#34;&gt;Проблемы и решения&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Нет ACID-транзакций&lt;/li&gt;
+&lt;li&gt;Возможна несогласованность&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Трассировка&lt;/p&gt;
+
+&lt;p&gt;На основе activity Id
+&lt;a href=&#34;https://opentracing.io/&#34; target=&#34;_blank&#34;&gt;https://opentracing.io/&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Замеры скорости загрузки вебсайтов</title>
       <link>https://vitalyzhakov.github.io/post/sitespeed/</link>
       <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
