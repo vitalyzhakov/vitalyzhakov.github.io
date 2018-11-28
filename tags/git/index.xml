@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on Инфраструктура ИТ</title>
+    <link>https://vitalyzhakov.github.io/tags/git/</link>
+    <description>Recent content in Git on Инфраструктура ИТ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru-ru</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Thu, 30 Aug 2018 00:10:06 +0500</lastBuildDate>
+    
+	<atom:link href="https://vitalyzhakov.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git rebase для удалённой ветки</title>
+      <link>https://vitalyzhakov.github.io/post/remote-rebase/</link>
+      <pubDate>Thu, 30 Aug 2018 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/remote-rebase/</guid>
+      <description> Командная строка  Клонируем репозиторий с указанием ветки, над которой будет выполнять операцию rebase
+git clone [Адрес репозитория] -b [ветка]  Выполняем rebase локально
+git pull --rebase origin master  Отправка данных на сервер
+git push origin [ветка] -f   </description>
+    </item>
+    
+  </channel>
+</rss>
