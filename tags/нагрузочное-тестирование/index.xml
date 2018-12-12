@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Нагрузочное тестирование on Инфраструктура ИТ</title>
+    <link>https://vitalyzhakov.github.io/tags/%D0%BD%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BE%D1%87%D0%BD%D0%BE%D0%B5-%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/</link>
+    <description>Recent content in Нагрузочное тестирование on Инфраструктура ИТ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru-ru</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Wed, 12 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://vitalyzhakov.github.io/tags/%D0%BD%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BE%D1%87%D0%BD%D0%BE%D0%B5-%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Нагрузочное тестирование</title>
+      <link>https://vitalyzhakov.github.io/post/load-testing/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/load-testing/</guid>
+      <description>Проблематика Запуск нагрузочного тестирования - довольно длительная процедура.
+Если сервис держит нужное количество пользователей или расширение делалось разовыми изменениями параметров конфигруации, внедрять нагрузочное тестирование в процесс будет только замедлять Time To Market, но не улучшит вопрос качества.
+Подготовка Договориться с заказчиком об SL  какое максимальное время ответа на каком сценарии должно быть (с распределением; какое количество пользователей должен выдерживать сервис в пиках.  Поправить все функциональные баги Перед тем, как начинать нагрузочное тестирование, нужно убедиться, что перед этим провели функциональное и поправили все баги.</description>
+    </item>
+    
+  </channel>
+</rss>
