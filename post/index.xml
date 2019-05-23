@@ -13,6 +13,26 @@
     
     
     <item>
+      <title>Запуск lighthouse (chrome audit) без SSL</title>
+      <link>https://vitalyzhakov.github.io/post/lighthouse-without-ssl/</link>
+      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/lighthouse-without-ssl/</guid>
+      <description>Не всегда есть возможность использовать валидный SSL для проектов в тестовой среде.
+Для анализа скорости загрузки страниц выпустили lighthouse и иетегрировали во вкладку инструментов разработчика Audit.
+Решение 1) Получаем содержимое ветки репозитория https://github.com/Janpot/lighthouse/tree/ignore-https-errors 2) Устанавливаем зависимости npm i 3) Запускаем ./lighthouse-cli/index.js  &amp;ndash;ignore-https-errors</description>
+    </item>
+    
+    <item>
+      <title>Надёжность веб-сервисов</title>
+      <link>https://vitalyzhakov.github.io/post/reliability/</link>
+      <pubDate>Tue, 23 Apr 2019 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/reliability/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Нагрузочное тестирование</title>
       <link>https://vitalyzhakov.github.io/post/load-testing/</link>
       <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
@@ -194,17 +214,6 @@ createdb gis psql -d gis -c &#39;CREATE EXTENSION postgis; CREATE EXTENSION hsto
       
       <guid>https://vitalyzhakov.github.io/post/postgis-examples/</guid>
       <description>Здание (полигон), которое содержит точку с координатами $lng, $lat &amp;lt;?php &#39;SELECT * FROM planet_osm_polygon WHERE &#39; . &#39;ST_contains( way, ST_Transform( ST_SetSRID( ST_Point(&#39; . $lng . &#39;,&#39; . $lat . &#39;), 4326&#39; . &#39;), 900913 ) )&#39; . &amp;quot;AND building != &#39;&#39;&amp;quot;  Точки (организации) внутри найденного полигона &#39;SELECT point.* FROM planet_osm_point point, &#39; . &#39;planet_osm_polygon polygon &#39; . &#39;WHERE polygon.osm_id = &#39; . $polygon-&amp;gt;osm_id . &#39; AND ST_Contains (polygon.way, point.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://vitalyzhakov.github.io/post/lighthouse-without-ssl/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/lighthouse-without-ssl/</guid>
-      <description>#Запуск lighthouse (chrome audit) без SSL
-Не всегда есть возможность использовать валидный SSL для проектов в тестовой среде.
-Для анализа скорости загрузки страниц выпустили lighthouse и иетегрировали во вкладку инструментов разработчика Audit.</description>
     </item>
     
   </channel>

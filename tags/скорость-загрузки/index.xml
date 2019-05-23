@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Mon, 06 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 May 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://vitalyzhakov.github.io/tags/%D1%81%D0%BA%D0%BE%D1%80%D0%BE%D1%81%D1%82%D1%8C-%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B8/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Запуск lighthouse (chrome audit) без SSL</title>
+      <link>https://vitalyzhakov.github.io/post/lighthouse-without-ssl/</link>
+      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/lighthouse-without-ssl/</guid>
+      <description>Не всегда есть возможность использовать валидный SSL для проектов в тестовой среде.
+Для анализа скорости загрузки страниц выпустили lighthouse и иетегрировали во вкладку инструментов разработчика Audit.
+Решение 1) Получаем содержимое ветки репозитория https://github.com/Janpot/lighthouse/tree/ignore-https-errors 2) Устанавливаем зависимости npm i 3) Запускаем ./lighthouse-cli/index.js  &amp;ndash;ignore-https-errors</description>
+    </item>
     
     <item>
       <title>Замеры скорости загрузки вебсайтов</title>
