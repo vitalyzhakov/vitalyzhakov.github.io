@@ -25,9 +25,17 @@
 
 &lt;h2 id=&#34;решение&#34;&gt;Решение&lt;/h2&gt;
 
-&lt;p&gt;1) Получаем содержимое ветки репозитория &lt;a href=&#34;https://github.com/Janpot/lighthouse/tree/ignore-https-errors&#34; target=&#34;_blank&#34;&gt;https://github.com/Janpot/lighthouse/tree/ignore-https-errors&lt;/a&gt;
-2) Устанавливаем зависимости &lt;code&gt;npm i&lt;/code&gt;
-3) Запускаем ./lighthouse-cli/index.js &lt;url&gt; &amp;ndash;ignore-https-errors&lt;/p&gt;
+&lt;p&gt;1) Получаем содержимое ветки репозитория &lt;a href=&#34;https://github.com/Janpot/lighthouse/tree/ignore-https-errors&#34; target=&#34;_blank&#34;&gt;https://github.com/Janpot/lighthouse/tree/ignore-https-errors&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;2) Устанавливаем зависимости&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm i
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;3) Запускаем&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;./lighthouse-cli/index.js &amp;lt;url&amp;gt; --ignore-https-errors --view
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

@@ -18,9 +18,12 @@
       <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
       
       <guid>https://vitalyzhakov.github.io/post/lighthouse-without-ssl/</guid>
-      <description>Не всегда есть возможность использовать валидный SSL для проектов в тестовой среде.
+      <description> Не всегда есть возможность использовать валидный SSL для проектов в тестовой среде.
 Для анализа скорости загрузки страниц выпустили lighthouse и иетегрировали во вкладку инструментов разработчика Audit.
-Решение 1) Получаем содержимое ветки репозитория https://github.com/Janpot/lighthouse/tree/ignore-https-errors 2) Устанавливаем зависимости npm i 3) Запускаем ./lighthouse-cli/index.js  &amp;ndash;ignore-https-errors</description>
+Решение 1) Получаем содержимое ветки репозитория https://github.com/Janpot/lighthouse/tree/ignore-https-errors
+2) Устанавливаем зависимости
+npm i  3) Запускаем
+./lighthouse-cli/index.js &amp;lt;url&amp;gt; --ignore-https-errors --view  </description>
     </item>
     
     <item>
