@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="ru-ru">
 <head>
@@ -15,10 +13,18 @@
   
   
   
-  <meta name="description" content="Магистр прикладной математики и информатики">
+    
+      
+    
+  
+  <meta name="description" content="Проблематика В крупные проекты вносится много (больше 10) изменений в день.
+С целью минимизации рисков можно вносить изменения на небольшие группы пользователей, постепенно увеличивая долю пользователей с новой версией в зависимости от успешности / не успешности метрик.
+Метрики Как видно из постановки проблемы, работа зависит от нескольких факторов:
+ длительность принятия решения; вероятность принятия неправильного решения; количество изменений в единицу времени.  Всё это строится на основе метрик.
+Реализация Пример в istio https://docs.">
 
   
-  <link rel="alternate" hreflang="ru-ru" href="https://vitalyzhakov.github.io/tags/%D0%BE%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-backend/">
+  <link rel="alternate" hreflang="ru-ru" href="https://vitalyzhakov.github.io/post/progressive-delivery/">
 
   
 
@@ -73,15 +79,15 @@
   
 
   
-  <link rel="alternate" href="https://vitalyzhakov.github.io/tags/%D0%BE%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-backend/index.xml" type="application/rss+xml" title="Инфраструктура ИТ">
-  <link rel="feed" href="https://vitalyzhakov.github.io/tags/%D0%BE%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-backend/index.xml" type="application/rss+xml" title="Инфраструктура ИТ">
+  <link rel="alternate" href="https://vitalyzhakov.github.io/index.xml" type="application/rss+xml" title="Инфраструктура ИТ">
+  <link rel="feed" href="https://vitalyzhakov.github.io/index.xml" type="application/rss+xml" title="Инфраструктура ИТ">
   
 
   <link rel="manifest" href="/site.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="https://vitalyzhakov.github.io/tags/%D0%BE%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-backend/">
+  <link rel="canonical" href="https://vitalyzhakov.github.io/post/progressive-delivery/">
 
   <meta property="twitter:card" content="summary_large_image">
   
@@ -89,18 +95,24 @@
   <meta property="twitter:creator" content="@GeorgeCushen">
   
   <meta property="og:site_name" content="Инфраструктура ИТ">
-  <meta property="og:url" content="https://vitalyzhakov.github.io/tags/%D0%BE%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-backend/">
-  <meta property="og:title" content="Оптимизация backend | Инфраструктура ИТ">
-  <meta property="og:description" content="Магистр прикладной математики и информатики">
+  <meta property="og:url" content="https://vitalyzhakov.github.io/post/progressive-delivery/">
+  <meta property="og:title" content="Постепенное развёртывание | Инфраструктура ИТ">
+  <meta property="og:description" content="Проблематика В крупные проекты вносится много (больше 10) изменений в день.
+С целью минимизации рисков можно вносить изменения на небольшие группы пользователей, постепенно увеличивая долю пользователей с новой версией в зависимости от успешности / не успешности метрик.
+Метрики Как видно из постановки проблемы, работа зависит от нескольких факторов:
+ длительность принятия решения; вероятность принятия неправильного решения; количество изменений в единицу времени.  Всё это строится на основе метрик.
+Реализация Пример в istio https://docs.">
   <meta property="og:locale" content="ru-ru">
   
-  <meta property="og:updated_time" content="2019-09-19T00:10:06&#43;05:00">
+  <meta property="article:published_time" content="2019-09-30T00:10:06&#43;05:00">
+  
+  <meta property="article:modified_time" content="2019-09-30T00:10:06&#43;05:00">
   
 
   
   
 
-  <title>Оптимизация backend | Инфраструктура ИТ</title>
+  <title>Постепенное развёртывание | Инфраструктура ИТ</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
@@ -196,31 +208,141 @@
 </nav>
 
 
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
 
 
+  <div class="article-container">
+    <h1 itemprop="name">Постепенное развёртывание</h1>
 
-<div class="universal-wrapper">
+    
 
-  <h1>Оптимизация backend</h1>
+<div class="article-metadata">
 
+  <span class="article-date">
+    
+    <time datetime="2019-09-30 00:10:06 &#43;0500 &#43;0500" itemprop="datePublished dateModified">
+      Sep 30, 2019
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Жаков Виталий">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    1 мин.
+  </span>
   
 
   
   
-  <div>
-    <h2><a href="https://vitalyzhakov.github.io/post/db-optimization/">Оптимизация обращений к базе данных</a></h2>
-    <div class="article-style">
-      
-      Оптимизируем бекенд в части обращения к базам данных
-      
-    </div>
-  </div>
+
+  
+  
+  
   
 
   
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=%d0%9f%d0%be%d1%81%d1%82%d0%b5%d0%bf%d0%b5%d0%bd%d0%bd%d0%be%d0%b5%20%d1%80%d0%b0%d0%b7%d0%b2%d1%91%d1%80%d1%82%d1%8b%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5&amp;url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fprogressive-delivery%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fprogressive-delivery%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fprogressive-delivery%2f&amp;title=%d0%9f%d0%be%d1%81%d1%82%d0%b5%d0%bf%d0%b5%d0%bd%d0%bd%d0%be%d0%b5%20%d1%80%d0%b0%d0%b7%d0%b2%d1%91%d1%80%d1%82%d1%8b%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fprogressive-delivery%2f&amp;title=%d0%9f%d0%be%d1%81%d1%82%d0%b5%d0%bf%d0%b5%d0%bd%d0%bd%d0%be%d0%b5%20%d1%80%d0%b0%d0%b7%d0%b2%d1%91%d1%80%d1%82%d1%8b%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=%d0%9f%d0%be%d1%81%d1%82%d0%b5%d0%bf%d0%b5%d0%bd%d0%bd%d0%be%d0%b5%20%d1%80%d0%b0%d0%b7%d0%b2%d1%91%d1%80%d1%82%d1%8b%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5&amp;body=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fprogressive-delivery%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
 
+
+  
 
 </div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<h2 id="проблематика">Проблематика</h2>
+
+<p>В крупные проекты вносится много (больше 10) изменений в день.</p>
+
+<p>С целью минимизации рисков можно вносить изменения на небольшие группы пользователей,
+постепенно увеличивая долю пользователей с новой версией в зависимости от успешности / не успешности метрик.</p>
+
+<h2 id="метрики">Метрики</h2>
+
+<p>Как видно из постановки проблемы, работа зависит от нескольких факторов:</p>
+
+<ul>
+<li>длительность принятия решения;</li>
+<li>вероятность принятия неправильного решения;</li>
+<li>количество изменений в единицу времени.</li>
+</ul>
+
+<p>Всё это строится на основе метрик.</p>
+
+<h2 id="реализация">Реализация</h2>
+
+<p>Пример в istio <a href="https://docs.flagger.app/usage/progressive-delivery" target="_blank">https://docs.flagger.app/usage/progressive-delivery</a></p>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="https://vitalyzhakov.github.io/tags/continious-delivery/">Continious Delivery</a>
+  
+</div>
+
+
+
+
+    
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
 <footer class="site-footer">
   <div class="container">
     <p class="powered-by">
@@ -304,6 +426,4 @@
 
   </body>
 </html>
-
-
 

@@ -5,8 +5,8 @@
     
     <url>
     
-      <loc>https://vitalyzhakov.github.io/post/lighthouse-without-ssl/</loc>
-      <lastmod>2019-05-23T00:00:00+00:00</lastmod>
+      <loc>https://vitalyzhakov.github.io/post/progressive-delivery/</loc>
+      <lastmod>2019-09-30T00:10:06+05:00</lastmod>
     </url>
     
   
@@ -14,8 +14,17 @@
     
     <url>
     
-      <loc>https://vitalyzhakov.github.io/post/reliability/</loc>
-      <lastmod>2019-04-23T00:10:06+05:00</lastmod>
+      <loc>https://vitalyzhakov.github.io/post/db-optimization/</loc>
+      <lastmod>2019-09-19T00:10:06+05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://vitalyzhakov.github.io/post/lighthouse-without-ssl/</loc>
+      <lastmod>2019-05-23T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -205,6 +214,16 @@
     
     <url>
     
+      <loc>https://vitalyzhakov.github.io/tags/continious-delivery/</loc>
+      <lastmod>2019-09-30T00:10:06+05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://vitalyzhakov.github.io/tags/docker/</loc>
       <lastmod>2018-05-07T00:10:06+05:00</lastmod>
       <priority>0</priority>
@@ -225,8 +244,8 @@
     
     <url>
     
-      <loc>https://vitalyzhakov.github.io/tags/ha/</loc>
-      <lastmod>2019-04-23T00:10:06+05:00</lastmod>
+      <loc>https://vitalyzhakov.github.io/tags/mysql/</loc>
+      <lastmod>2019-09-19T00:10:06+05:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -314,6 +333,16 @@
     
     <url>
     
+      <loc>https://vitalyzhakov.github.io/tags/%D0%B1%D0%B0%D0%B7%D1%8B-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85/</loc>
+      <lastmod>2019-09-19T00:10:06+05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://vitalyzhakov.github.io/</loc>
       <lastmod>2016-04-20T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -326,6 +355,16 @@
     
       <loc>https://vitalyzhakov.github.io/tags/%D0%BD%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BE%D1%87%D0%BD%D0%BE%D0%B5-%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/</loc>
       <lastmod>2018-12-12T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://vitalyzhakov.github.io/tags/%D0%BE%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-backend/</loc>
+      <lastmod>2019-09-19T00:10:06+05:00</lastmod>
       <priority>0</priority>
     </url>
     

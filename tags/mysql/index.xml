@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Fri, 01 Jun 2018 00:10:06 +0500</lastBuildDate>
+    <lastBuildDate>Thu, 19 Sep 2019 00:10:06 +0500</lastBuildDate>
     
 	<atom:link href="https://vitalyzhakov.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Оптимизация обращений к базе данных</title>
       <link>https://vitalyzhakov.github.io/post/db-optimization/</link>
-      <pubDate>Fri, 01 Jun 2018 00:10:06 +0500</pubDate>
+      <pubDate>Thu, 19 Sep 2019 00:10:06 +0500</pubDate>
       
       <guid>https://vitalyzhakov.github.io/post/db-optimization/</guid>
       <description>При разборе времени генерации ответа от сервера иногда узким местом может быть обращение к СУБД. Оптимизацию времени доступа к СУБД можно разделить на несколько видов:
