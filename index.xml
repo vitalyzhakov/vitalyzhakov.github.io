@@ -238,6 +238,8 @@ export FQDN=адрес веб-сервера
 &lt;p&gt;Ставим зависимости&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;composer install
+#если падает с ошибкой отсутствия какой-либо зависимости, можно вызвать с ключиком --ignore-platform-reqs
+composer install --ignore-platform-reqs
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Запускаем тесты&lt;/p&gt;
