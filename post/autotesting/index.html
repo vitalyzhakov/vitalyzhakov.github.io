@@ -347,9 +347,14 @@
 <pre><code class="language-bash">docker run -d --shm-size=2g --network bridge --name selenium-chrome selenium/standalone-chrome:3.141.5
 </code></pre>
 
+<p>Узнаём IP адрес созданного контейнера с selenium</p>
+
+<pre><code class="language-bash">docker inspect selenium-chrome
+</code></pre>
+
 <p>Экспортируем переменные окружения</p>
 
-<pre><code class="language-bash">export SELENIUM_CHROME_ADDRESS=selenium-chrome
+<pre><code class="language-bash">export SELENIUM_CHROME_ADDRESS=IP адрес контейнера с selenium
 export FQDN=адрес веб-сервера
 </code></pre>
 
