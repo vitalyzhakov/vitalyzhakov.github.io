@@ -221,7 +221,7 @@
 
 &lt;p&gt;Запускаем selenium&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker run -d --shm-size=2g --network bridge --name selenium-chrome selenium/standalone-chrome:3.141.5
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker run -d --shm-size=2g --network bridge --name selenium-chrome selenium/standalone-chrome
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Узнаём IP адрес созданного контейнера с selenium&lt;/p&gt;
