@@ -605,64 +605,6 @@ https://мой-быстрый-сайт.рф
     </item>
     
     <item>
-      <title>Прокидываем протокол клиента в исполняемый скрипт для веб-сервера</title>
-      <link>https://vitalyzhakov.github.io/post/https-to-container/</link>
-      <pubDate>Thu, 07 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/https-to-container/</guid>
-      <description>&lt;p&gt;Иногда приложению нужно знать, по какому протоколу соединяется Клиент.
-Но при этом приложение скрыто за балансировщиком (SSL терминируется на балансировщике, апстримы работают по &lt;code&gt;HTTP&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;Суть в следующем - подменить параметр HTTPS информацией с балансировщика.&lt;/p&gt;
-
-&lt;p&gt;Тогда конфигруация балансировщика может быть&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;server {
-    listen 80;
-    rewrite ^(.*)$ https://$server_name$1 permanent;
-}
-
-server {
-    listen 443;
-
-    ssl on;
-    ssl_certificate /etc/nginx/ssl/server.crt;
-    ssl_certificate_key /etc/nginx/ssl/server.key;
-
-    location / {
-        proxy_pass http://upstream.addr;
-        proxy_set_header X-Forwarded-Proto $https;
-        proxy_set_header Host $host;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Конфигурация nginx на апстриме&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;server {
-    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-    #
-    location ~ \.php$ {
-        fastcgi_pass    unix:/var/run/php/php7.0-fpm.sock;
-        include         fastcgi_params;
-        fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param   HTTPS $http_x_forwarded_proto if_not_empty;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Для проверки, пришла ли переменная, можно воспользоваться скриптом, вызываваемым из веба&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;?php
-
-var_dump($_SERVER[&#39;HTTPS&#39;]);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Выражение должно вывести значение &lt;code&gt;on&lt;/code&gt;, если запрос идёт по &lt;code&gt;https&lt;/code&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Автоматическая проверка переадресации с помощью Codeception</title>
       <link>https://vitalyzhakov.github.io/post/redirect-autotest/</link>
       <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
@@ -963,6 +905,31 @@ node,way   osm_timestamp timestamptz(0) linear
 &lt;p&gt;По ним &lt;a href=&#34;https://vitalyzhakov.github.io/post/postgis-examples/&#34;&gt;можно выполнять различные запросы над геоданными&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Более подробно про &lt;a href=&#34;https://github.com/openstreetmap/osm2pgsql&#34; target=&#34;_blank&#34;&gt;опции использования osm2pgsql на странице репозитория&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Автоматическое UI-тестирование в среде разработки</title>
+      <link>https://vitalyzhakov.github.io/post/autotesting-in-sandbox/</link>
+      <pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/autotesting-in-sandbox/</guid>
+      <description>
+
+&lt;p&gt;Для комплексного тестирования приложения с веб-интерфейсом требуется &lt;a href=&#34;https://github.com/SeleniumHQ/docker-selenium&#34; target=&#34;_blank&#34;&gt;selenium&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;суть-проблемы&#34;&gt;Суть проблемы&lt;/h2&gt;
+
+&lt;p&gt;Допустим, параллельно ведётся разработка 30 задач. Каждая задача требует индивидуальный контейнер с selenium для тестирования.
+Каждый контейнер с selenium требует 1-2 GB RAM и глючит, если его не перезапускать долгое время.&lt;/p&gt;
+
+&lt;h2 id=&#34;решение&#34;&gt;Решение&lt;/h2&gt;
+
+&lt;p&gt;До проведения тестов в CI прописывается удаление контейнера с selenium.
+После проведения тестов в CI прописывается удаление контейнера с selenium.&lt;/p&gt;
+
+&lt;p&gt;Теперь у нас память расходуется &amp;ldquo;по потребности&amp;rdquo;.
+Но при этом все пользователи обеспечены необходимым браузером для тестирования.&lt;/p&gt;
 </description>
     </item>
     
