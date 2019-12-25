@@ -235,11 +235,6 @@
 export FQDN=адрес веб-сервера
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Запускаем codeception&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker run -v ${PWD}:/project -e SELENIUM_ADDRESS=selenium-chrome -e FQDN=${FQDN} codeception/codeception run
-&lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;Ставим зависимости&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;composer install
