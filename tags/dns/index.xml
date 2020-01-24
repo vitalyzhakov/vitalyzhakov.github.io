@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DNS on Инфраструктура ИТ</title>
+    <link>https://vitalyzhakov.github.io/tags/dns/</link>
+    <description>Recent content in DNS on Инфраструктура ИТ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru-ru</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Thu, 23 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://vitalyzhakov.github.io/tags/dns/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Почему мы не можем повлиять на чужие сайты</title>
+      <link>https://vitalyzhakov.github.io/post/why-you-not-influence-aliens-site/</link>
+      <pubDate>Thu, 23 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/why-you-not-influence-aliens-site/</guid>
+      <description>Есть различные ресурсы, которые (якобы) выдают некие рекомендации по скорости загрузки страницы. Далее будем называеть его оптимизируемый сайт.
+Рассмотрим рекомендацию для сайта известного федерального провайдера perm.domru.ru
+Время жизни кеша задаётся в заголовках http-ответа. Рекомендация состоит в том, чтобы их изменить.
+Как считаете, где надо менять?
+Цикл запроса Рассмотрим последовательность до конкретного ответа.
+Браузер как http-клиент посылает запрос на доменное имя facebook.com
+Компьютеры внутри сети общаются по IP адресам.
+У каждого устройства, подключенного к сети, есть такой адрес.</description>
+    </item>
+    
+  </channel>
+</rss>

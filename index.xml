@@ -11,6 +11,64 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Почему мы не можем повлиять на чужие сайты</title>
+      <link>https://vitalyzhakov.github.io/post/why-you-not-influence-aliens-site/</link>
+      <pubDate>Thu, 23 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/why-you-not-influence-aliens-site/</guid>
+      <description>
+
+&lt;p&gt;Есть различные ресурсы, которые (якобы) выдают некие рекомендации по скорости загрузки страницы.
+Далее будем называеть его оптимизируемый сайт.&lt;/p&gt;
+
+&lt;p&gt;Рассмотрим рекомендацию для сайта известного федерального провайдера perm.domru.ru&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/why-you-not-influence-alience-site/pagespeed-recomedations.png&#34; alt=&#34;Рекомендации pagespeed&#34; title=&#34;Рекомендации pagespeed&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Время жизни кеша задаётся в заголовках http-ответа. Рекомендация состоит в том, чтобы их изменить.&lt;/p&gt;
+
+&lt;p&gt;Как считаете, где надо менять?&lt;/p&gt;
+
+&lt;h2 id=&#34;цикл-запроса&#34;&gt;Цикл запроса&lt;/h2&gt;
+
+&lt;p&gt;Рассмотрим последовательность до конкретного ответа.&lt;/p&gt;
+
+&lt;p&gt;Браузер как http-клиент посылает запрос на доменное имя facebook.com&lt;/p&gt;
+
+&lt;p&gt;Компьютеры внутри сети общаются по IP адресам.&lt;/p&gt;
+
+&lt;p&gt;У каждого устройства, подключенного к сети, есть такой адрес.&lt;/p&gt;
+
+&lt;p&gt;DNS-зоны распределяются международными организациями, например, ICANN.&lt;/p&gt;
+
+&lt;p&gt;Внутри зон коммерческим компаниям и физ. лицам разрешается приобрести доменное имя
+на определённый срок (обычно, год).&lt;/p&gt;
+
+&lt;p&gt;Затем хозяин домена выставляет IP адрес, который будет выдан DNS-сервером при запросе.&lt;/p&gt;
+
+&lt;p&gt;Чтобы по человекочитаемому (доменному) имени получить IP,
+клиентскому устройству нужно сделать запрос к серверу DNS,
+который хранит условную таблицу соответствий
+между доменным именем и IP адресом.&lt;/p&gt;
+
+&lt;p&gt;Ваше устройство производит запрос к DNS-серверу, далее
+запрос уходит по целевому IP адресу, на другом конце сети этот запрос
+слушает веб-сервер.&lt;/p&gt;
+
+&lt;p&gt;Веб-сервер выполняет заранее запрограммированные в нём действия, отдавая http-ответ,
+включая тело ответа и заголовки.&lt;/p&gt;
+
+&lt;h2 id=&#34;проверь-себя&#34;&gt;Проверь себя&lt;/h2&gt;
+
+&lt;p&gt;Коллеги на веб-сервере оптимизируемого сайта задали слеюущую конфигурацию:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/why-you-not-influence-alience-site/nginx-config.png&#34; alt=&#34;Рекомендации pagespeed&#34; title=&#34;Рекомендации pagespeed&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Как вы думаете, будет ли она работать?&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Мониторинг</title>
       <link>https://vitalyzhakov.github.io/post/monitoring/</link>
       <pubDate>Tue, 01 Oct 2019 00:10:06 +0500</pubDate>
@@ -905,31 +963,6 @@ node,way   osm_timestamp timestamptz(0) linear
 &lt;p&gt;По ним &lt;a href=&#34;https://vitalyzhakov.github.io/post/postgis-examples/&#34;&gt;можно выполнять различные запросы над геоданными&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Более подробно про &lt;a href=&#34;https://github.com/openstreetmap/osm2pgsql&#34; target=&#34;_blank&#34;&gt;опции использования osm2pgsql на странице репозитория&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Автоматическое UI-тестирование в среде разработки</title>
-      <link>https://vitalyzhakov.github.io/post/autotesting-in-sandbox/</link>
-      <pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/autotesting-in-sandbox/</guid>
-      <description>
-
-&lt;p&gt;Для комплексного тестирования приложения с веб-интерфейсом требуется &lt;a href=&#34;https://github.com/SeleniumHQ/docker-selenium&#34; target=&#34;_blank&#34;&gt;selenium&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;суть-проблемы&#34;&gt;Суть проблемы&lt;/h2&gt;
-
-&lt;p&gt;Допустим, параллельно ведётся разработка 30 задач. Каждая задача требует индивидуальный контейнер с selenium для тестирования.
-Каждый контейнер с selenium требует 1-2 GB RAM и глючит, если его не перезапускать долгое время.&lt;/p&gt;
-
-&lt;h2 id=&#34;решение&#34;&gt;Решение&lt;/h2&gt;
-
-&lt;p&gt;До проведения тестов в CI прописывается удаление контейнера с selenium.
-После проведения тестов в CI прописывается удаление контейнера с selenium.&lt;/p&gt;
-
-&lt;p&gt;Теперь у нас память расходуется &amp;ldquo;по потребности&amp;rdquo;.
-Но при этом все пользователи обеспечены необходимым браузером для тестирования.&lt;/p&gt;
 </description>
     </item>
     

@@ -13,6 +13,22 @@
     
     
     <item>
+      <title>Почему мы не можем повлиять на чужие сайты</title>
+      <link>https://vitalyzhakov.github.io/post/why-you-not-influence-aliens-site/</link>
+      <pubDate>Thu, 23 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/why-you-not-influence-aliens-site/</guid>
+      <description>Есть различные ресурсы, которые (якобы) выдают некие рекомендации по скорости загрузки страницы. Далее будем называеть его оптимизируемый сайт.
+Рассмотрим рекомендацию для сайта известного федерального провайдера perm.domru.ru
+Время жизни кеша задаётся в заголовках http-ответа. Рекомендация состоит в том, чтобы их изменить.
+Как считаете, где надо менять?
+Цикл запроса Рассмотрим последовательность до конкретного ответа.
+Браузер как http-клиент посылает запрос на доменное имя facebook.com
+Компьютеры внутри сети общаются по IP адресам.
+У каждого устройства, подключенного к сети, есть такой адрес.</description>
+    </item>
+    
+    <item>
       <title>Мониторинг</title>
       <link>https://vitalyzhakov.github.io/post/monitoring/</link>
       <pubDate>Tue, 01 Oct 2019 00:10:06 +0500</pubDate>
