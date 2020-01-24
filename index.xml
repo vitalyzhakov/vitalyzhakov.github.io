@@ -18,8 +18,8 @@
       <guid>https://vitalyzhakov.github.io/post/why-you-not-influence-aliens-site/</guid>
       <description>
 
-&lt;p&gt;Есть различные ресурсы, которые (якобы) выдают некие рекомендации по скорости загрузки страницы.
-Далее будем называеть его оптимизируемый сайт.&lt;/p&gt;
+&lt;p&gt;Есть различные ресурсы, которые (якобы) выдают некие рекомендации по скорости загрузки страницы конкретного сайта.
+Далее будем называть его оптимизируемый сайт.&lt;/p&gt;
 
 &lt;p&gt;Рассмотрим рекомендацию для сайта известного федерального провайдера perm.domru.ru&lt;/p&gt;
 
@@ -28,6 +28,8 @@
 &lt;p&gt;Время жизни кеша задаётся в заголовках http-ответа. Рекомендация состоит в том, чтобы их изменить.&lt;/p&gt;
 
 &lt;p&gt;Как считаете, где надо менять?&lt;/p&gt;
+
+&lt;p&gt;Но пока не отвечайте =)&lt;/p&gt;
 
 &lt;h2 id=&#34;цикл-запроса&#34;&gt;Цикл запроса&lt;/h2&gt;
 
@@ -60,9 +62,9 @@
 
 &lt;h2 id=&#34;проверь-себя&#34;&gt;Проверь себя&lt;/h2&gt;
 
-&lt;p&gt;Коллеги на веб-сервере оптимизируемого сайта задали слеюущую конфигурацию:&lt;/p&gt;
+&lt;p&gt;Коллеги на веб-сервере оптимизируемого сайта задали конфигурацию:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/why-you-not-influence-alience-site/nginx-config.png&#34; alt=&#34;Рекомендации pagespeed&#34; title=&#34;Рекомендации pagespeed&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/why-you-not-influence-alience-site/nginx-config.png&#34; alt=&#34;Конфигурация nginx&#34; title=&#34;Конфигурация nginx&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Как вы думаете, будет ли она работать?&lt;/p&gt;
 </description>
