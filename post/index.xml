@@ -13,6 +13,17 @@
     
     
     <item>
+      <title>Оптимизация скорости загрузки</title>
+      <link>https://vitalyzhakov.github.io/post/page-load-time-optimizing/</link>
+      <pubDate>Mon, 03 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/page-load-time-optimizing/</guid>
+      <description> Шаг 1. Постановка цели Основное на этом шаге - определиться, зачем вам оптимизировать скорость загрузки. К примеру, у вас сайт-визитка, продаёте вы бани под ключ. Продажи происходят в той же бане, за столом или по телефону.
+Вполне возможно, что очередная секунда времени загрузки не влияет на продажи и вложенные затраты не окупятся.
+Шаг 2. Сбор статистики и выбор узкого места для оптимизации </description>
+    </item>
+    
+    <item>
       <title>Почему мы не можем повлиять на чужие сайты</title>
       <link>https://vitalyzhakov.github.io/post/why-you-not-influence-aliens-site/</link>
       <pubDate>Thu, 23 Jan 2020 00:00:00 +0000</pubDate>

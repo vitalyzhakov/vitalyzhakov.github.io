@@ -316,7 +316,7 @@
 
 <p>Содержимое файла docker-compose.tmpl</p>
 
-<pre><code>version: '2'
+<pre><code class="language-yml">version: '2'
 services:
     graphite:
         image: sitespeedio/graphite
@@ -358,7 +358,7 @@ services:
 
 <p>Первичный запуск с инициализацией стандартных панелей sitespeed в grafana:</p>
 
-<pre><code>    - docker-compose up -d
+<pre><code class="language-bash">    - docker-compose up -d
     - docker-compose run --rm grafana-bootstrap
 </code></pre>
 
@@ -372,7 +372,7 @@ services:
 
 <p>Пример запуска сбора данных в crontab раз в 10 минут</p>
 
-<pre><code>*/10 * * * * docker run -v /etc/sitespeed.io/urls.txt:/sitespeed.io/urls.txt sitespeedio/sitespeed.io urls.txt --graphite.host=[хост с сервером]  -n 1 --speedIndex false --video false -c 3g &gt;&gt; /tmp/sitespeed.log
+<pre><code class="language-bash">*/10 * * * * docker run -v /etc/sitespeed.io/urls.txt:/sitespeed.io/urls.txt sitespeedio/sitespeed.io urls.txt --graphite.host=[хост с сервером]  -n 1 --speedIndex false --video false -c 3g &gt;&gt; /tmp/sitespeed.log
 </code></pre>
 
 <p>Файл <code>urls.txt</code> содержит список страниц, которые нужно проверить:</p>
@@ -389,7 +389,7 @@ https://мой-быстрый-сайт.рф
 <p>Если проект развивается и появилась возможность мониторить время загрузки страниц
 с разных провайдеров, сетей, географических зон, добавьте в crontab клиента</p>
 
-<pre><code>--graphite.namespace sitespeed_io.perm
+<pre><code class="language-bash">--graphite.namespace sitespeed_io.perm
 </code></pre>
 
 <p>В этом примере <code>perm</code> означает, что замеры производятся в городе Пермь.</p>

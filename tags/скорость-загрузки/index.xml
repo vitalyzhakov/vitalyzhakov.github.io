@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Thu, 23 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 03 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://vitalyzhakov.github.io/tags/%D1%81%D0%BA%D0%BE%D1%80%D0%BE%D1%81%D1%82%D1%8C-%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B8/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Оптимизация скорости загрузки</title>
+      <link>https://vitalyzhakov.github.io/post/page-load-time-optimizing/</link>
+      <pubDate>Mon, 03 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/page-load-time-optimizing/</guid>
+      <description> Шаг 1. Постановка цели Основное на этом шаге - определиться, зачем вам оптимизировать скорость загрузки. К примеру, у вас сайт-визитка, продаёте вы бани под ключ. Продажи происходят в той же бане, за столом или по телефону.
+Вполне возможно, что очередная секунда времени загрузки не влияет на продажи и вложенные затраты не окупятся.
+Шаг 2. Сбор статистики и выбор узкого места для оптимизации </description>
+    </item>
     
     <item>
       <title>Запуск lighthouse (chrome audit) без SSL</title>
