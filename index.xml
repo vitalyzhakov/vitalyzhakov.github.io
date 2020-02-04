@@ -98,7 +98,9 @@
 &lt;img src=&#34;https://vitalyzhakov.github.io/images/page-load-time-optimizing/timings-from-ga.png&#34; alt=&#34;Page timings&#34; title=&#34;Page timings&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Видно, что узкое место - время ответа сервера.
-На втором месте - переадресации.&lt;/p&gt;
+На втором месте - переадресация.&lt;/p&gt;
+
+&lt;p&gt;В таком же порядке стоит начать оптимизировать. Сначала время ответа сервера, затем - уменьшение переадресаций.&lt;/p&gt;
 </description>
     </item>
     
