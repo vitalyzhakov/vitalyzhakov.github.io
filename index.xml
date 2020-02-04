@@ -63,9 +63,9 @@
 
 &lt;p&gt;Возможно применение сервисов, которые позволят собрать реальные данные,
 не тратя время на равёртывание сервиса сбора метрик.
-Например, google analytics и её отчёт по скорости.&lt;/p&gt;
+Например, &lt;code&gt;google analytics&lt;/code&gt; и её отчёт по скорости.&lt;/p&gt;
 
-&lt;p&gt;По умолчанию с 1% пользователей собираются метрики по времени загрузки.&lt;/p&gt;
+&lt;p&gt;В &lt;code&gt;google analytics&lt;/code&gt; по умолчанию собираются метрики по времени загрузки с 1% пользователей.&lt;/p&gt;
 
 &lt;p&gt;При большом количестве просмотров страниц метрики начинают показывать стабильные результаты.&lt;/p&gt;
 
@@ -86,9 +86,19 @@
 &lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/page-load-time-optimizing/chromium-audit-result.png&#34; alt=&#34;Результат Audit в Chromium&#34; title=&#34;Результат Audit в Chromium&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Lighthouse, встроенный в инструменты разработчика Chromium,
-отсортировал для нас в факторы оптимизации в порядке приносимых эффектов.&lt;/p&gt;
+отсортировал для нас факторы оптимизации в порядке приносимых эффектов.&lt;/p&gt;
 
 &lt;p&gt;В данном примере рекомендуют минимизировать работу в главном потоке путём минимизации выполнения JS.&lt;/p&gt;
+
+&lt;h3 id=&#34;вариант-по-статистическим-данным&#34;&gt;Вариант &amp;ldquo;по статистическим данным&amp;rdquo;&lt;/h3&gt;
+
+&lt;p&gt;В &lt;code&gt;google analytics&lt;/code&gt; находим отчёт по скорости загрузки страниц.&lt;/p&gt;
+
+&lt;p&gt;Для наглядности на основе данных я построил диаграмму
+&lt;img src=&#34;https://vitalyzhakov.github.io/images/page-load-time-optimizing/timings-from-ga.png&#34; alt=&#34;Page timings&#34; title=&#34;Page timings&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Видно, что узкое место - время ответа сервера.
+На втором месте - переадресации.&lt;/p&gt;
 </description>
     </item>
     
