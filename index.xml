@@ -81,9 +81,9 @@
 
 &lt;ul&gt;
 &lt;li&gt;встроенные в браузер (debug панель FireFox, Chrome);&lt;/li&gt;
-&lt;li&gt;одноразовые сервисы - одно измерение, не отражающее действительность в силу их (статической незначимости)[&lt;a href=&#34;https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D0%B0%D1%82%D0%B8%D1%81%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D0%B7%D0%BD%D0%B0%D1%87%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D1%8C&#34; target=&#34;_blank&#34;&gt;https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D0%B0%D1%82%D0%B8%D1%81%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D0%B7%D0%BD%D0%B0%D1%87%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D1%8C&lt;/a&gt;];&lt;/li&gt;
+&lt;li&gt;одноразовые сервисы - одно измерение, не отражающее действительность в силу их &lt;a href=&#34;https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D0%B0%D1%82%D0%B8%D1%81%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D0%B7%D0%BD%D0%B0%D1%87%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D1%8C&#34; target=&#34;_blank&#34;&gt;статической незначимости&lt;/a&gt;;&lt;/li&gt;
 &lt;li&gt;скрипты сбора статистики, встроенные в счётики (Яндекс Метрика, Google Analytics);&lt;/li&gt;
-&lt;li&gt;управляемый сбор статистики путём имитации клиента (sitespeed.io)[/post/sitespeed/].&lt;/li&gt;
+&lt;li&gt;управляемый сбор статистики путём имитации клиента &lt;a href=&#34;https://vitalyzhakov.github.io/post/sitespeed/&#34;&gt;sitespeed.io&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Например, &lt;code&gt;google analytics&lt;/code&gt; по умолчанию собираются метрики по времени загрузки с 1% пользователей.&lt;/p&gt;
