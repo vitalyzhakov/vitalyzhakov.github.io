@@ -393,7 +393,7 @@ server-id=3
 <pre><code class="language-bash">nano build_env/mysql/slave.sql
 </code></pre>
 
-<pre><code class="language-sql">CHANGE MASTER TO MASTER_HOST='${COMPOSE_PROJECT_NAME}-mysql', MASTER_USER='repl', MASTER_PASSWORD='slavepass', MASTER_LOG_FILE='mysqld-bin.000004';
+<pre><code class="language-sql">CHANGE MASTER TO MASTER_HOST='db-master', MASTER_USER='repl', MASTER_PASSWORD='slavepass', MASTER_LOG_FILE='mysqld-bin.000004';
 </code></pre>
 
 <h3 id="запускаем">Запускаем</h3>
@@ -410,7 +410,6 @@ server-id=3
 services:
     mysql:
         image: 'percona:8.0'
-        network_mode: &quot;bridge&quot;
         container_name: db-master
         volumes:
             - ./build_env/mysql/master.cnf:/etc/mysql/conf.d/my.cnf
@@ -420,7 +419,6 @@ services:
 
     mysqlread1:
         image: 'percona:8.0'
-        network_mode: &quot;bridge&quot;
         container_name: db-slave1
         volumes:
             - ./build_env/mysql/slave1.cnf:/etc/mysql/conf.d/my.cnf
@@ -432,7 +430,6 @@ services:
 
     mysqlread2:
         image: 'percona:8.0'
-        network_mode: &quot;bridge&quot;
         container_name: db-slave2
         volumes:
             - ./build_env/mysql/slave2.cnf:/etc/mysql/conf.d/my.cnf
