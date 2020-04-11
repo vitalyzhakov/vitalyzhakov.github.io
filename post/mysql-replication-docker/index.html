@@ -421,7 +421,7 @@ services:
     mysqlread1:
         image: 'percona:8.0'
         network_mode: &quot;bridge&quot;
-        container_name: ${COMPOSE_PROJECT_NAME}-mysqlread1
+        container_name: db-slave1
         volumes:
             - ./build_env/mysql/slave1.cnf:/etc/mysql/conf.d/my.cnf
             - ./build_env/mysql/slave.sql:/docker-entrypoint-initdb.d/start.sql
@@ -433,7 +433,7 @@ services:
     mysqlread2:
         image: 'percona:8.0'
         network_mode: &quot;bridge&quot;
-        container_name: ${COMPOSE_PROJECT_NAME}-mysqlread2
+        container_name: db-slave2
         volumes:
             - ./build_env/mysql/slave2.cnf:/etc/mysql/conf.d/my.cnf
             - ./build_env/mysql/slave.sql:/docker-entrypoint-initdb.d/start.sql
