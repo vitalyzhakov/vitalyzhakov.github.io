@@ -100,9 +100,9 @@
 В нашем случае количество запросов на чтение информации гораздо меньше количества изменений (есть подозрение, что так на большинстве веб-проектов). Логичным способом увеличения такого бутылочного горлышка - увеличить количество баз на чтение и настроить приложение таким образом, чтобы большее количество запросов на чтение отправлялось на SLAVE-сервера.">
   <meta property="og:locale" content="ru-ru">
   
-  <meta property="article:published_time" content="2017-01-22T00:10:06&#43;05:00">
+  <meta property="article:published_time" content="2020-04-10T00:10:06&#43;05:00">
   
-  <meta property="article:modified_time" content="2017-01-22T00:10:06&#43;05:00">
+  <meta property="article:modified_time" content="2020-04-10T00:10:06&#43;05:00">
   
 
   
@@ -218,8 +218,8 @@
 
   <span class="article-date">
     
-    <time datetime="2017-01-22 00:10:06 &#43;0500 &#43;0500" itemprop="datePublished dateModified">
-      Jan 22, 2017
+    <time datetime="2020-04-10 00:10:06 &#43;0500 &#43;0500" itemprop="datePublished dateModified">
+      Apr 10, 2020
     </time>
   </span>
   <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
@@ -304,6 +304,15 @@
 отправлялось на SLAVE-сервера.</p>
 
 <p><img src="/images/several-upstream-several-dbs.svg" alt="Много приложений - одна база" title="Много приложений - много баз" /></p>
+
+<h2 id="предварительная-установка">Предварительная установка</h2>
+
+<p>Установить docker, docker-compose на вашу операционную систему.</p>
+
+<p>Текст далее протестирован на
+* Ubuntu 18.04
+* docker 18.09
+* <a href="https://docs.docker.com/compose/install/" target="_blank">docker-compose</a> 1.25.4</p>
 
 <h2 id="настройка-репликации">Настройка репликации</h2>
 
@@ -452,6 +461,22 @@ mysqlread2:
 
 
     
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3></h3>
+      <ul>
+        
+        <li><a href="/post/sandbox-for-web-developers/">Песочница (среда разработки) для веб-разработчиков</a></li>
+        
+        <li><a href="/post/autotesting/">Автоматическое тестирование</a></li>
+        
+        <li><a href="/post/qa-api/">API для автоматического тестирования</a></li>
+        
+        <li><a href="/post/autotesting-in-sandbox/">Автоматическое UI-тестирование в среде разработки</a></li>
+        
+      </ul>
+    </div>
     
 
     
