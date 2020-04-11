@@ -458,19 +458,16 @@ services:
 
 <p>На master выполняем</p>
 
-<pre><code>show databases;
-</code></pre>
-
-<p>Примерный вывод</p>
-
-<p>+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+<pre><code class="language-sql">show databases;
++--------------------+
 | Database           |
-+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
++--------------------+
 | information_schema |
 | mysql              |
 | performance_schema |
 | sys                |
-+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+</p>
++--------------------+
+</code></pre>
 
 <p>Создадим на master базу данных <code>test</code></p>
 
@@ -479,19 +476,21 @@ services:
 
 <p>В подключении для slave проверяем, появилась ли созданная на master база данных:</p>
 
-<pre><code>show databases;
+<pre><code class="language-sql">show databases;
 </code></pre>
 
-<p>В выводе должна появиться база данных <code>test</code>.
-+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+<p>В выводе должна появиться база данных <code>test</code>.</p>
+
+<pre><code class="language-sql">+--------------------+
 | Database           |
-+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
++--------------------+
 | information_schema |
 | mysql              |
 | performance_schema |
 | sys                |
 | test               |
-+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+</p>
++--------------------+
+</code></pre>
 
 <h2 id="диагностика">Диагностика</h2>
 

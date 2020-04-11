@@ -188,19 +188,16 @@ services:
 
 &lt;p&gt;На master выполняем&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;show databases;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Примерный вывод&lt;/p&gt;
-
-&lt;p&gt;+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;show databases;
++--------------------+
 | Database           |
-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+
++--------------------+
 | information_schema |
 | mysql              |
 | performance_schema |
 | sys                |
-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&lt;/p&gt;
++--------------------+
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Создадим на master базу данных &lt;code&gt;test&lt;/code&gt;&lt;/p&gt;
 
@@ -209,19 +206,21 @@ services:
 
 &lt;p&gt;В подключении для slave проверяем, появилась ли созданная на master база данных:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;show databases;
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;show databases;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;В выводе должна появиться база данных &lt;code&gt;test&lt;/code&gt;.
-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+
+&lt;p&gt;В выводе должна появиться база данных &lt;code&gt;test&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;+--------------------+
 | Database           |
-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+
++--------------------+
 | information_schema |
 | mysql              |
 | performance_schema |
 | sys                |
 | test               |
-+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;+&lt;/p&gt;
++--------------------+
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;диагностика&#34;&gt;Диагностика&lt;/h2&gt;
 
