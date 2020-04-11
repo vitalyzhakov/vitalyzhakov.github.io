@@ -385,7 +385,8 @@ server-id=3
 <pre><code class="language-bash">nano build_env/mysql/master.sql
 </code></pre>
 
-<pre><code>GRANT REPLICATION SLAVE ON *.* TO repl@'%' IDENTIFIED BY 'slavepass';
+<pre><code class="language-sql">CREATE USER repl@'%' IDENTIFIED WITH mysql_native_password BY 'slavepass';
+GRANT REPLICATION SLAVE ON *.* TO repl@'%';
 </code></pre>
 
 <p>На slave-сервере нужно указать координаты для подключения к master</p>
@@ -393,7 +394,7 @@ server-id=3
 <pre><code class="language-bash">nano build_env/mysql/slave.sql
 </code></pre>
 
-<pre><code class="language-sql">CHANGE MASTER TO MASTER_HOST='db-master', MASTER_USER='repl', MASTER_PASSWORD='slavepass', MASTER_LOG_FILE='mysqld-bin.000004';
+<pre><code class="language-sql">CHANGE MASTER TO MASTER_HOST='db-master', MASTER_USER='repl', MASTER_PASSWORD='slavepass';
 </code></pre>
 
 <h3 id="запускаем">Запускаем</h3>
@@ -412,7 +413,7 @@ services:
         image: 'percona:8.0'
         container_name: db-master
         volumes:
-            - ./build_env/mysql/master.cnf:/etc/mysql/conf.d/my.cnf
+            - ./build_env/mysql/master.cnf:/etc/my.cnf.d/repl.cnf
             - ./build_env/mysql/master.sql:/docker-entrypoint-initdb.d/start.sql
         environment:
             MYSQL_ROOT_PASSWORD: &quot;secret&quot;
@@ -421,7 +422,7 @@ services:
         image: 'percona:8.0'
         container_name: db-slave1
         volumes:
-            - ./build_env/mysql/slave1.cnf:/etc/mysql/conf.d/my.cnf
+            - ./build_env/mysql/slave1.cnf:/etc/my.cnf.d/repl.cnf
             - ./build_env/mysql/slave.sql:/docker-entrypoint-initdb.d/start.sql
         depends_on:
             - mysql
@@ -432,7 +433,7 @@ services:
         image: 'percona:8.0'
         container_name: db-slave2
         volumes:
-            - ./build_env/mysql/slave2.cnf:/etc/mysql/conf.d/my.cnf
+            - ./build_env/mysql/slave2.cnf:/etc/my.cnf.d/repl.cnf
             - ./build_env/mysql/slave.sql:/docker-entrypoint-initdb.d/start.sql
         depends_on:
             - mysql
@@ -442,7 +443,13 @@ services:
 
 <h3 id="диагностика">Диагностика</h3>
 
-<p>Для диагностики нужно иметь возможность подключения к консоли mysql. Для master-сервера вывод будет следующим:</p>
+<p>Для диагностики нужно иметь возможность подключения к консоли mysql.
+Подключаемся к master-серверу:</p>
+
+<pre><code class="language-bash">docker exec -it db-master mysql -uroot -psecret
+</code></pre>
+
+<p>Смотрим статус</p>
 
 <pre><code>mysql&gt; show master status;
 +-------------------+----------+--------------+------------------+

@@ -115,7 +115,8 @@ server-id=3
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;nano build_env/mysql/master.sql
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;GRANT REPLICATION SLAVE ON *.* TO repl@&#39;%&#39; IDENTIFIED BY &#39;slavepass&#39;;
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;CREATE USER repl@&#39;%&#39; IDENTIFIED WITH mysql_native_password BY &#39;slavepass&#39;;
+GRANT REPLICATION SLAVE ON *.* TO repl@&#39;%&#39;;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;На slave-сервере нужно указать координаты для подключения к master&lt;/p&gt;
@@ -123,7 +124,7 @@ server-id=3
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;nano build_env/mysql/slave.sql
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;CHANGE MASTER TO MASTER_HOST=&#39;db-master&#39;, MASTER_USER=&#39;repl&#39;, MASTER_PASSWORD=&#39;slavepass&#39;, MASTER_LOG_FILE=&#39;mysqld-bin.000004&#39;;
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;CHANGE MASTER TO MASTER_HOST=&#39;db-master&#39;, MASTER_USER=&#39;repl&#39;, MASTER_PASSWORD=&#39;slavepass&#39;;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;запускаем&#34;&gt;Запускаем&lt;/h3&gt;
@@ -142,7 +143,7 @@ services:
         image: &#39;percona:8.0&#39;
         container_name: db-master
         volumes:
-            - ./build_env/mysql/master.cnf:/etc/mysql/conf.d/my.cnf
+            - ./build_env/mysql/master.cnf:/etc/my.cnf.d/repl.cnf
             - ./build_env/mysql/master.sql:/docker-entrypoint-initdb.d/start.sql
         environment:
             MYSQL_ROOT_PASSWORD: &amp;quot;secret&amp;quot;
@@ -151,7 +152,7 @@ services:
         image: &#39;percona:8.0&#39;
         container_name: db-slave1
         volumes:
-            - ./build_env/mysql/slave1.cnf:/etc/mysql/conf.d/my.cnf
+            - ./build_env/mysql/slave1.cnf:/etc/my.cnf.d/repl.cnf
             - ./build_env/mysql/slave.sql:/docker-entrypoint-initdb.d/start.sql
         depends_on:
             - mysql
@@ -162,7 +163,7 @@ services:
         image: &#39;percona:8.0&#39;
         container_name: db-slave2
         volumes:
-            - ./build_env/mysql/slave2.cnf:/etc/mysql/conf.d/my.cnf
+            - ./build_env/mysql/slave2.cnf:/etc/my.cnf.d/repl.cnf
             - ./build_env/mysql/slave.sql:/docker-entrypoint-initdb.d/start.sql
         depends_on:
             - mysql
@@ -172,7 +173,13 @@ services:
 
 &lt;h3 id=&#34;диагностика&#34;&gt;Диагностика&lt;/h3&gt;
 
-&lt;p&gt;Для диагностики нужно иметь возможность подключения к консоли mysql. Для master-сервера вывод будет следующим:&lt;/p&gt;
+&lt;p&gt;Для диагностики нужно иметь возможность подключения к консоли mysql.
+Подключаемся к master-серверу:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker exec -it db-master mysql -uroot -psecret
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Смотрим статус&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;mysql&amp;gt; show master status;
 +-------------------+----------+--------------+------------------+
