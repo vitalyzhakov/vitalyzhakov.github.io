@@ -22,7 +22,7 @@
 &lt;a href=&#34;https://vitalyzhakov.github.io/post/sandbox-for-web-developers/&#34;&gt;в тестовой среде&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Технология Docker Swarm позволяет легко масштабировать приложение горизонтально.
-Но приложению приходится обращаться к серверу баз данных, задача масшабировать который гораздо труднее.&lt;/p&gt;
+Но часто приложению приходится обращаться к серверу баз данных, задача масшабировать который гораздо труднее.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/several-upstream-one-db.svg&#34; alt=&#34;Много приложений - одна база&#34; title=&#34;Много приложений - одна база&#34; /&gt;&lt;/p&gt;
 
@@ -47,7 +47,26 @@
 &lt;li&gt;&lt;a href=&#34;https://docs.docker.com/compose/install/&#34; target=&#34;_blank&#34;&gt;docker-compose&lt;/a&gt; 1.25.4&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h2 id=&#34;проект&#34;&gt;Проект&lt;/h2&gt;
+
+&lt;p&gt;Создадим папку, где будет располагаться конфиругация серверов&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mkdir db-replication
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;и перейдём в неё&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd db-replication
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Дальнейшие действия будут производиться относительно папки с проектом.&lt;/p&gt;
+
 &lt;h2 id=&#34;настройка-репликации&#34;&gt;Настройка репликации&lt;/h2&gt;
+
+&lt;p&gt;Создадим папку для хранения конфигураций серверов mysql&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mkdir -p build_env/mysql
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;изменение-в-my-cnf-для-каждого-сервера&#34;&gt;Изменение в my.cnf для каждого сервера&lt;/h3&gt;
 
@@ -58,7 +77,12 @@ Slave-сервер &lt;code&gt;server-id&amp;gt;1&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Конфигурационный файл находится по адресу
 &lt;code&gt;/etc/mysql/conf.d/my.cnf&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Конфигурация master-сервера&lt;/p&gt;
+&lt;p&gt;Создадим файл конфигурации master-сервера&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;nano build_env/mysql/master.cnf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;с содержимым&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;[mysqld]
 server-id=1
@@ -68,75 +92,85 @@ log-bin
 
 &lt;p&gt;Конфигурация slave1&lt;/p&gt;
 
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;nano build_env/mysql/slave1.cnf
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;pre&gt;&lt;code&gt;[mysqld]
 server-id=2
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Конфигурация slave2&lt;/p&gt;
 
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;nano build_env/mysql/slave2.cnf
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;pre&gt;&lt;code&gt;[mysqld]
-server-id=2
+server-id=3
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;изменения-при-старте-сервера&#34;&gt;Изменения при старте сервера&lt;/h3&gt;
 
 &lt;p&gt;На master-сервере нужно выдать права пользователю для чтения файла лога&lt;/p&gt;
 
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;nano build_env/mysql/master.sql
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;pre&gt;&lt;code&gt;GRANT REPLICATION SLAVE ON *.* TO repl@&#39;%&#39; IDENTIFIED BY &#39;slavepass&#39;;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;На slave-сервере нужно указать координаты для подключения к master&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;CHANGE MASTER TO MASTER_HOST=&#39;${COMPOSE_PROJECT_NAME}-mysql&#39;, MASTER_USER=&#39;repl&#39;, MASTER_PASSWORD=&#39;slavepass&#39;, MASTER_LOG_FILE=&#39;mysqld-bin.000004&#39;;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;nano build_env/mysql/slave.sql
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;итоговый-код&#34;&gt;Итоговый код&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;CHANGE MASTER TO MASTER_HOST=&#39;${COMPOSE_PROJECT_NAME}-mysql&#39;, MASTER_USER=&#39;repl&#39;, MASTER_PASSWORD=&#39;slavepass&#39;, MASTER_LOG_FILE=&#39;mysqld-bin.000004&#39;;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;mysql:
-  image: &#39;percona:5.5&#39;
-  network_mode: &amp;quot;bridge&amp;quot;
-  container_name: ${COMPOSE_PROJECT_NAME}-mysql
-  volumes:
-    - ${PROJECT_DIR}/build_env/mysql/master.cnf:/etc/mysql/conf.d/my.cnf
-    - ${PROJECT_DIR}/build_env/mysql/master.sql:/docker-entrypoint-initdb.d/start.sql
-  environment:
-    MYSQL_DATABASE: ${MYSQL_DB}
-    MYSQL_USER: ${MYSQL_USER}
-    MYSQL_PASSWORD: &amp;quot;${MYSQL_PASSWORD}&amp;quot;
-    MYSQL_ROOT_PASSWORD: &amp;quot;${MYSQL_ROOT_PASSWORD}&amp;quot;
-    SERVICE_NAME: ${COMPOSE_PROJECT_NAME}-mysql
+&lt;h3 id=&#34;запускаем&#34;&gt;Запускаем&lt;/h3&gt;
 
-mysqlread1:
-  image: &#39;percona:5.5&#39;
-  network_mode: &amp;quot;bridge&amp;quot;
-  container_name: ${COMPOSE_PROJECT_NAME}-mysqlread1
-  volumes:
-    - ${PROJECT_DIR}/build_env/mysql/server2.cnf:/etc/mysql/conf.d/my.cnf
-    - ${PROJECT_DIR}/build_env/mysql/slave.sql:/docker-entrypoint-initdb.d/start.sql
-  depends_on:
-    - mysql
-  environment:
-    MYSQL_DATABASE: ${MYSQL_DB}
-    MYSQL_USER: ${MYSQL_USER}
-    MYSQL_PASSWORD: &amp;quot;${MYSQL_PASSWORD}&amp;quot;
-    MYSQL_ROOT_PASSWORD: &amp;quot;${MYSQL_ROOT_PASSWORD}&amp;quot;
-    SERVICE_NAME: ${COMPOSE_PROJECT_NAME}-mysqlread1
+&lt;p&gt;Создадим файл для docker-compose&lt;/p&gt;
 
-mysqlread2:
-  image: &#39;percona:5.5&#39;
-  network_mode: &amp;quot;bridge&amp;quot;
-  container_name: ${COMPOSE_PROJECT_NAME}-mysqlread2
-  volumes:
-    - ${PROJECT_DIR}/build_env/mysql/server2.cnf:/etc/mysql/conf.d/my.cnf
-    - ${PROJECT_DIR}/build_env/mysql/slave.sql:/docker-entrypoint-initdb.d/start.sql
-  depends_on:
-    - mysql
-  environment:
-    MYSQL_DATABASE: ${MYSQL_DB}
-    MYSQL_USER: ${MYSQL_USER}
-    MYSQL_PASSWORD: &amp;quot;${MYSQL_PASSWORD}&amp;quot;
-    MYSQL_ROOT_PASSWORD: &amp;quot;${MYSQL_ROOT_PASSWORD}&amp;quot;
-    SERVICE_NAME: ${COMPOSE_PROJECT_NAME}-mysqlread2
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;nano docker-compose.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;с содержимым&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;version: &#39;3.7&#39;
+
+services:
+    mysql:
+        image: &#39;percona:8.0&#39;
+        network_mode: &amp;quot;bridge&amp;quot;
+        container_name: db-master
+        volumes:
+            - ./build_env/mysql/master.cnf:/etc/mysql/conf.d/my.cnf
+            - ./build_env/mysql/master.sql:/docker-entrypoint-initdb.d/start.sql
+        environment:
+            MYSQL_ROOT_PASSWORD: &amp;quot;secret&amp;quot;
+
+    mysqlread1:
+        image: &#39;percona:8.0&#39;
+        network_mode: &amp;quot;bridge&amp;quot;
+        container_name: ${COMPOSE_PROJECT_NAME}-mysqlread1
+        volumes:
+            - ./build_env/mysql/slave1.cnf:/etc/mysql/conf.d/my.cnf
+            - ./build_env/mysql/slave.sql:/docker-entrypoint-initdb.d/start.sql
+        depends_on:
+            - mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: &amp;quot;secret&amp;quot;
+
+    mysqlread2:
+        image: &#39;percona:8.0&#39;
+        network_mode: &amp;quot;bridge&amp;quot;
+        container_name: ${COMPOSE_PROJECT_NAME}-mysqlread2
+        volumes:
+            - ./build_env/mysql/slave2.cnf:/etc/mysql/conf.d/my.cnf
+            - ./build_env/mysql/slave.sql:/docker-entrypoint-initdb.d/start.sql
+        depends_on:
+            - mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: &amp;quot;secret&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;диагностика&#34;&gt;Диагностика&lt;/h3&gt;
