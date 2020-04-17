@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>https://vitalyzhakov.github.io/post/graylog/</loc>
+      <lastmod>2020-04-17T00:10:06+05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://vitalyzhakov.github.io/post/mysql-replication-docker/</loc>
       <lastmod>2020-04-10T00:10:06+05:00</lastmod>
     </url>
@@ -223,7 +232,7 @@
     <url>
     
       <loc>https://vitalyzhakov.github.io/tags/continious-delivery/</loc>
-      <lastmod>2019-10-01T00:10:06+05:00</lastmod>
+      <lastmod>2020-04-17T00:10:06+05:00</lastmod>
       <priority>0</priority>
     </url>
     

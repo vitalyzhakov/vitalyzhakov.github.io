@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Tue, 01 Oct 2019 00:10:06 +0500</lastBuildDate>
+    <lastBuildDate>Fri, 17 Apr 2020 00:10:06 +0500</lastBuildDate>
     
 	<atom:link href="https://vitalyzhakov.github.io/tags/continious-delivery/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Graylog</title>
+      <link>https://vitalyzhakov.github.io/post/graylog/</link>
+      <pubDate>Fri, 17 Apr 2020 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/graylog/</guid>
+      <description>В нашей жизни происходят разные события. Совсем разные. Например, люди заболевают коронавирусом.
+Для различных прикладных задач важно знать, когда, на какой территории сколько человек заболело, чтобы своевременно действовать.
+Как это происходит с точки зрения процесса:
+ больного записывают в журнал с указанием важных атрибутов (дата, время, диагноз, место проживания). данные передаются на центральный узел сбора специалисты анализируют данные, делают выводы.  Наши сервисы также могут отсылать события в централизованную систему. Пример события:</description>
+    </item>
     
     <item>
       <title>Мониторинг</title>
