@@ -13,6 +13,16 @@
     
     
     <item>
+      <title>VSCode for php</title>
+      <link>https://vitalyzhakov.github.io/post/vscode-php/</link>
+      <pubDate>Mon, 20 Apr 2020 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/vscode-php/</guid>
+      <description> Работа с git по SSH Приватный ключ может быть защищён паролем, поэтому на Linux-based системах перед началом работы для использования такого ключа нужно воспрользоваться командой
+ssh-add ключ  Рекомендуемые расширения  vscode-intelephense-client  </description>
+    </item>
+    
+    <item>
       <title>Graylog</title>
       <link>https://vitalyzhakov.github.io/post/graylog/</link>
       <pubDate>Fri, 17 Apr 2020 00:10:06 +0500</pubDate>
@@ -95,20 +105,6 @@
       <guid>https://vitalyzhakov.github.io/post/db-optimization/</guid>
       <description>При разборе времени генерации ответа от сервера иногда узким местом может быть обращение к СУБД. Оптимизацию времени доступа к СУБД можно разделить на несколько видов:
 Использование параметризованных запросов Некоторые программисты совершают ошибку, вписывая параметры (например, идентификаторы) запроса сразу в запрос. Первым шагом СУБД пытается проанализировать запрос. Если параметры приходят в запросе, в кеш запрос не складывается. Но если параметры прикладывать к запросу, структура запроса не меняется. Значит, при следующем запросе, есть вероятность нахождения проанализированной структуры в кеше, что позволит ускорить выполнение.</description>
-    </item>
-    
-    <item>
-      <title>Запуск lighthouse (chrome audit) без SSL</title>
-      <link>https://vitalyzhakov.github.io/post/lighthouse-without-ssl/</link>
-      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/lighthouse-without-ssl/</guid>
-      <description> Не всегда есть возможность использовать валидный SSL для проектов в тестовой среде.
-Для анализа скорости загрузки страниц выпустили lighthouse и иетегрировали во вкладку инструментов разработчика Audit.
-Решение 1) Получаем содержимое ветки репозитория https://github.com/Janpot/lighthouse/tree/ignore-https-errors
-2) Устанавливаем зависимости
-npm i  3) Запускаем
-./lighthouse-cli/index.js &amp;lt;url&amp;gt; --ignore-https-errors --view  </description>
     </item>
     
     <item>

@@ -25,20 +25,6 @@
     </item>
     
     <item>
-      <title>Запуск lighthouse (chrome audit) без SSL</title>
-      <link>https://vitalyzhakov.github.io/post/lighthouse-without-ssl/</link>
-      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/lighthouse-without-ssl/</guid>
-      <description> Не всегда есть возможность использовать валидный SSL для проектов в тестовой среде.
-Для анализа скорости загрузки страниц выпустили lighthouse и иетегрировали во вкладку инструментов разработчика Audit.
-Решение 1) Получаем содержимое ветки репозитория https://github.com/Janpot/lighthouse/tree/ignore-https-errors
-2) Устанавливаем зависимости
-npm i  3) Запускаем
-./lighthouse-cli/index.js &amp;lt;url&amp;gt; --ignore-https-errors --view  </description>
-    </item>
-    
-    <item>
       <title>Замеры скорости загрузки вебсайтов</title>
       <link>https://vitalyzhakov.github.io/post/sitespeed/</link>
       <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>

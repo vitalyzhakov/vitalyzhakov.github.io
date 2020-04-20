@@ -11,6 +11,30 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>VSCode for php</title>
+      <link>https://vitalyzhakov.github.io/post/vscode-php/</link>
+      <pubDate>Mon, 20 Apr 2020 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/vscode-php/</guid>
+      <description>
+
+&lt;h2 id=&#34;работа-с-git-по-ssh&#34;&gt;Работа с git по SSH&lt;/h2&gt;
+
+&lt;p&gt;Приватный ключ может быть защищён паролем, поэтому на Linux-based системах
+перед началом работы для использования такого ключа нужно воспрользоваться командой&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-add ключ
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;рекомендуемые-расширения&#34;&gt;Рекомендуемые расширения&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client&#34; target=&#34;_blank&#34;&gt;vscode-intelephense-client&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Graylog</title>
       <link>https://vitalyzhakov.github.io/post/graylog/</link>
       <pubDate>Fri, 17 Apr 2020 00:10:06 +0500</pubDate>
@@ -654,35 +678,6 @@ services:
 &lt;p&gt;Этот вариант требует значительных затрат и модификации.
 В большинстве систем данные нормализованы для поддержания целостности.
 Но с точки зрения оптимизации времени выборка из одной таблицы обходится дешевле, чем свзязка некольких и выборка из связки.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Запуск lighthouse (chrome audit) без SSL</title>
-      <link>https://vitalyzhakov.github.io/post/lighthouse-without-ssl/</link>
-      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/lighthouse-without-ssl/</guid>
-      <description>
-
-&lt;p&gt;Не всегда есть возможность использовать валидный SSL для проектов в тестовой среде.&lt;/p&gt;
-
-&lt;p&gt;Для анализа скорости загрузки страниц выпустили lighthouse и
-иетегрировали во вкладку инструментов разработчика &lt;code&gt;Audit&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;решение&#34;&gt;Решение&lt;/h2&gt;
-
-&lt;p&gt;1) Получаем содержимое ветки репозитория &lt;a href=&#34;https://github.com/Janpot/lighthouse/tree/ignore-https-errors&#34; target=&#34;_blank&#34;&gt;https://github.com/Janpot/lighthouse/tree/ignore-https-errors&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;2) Устанавливаем зависимости&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm i
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;3) Запускаем&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;./lighthouse-cli/index.js &amp;lt;url&amp;gt; --ignore-https-errors --view
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>https://vitalyzhakov.github.io/post/vscode-php/</loc>
+      <lastmod>2020-04-20T00:10:06+05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://vitalyzhakov.github.io/post/graylog/</loc>
       <lastmod>2020-04-17T00:10:06+05:00</lastmod>
     </url>
@@ -61,15 +70,6 @@
     
       <loc>https://vitalyzhakov.github.io/post/db-optimization/</loc>
       <lastmod>2019-09-19T00:10:06+05:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://vitalyzhakov.github.io/post/lighthouse-without-ssl/</loc>
-      <lastmod>2019-05-23T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -271,6 +271,16 @@
     
     <url>
     
+      <loc>https://vitalyzhakov.github.io/tags/ide/</loc>
+      <lastmod>2020-04-20T00:10:06+05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://vitalyzhakov.github.io/tags/mysql/</loc>
       <lastmod>2019-09-19T00:10:06+05:00</lastmod>
       <priority>0</priority>
@@ -331,7 +341,7 @@
     <url>
     
       <loc>https://vitalyzhakov.github.io/tags/qa/</loc>
-      <lastmod>2019-05-23T00:00:00+00:00</lastmod>
+      <lastmod>2019-05-09T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
