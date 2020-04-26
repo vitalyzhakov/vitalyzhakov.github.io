@@ -33,6 +33,27 @@
 &lt;p&gt;Для увеличения прочности изделия уголок будет состоять из трёх частей:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/freecad-degree-of-freedom/chernovik.png&#34; alt=&#34;Черновик будущего уголка&#34; title=&#34;Черновик&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Самое интересное - как посчитать, конкретные размеры, чтобы было красиво (но не подгонять их руками).&lt;/p&gt;
+
+&lt;p&gt;Благодаря степеням свободы, мы можем задать только углы и равенство отрезков.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/freecad-degree-of-freedom/ugolok-no-freedom.png&#34; alt=&#34;Черновик будущего уголка&#34; title=&#34;Черновик&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Нам останется задать в терминах длины только 2 параметра:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ширину бруска;&lt;/li&gt;
+&lt;li&gt;высоту бруска, прилегающего к стене.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Всё остально FreeCAD посчитает за нас!&lt;/p&gt;
+
+&lt;p&gt;Например, при высоте вертикального бруска 350мм, горизонтальный будет длиной 270 мм.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/freecad-degree-of-freedom/horizontal-length-270.png&#34; alt=&#34;Черновик будущего уголка&#34; title=&#34;Черновик&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/freecad-degree-of-freedom/ugolok-2d.png&#34; alt=&#34;Скачать исходник&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
