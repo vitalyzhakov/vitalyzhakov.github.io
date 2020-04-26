@@ -74,7 +74,7 @@
 &lt;h3 id=&#34;другие-инструменты-например-elk-или-splunk&#34;&gt;Другие инструменты, например, ELK или splunk&lt;/h3&gt;
 
 &lt;p&gt;Принцип работы у всех продуктов один и тот же, я же призываю вас поддержать open-source продукт.
-Вы можете внести (свой вклад)[&lt;a href=&#34;https://github.com/Graylog2/graylog2-server&#34; target=&#34;_blank&#34;&gt;https://github.com/Graylog2/graylog2-server&lt;/a&gt;]
+Вы можете внести &lt;a href=&#34;https://github.com/Graylog2/graylog2-server&#34; target=&#34;_blank&#34;&gt;свой вклад&lt;/a&gt;
 путём отправки ошибок в баг-трекер или оформлять документацию,
 писать код или отвечать на вопросы пользователей.&lt;/p&gt;
 </description>
