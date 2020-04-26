@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>https://vitalyzhakov.github.io/post/freecad-degree-of-freedom/</loc>
+      <lastmod>2020-04-26T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://vitalyzhakov.github.io/post/graylog/</loc>
       <lastmod>2020-04-24T00:10:06+05:00</lastmod>
     </url>
@@ -253,6 +262,16 @@
     
       <loc>https://vitalyzhakov.github.io/tags/docker/</loc>
       <lastmod>2020-04-10T00:10:06+05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://vitalyzhakov.github.io/tags/freecad/</loc>
+      <lastmod>2020-04-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

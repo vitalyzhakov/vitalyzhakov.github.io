@@ -13,6 +13,19 @@
     
     
     <item>
+      <title>Вычисление размеров издения с помощью степеней свободы FreeCAD</title>
+      <link>https://vitalyzhakov.github.io/post/freecad-degree-of-freedom/</link>
+      <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/freecad-degree-of-freedom/</guid>
+      <description>Недавно я столкнулся с простой бытовой потребностью - повесить полочки на стену. Так как стена плоская, полка должна опираться на уголки.
+Вроде таких В магазине самые большие уголки длиной до 150 мм.
+Ширина полки меня бы устроила ~300 мм, длина ~2 метра. Магазинный уголок, очевидно, не выдержит такую нагрузку.
+В режиме самоизоляции ходить по магазинам не очень удобно, поэтому я решил немного прокачаться во FreeCAD и изготовить уголок самостоятельно.
+Для увеличения прочности изделия уголок будет состоять из трёх частей:</description>
+    </item>
+    
+    <item>
       <title>Graylog</title>
       <link>https://vitalyzhakov.github.io/post/graylog/</link>
       <pubDate>Fri, 24 Apr 2020 00:10:06 +0500</pubDate>

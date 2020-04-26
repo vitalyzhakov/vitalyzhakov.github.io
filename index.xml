@@ -11,6 +11,32 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Вычисление размеров издения с помощью степеней свободы FreeCAD</title>
+      <link>https://vitalyzhakov.github.io/post/freecad-degree-of-freedom/</link>
+      <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/freecad-degree-of-freedom/</guid>
+      <description>&lt;p&gt;Недавно я столкнулся с простой бытовой потребностью - повесить полочки на стену.
+Так как стена плоская, полка должна опираться на уголки.&lt;/p&gt;
+
+&lt;p&gt;Вроде таких
+&lt;img src=&#34;https://yunimag.ru/images/big/206362_1.jpg&#34; alt=&#34;Уголок&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;В магазине самые большие уголки длиной до 150 мм.&lt;/p&gt;
+
+&lt;p&gt;Ширина полки меня бы устроила ~300 мм, длина ~2 метра.
+Магазинный уголок, очевидно, не выдержит такую нагрузку.&lt;/p&gt;
+
+&lt;p&gt;В режиме самоизоляции ходить по магазинам не очень удобно,
+поэтому я решил немного прокачаться во FreeCAD и изготовить уголок самостоятельно.&lt;/p&gt;
+
+&lt;p&gt;Для увеличения прочности изделия уголок будет состоять из трёх частей:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/freecad-degree-of-freedom/chernovik.png&#34; alt=&#34;Черновик будущего уголка&#34; title=&#34;Черновик&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Graylog</title>
       <link>https://vitalyzhakov.github.io/post/graylog/</link>
       <pubDate>Fri, 24 Apr 2020 00:10:06 +0500</pubDate>
@@ -1171,45 +1197,6 @@ modules:
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Таким образом мы убеждаемся в присутствии переадресации при определённом запросе пользователя на веб-сервер.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Тестирование API-интерфейсов над большими системами</title>
-      <link>https://vitalyzhakov.github.io/post/rest-api-testing/</link>
-      <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/rest-api-testing/</guid>
-      <description>
-
-&lt;h2 id=&#34;постановка-задачи&#34;&gt;Постановка задачи&lt;/h2&gt;
-
-&lt;p&gt;Протестировать автоматическими скриптами валидность ответов API над большой системой.&lt;/p&gt;
-
-&lt;h2 id=&#34;решение&#34;&gt;Решение&lt;/h2&gt;
-
-&lt;p&gt;Для решения нам понадобится &lt;a href=&#34;https://vitalyzhakov.github.io/post/qa-api&#34;&gt;QA API&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;В общем случае процесс выглядит следующим образом:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;скрипт с помощью &lt;a href=&#34;https://vitalyzhakov.github.io/post/qa-api&#34;&gt;QA API&lt;/a&gt; создаёт элемент данных, над которым будем проводить операции в проверяемом API.&lt;/li&gt;
-&lt;li&gt;скрипт выполняет API-запросы с созданными элементами данных, для которых заранее известен ответ.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;пример-системы-личный-кабинет&#34;&gt;Пример системы - личный кабинет&lt;/h2&gt;
-
-&lt;p&gt;Протестируем API баланса личного кабинета пользователя.&lt;/p&gt;
-
-&lt;p&gt;Для этого:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;С помощью &lt;a href=&#34;https://vitalyzhakov.github.io/post/qa-api&#34;&gt;QA API&lt;/a&gt; создадим пользователя с указанным начальным значением баланса;&lt;/li&gt;
-&lt;li&gt;С помощью rest API авторизуемся под пользователем;&lt;/li&gt;
-&lt;li&gt;С помощью rest API проверим текущий баланс пользователя, сравним с балансом в пункте 1. Значения должны совпадать.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Замечу, что при выполнении на непродуктовой базе влияния на сервис нет совсем (ни по нагрузке, ни по изменяемым данным). Последним обычно грешат стандартные способы проверки без использования &lt;a href=&#34;https://vitalyzhakov.github.io/post/qa-api&#34;&gt;QA API&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
