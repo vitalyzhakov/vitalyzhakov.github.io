@@ -11,9 +11,9 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Вычисление размеров издения с помощью степеней свободы FreeCAD</title>
+      <title>Вычисление размеров изделия с помощью степеней свободы FreeCAD</title>
       <link>https://vitalyzhakov.github.io/post/freecad-degree-of-freedom/</link>
-      <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate>
       
       <guid>https://vitalyzhakov.github.io/post/freecad-degree-of-freedom/</guid>
       <description>&lt;p&gt;Недавно я столкнулся с простой бытовой потребностью - повесить полочки на стену.
