@@ -13,6 +13,16 @@
     
     
     <item>
+      <title>VSCode for php</title>
+      <link>https://vitalyzhakov.github.io/post/vscode-php/</link>
+      <pubDate>Tue, 19 May 2020 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/vscode-php/</guid>
+      <description> Работа с git по SSH Приватный ключ может быть защищён паролем, поэтому на Linux-based системах перед началом работы для использования такого ключа нужно воспользоваться командой
+ssh-add ключ  Рекомендуемые расширения  vscode-intelephense-client code-spell-checker [code-spell-checker-russian]https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-russian После установки в readme spell checker russian написано, как добавить русский язык в проверку.  </description>
+    </item>
+    
+    <item>
       <title>Вычисление размеров изделия с помощью степеней свободы FreeCAD</title>
       <link>https://vitalyzhakov.github.io/post/freecad-degree-of-freedom/</link>
       <pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate>
@@ -35,16 +45,6 @@
 Для различных прикладных задач важно знать, когда, на какой территории сколько человек заболело, чтобы своевременно действовать.
 Как это происходит с точки зрения процесса:
  больного записывают в журнал с указанием важных атрибутов (дата, время, диагноз, место проживания); данные передаются на центральный узел сбора; специалисты анализируют данные, делают выводы.  Наши сервисы также могут отсылать события в централизованную систему (graylog).</description>
-    </item>
-    
-    <item>
-      <title>VSCode for php</title>
-      <link>https://vitalyzhakov.github.io/post/vscode-php/</link>
-      <pubDate>Mon, 20 Apr 2020 00:10:06 +0500</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/vscode-php/</guid>
-      <description> Работа с git по SSH Приватный ключ может быть защищён паролем, поэтому на Linux-based системах перед началом работы для использования такого ключа нужно воспрользоваться командой
-ssh-add ключ  Рекомендуемые расширения  vscode-intelephense-client  </description>
     </item>
     
     <item>

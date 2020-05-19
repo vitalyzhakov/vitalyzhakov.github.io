@@ -11,6 +11,33 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>VSCode for php</title>
+      <link>https://vitalyzhakov.github.io/post/vscode-php/</link>
+      <pubDate>Tue, 19 May 2020 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/vscode-php/</guid>
+      <description>
+
+&lt;h2 id=&#34;работа-с-git-по-ssh&#34;&gt;Работа с git по SSH&lt;/h2&gt;
+
+&lt;p&gt;Приватный ключ может быть защищён паролем, поэтому на Linux-based системах
+перед началом работы для использования такого ключа нужно воспользоваться командой&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-add ключ
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;рекомендуемые-расширения&#34;&gt;Рекомендуемые расширения&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client&#34; target=&#34;_blank&#34;&gt;vscode-intelephense-client&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker&#34; target=&#34;_blank&#34;&gt;code-spell-checker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[code-spell-checker-russian]&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-russian&#34; target=&#34;_blank&#34;&gt;https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-russian&lt;/a&gt;
+После установки в readme spell checker russian написано, как добавить русский язык в проверку.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Вычисление размеров изделия с помощью степеней свободы FreeCAD</title>
       <link>https://vitalyzhakov.github.io/post/freecad-degree-of-freedom/</link>
       <pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate>
@@ -125,30 +152,6 @@
 Вы можете внести &lt;a href=&#34;https://github.com/Graylog2/graylog2-server&#34; target=&#34;_blank&#34;&gt;свой вклад&lt;/a&gt;
 путём отправки ошибок в баг-трекер или оформлять документацию,
 писать код или отвечать на вопросы пользователей.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>VSCode for php</title>
-      <link>https://vitalyzhakov.github.io/post/vscode-php/</link>
-      <pubDate>Mon, 20 Apr 2020 00:10:06 +0500</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/vscode-php/</guid>
-      <description>
-
-&lt;h2 id=&#34;работа-с-git-по-ssh&#34;&gt;Работа с git по SSH&lt;/h2&gt;
-
-&lt;p&gt;Приватный ключ может быть защищён паролем, поэтому на Linux-based системах
-перед началом работы для использования такого ключа нужно воспрользоваться командой&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-add ключ
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;рекомендуемые-расширения&#34;&gt;Рекомендуемые расширения&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client&#34; target=&#34;_blank&#34;&gt;vscode-intelephense-client&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     
