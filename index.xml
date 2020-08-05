@@ -11,6 +11,48 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Ошибка с пространственным полем point при миграции из mysql 5.1 до mysql 8</title>
+      <link>https://vitalyzhakov.github.io/post/migration-from-mysql-51-to-mysql-8-geometry-field/</link>
+      <pubDate>Wed, 05 Aug 2020 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/migration-from-mysql-51-to-mysql-8-geometry-field/</guid>
+      <description>
+
+&lt;h2 id=&#34;постановка-задачи&#34;&gt;Постановка задачи&lt;/h2&gt;
+
+&lt;p&gt;Был сервис на mysql 5.1. Нужно мигрировать на актуальную 8ю версию.&lt;/p&gt;
+
+&lt;p&gt;Заход с помощью mysql workbench не увенчался успехом, так как 5.1 уже давно не поддерживают.&lt;/p&gt;
+
+&lt;p&gt;mysqldump справился с задачей снять дамп, но при выполнении его на целевом сервере появились ошибки:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;Cannot get geometry object from data you send to the GEOMETRY field
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;диагностика&#34;&gt;Диагностика&lt;/h2&gt;
+
+&lt;p&gt;Беглый поиск подводит к использованию mysqldump с ключом &lt;code&gt;--hex-blob&lt;/code&gt;, но к результату это не приводит.
+Ошибка сохраняется.&lt;/p&gt;
+
+&lt;p&gt;Экспорт дампа с ключами &lt;code&gt;--hex-blob --extended-insert=FALSE&lt;/code&gt;, импорт даёт конкретную строку, в которой ошибка.
+Дальнейший просмотр дампа позволяет понять, что вместо геометрических данных mysqldum выгружает в пустых значениях&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;binary &#39;&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Импорт в mysql 8 версии преобразовать это поле в геометрию точки не может.&lt;/p&gt;
+
+&lt;p&gt;Но такое поведение только при пустом исходном значении. При заполненном заполняется и импортируется корректно.&lt;/p&gt;
+
+&lt;h2 id=&#34;решение&#34;&gt;Решение&lt;/h2&gt;
+
+&lt;p&gt;Замена в файле дампа  &lt;code&gt;,binary &#39;&#39;,&lt;/code&gt; -&amp;gt; &lt;code&gt;,NULL,&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;В моём случае также пришлось снять обязательность на поле &lt;code&gt;point&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>VSCode for php</title>
       <link>https://vitalyzhakov.github.io/post/vscode-php/</link>
       <pubDate>Tue, 19 May 2020 00:10:06 +0500</pubDate>
@@ -31,9 +73,10 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client&#34; target=&#34;_blank&#34;&gt;vscode-intelephense-client&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker&#34; target=&#34;_blank&#34;&gt;code-spell-checker&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-russian&#34; target=&#34;_blank&#34;&gt;code-spell-checker-russian&lt;/a&gt;
-После установки в readme spell checker russian написано, как добавить русский язык в проверку.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-russian&#34; target=&#34;_blank&#34;&gt;code-spell-checker-russian&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;После установки в readme spell checker russian написано, как добавить русский язык в проверку.&lt;/p&gt;
 </description>
     </item>
     
@@ -1181,47 +1224,6 @@ https://мой-быстрый-сайт.рф
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;В этом примере &lt;code&gt;perm&lt;/code&gt; означает, что замеры производятся в городе Пермь.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Автоматическая проверка переадресации с помощью Codeception</title>
-      <link>https://vitalyzhakov.github.io/post/redirect-autotest/</link>
-      <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/redirect-autotest/</guid>
-      <description>&lt;p&gt;Рассмотрим реализацию теста, который подтверждает (проверяет) переадресацию пользователя на определённый URL.&lt;/p&gt;
-
-&lt;p&gt;На самом деле нам не нужно проверять, что пользователь перешёл на целевой URL.
-Задача веб-сервера заключается в том, чтобы отправить клиенту
-верный http-ответ с корректным заголовком и правильным статусом.&lt;/p&gt;
-
-&lt;p&gt;Далее уже клиент решает, переходить ему по этому URL или нет.&lt;/p&gt;
-
-&lt;p&gt;Пример конфигурации &lt;code&gt;rest.suite.yml&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;actor: RestTester
-modules:
-    enabled:
-        - REST:
-            depends: PhpBrowser
-            url: http://адрес-сервера
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Пример автоматической проверки&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;class RedirectCest{
-    public function autodiscoverRedirect(RestTester $I) {
-        $I-&amp;gt;stopFollowingRedirects(); // запрещаем переходить по URL, чтобы отследить ответ сервера
-        $I-&amp;gt;sendGET(&#39;/autodiscover/autodiscover.xml&#39;); // делаем запрос
-        $I-&amp;gt;seeResponseCodeIs(302); // Проверяем код ответа (302 или 301)
-        $I-&amp;gt;seeHttpHeader(&#39;Location&#39;, &#39;https://vnytve.ru&#39;); // Проверяем целевой URL для клиента
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Таким образом мы убеждаемся в присутствии переадресации при определённом запросе пользователя на веб-сервер.&lt;/p&gt;
 </description>
     </item>
     

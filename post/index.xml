@@ -13,13 +13,25 @@
     
     
     <item>
+      <title>Ошибка с пространственным полем point при миграции из mysql 5.1 до mysql 8</title>
+      <link>https://vitalyzhakov.github.io/post/migration-from-mysql-51-to-mysql-8-geometry-field/</link>
+      <pubDate>Wed, 05 Aug 2020 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/migration-from-mysql-51-to-mysql-8-geometry-field/</guid>
+      <description>Постановка задачи Был сервис на mysql 5.1. Нужно мигрировать на актуальную 8ю версию.
+Заход с помощью mysql workbench не увенчался успехом, так как 5.1 уже давно не поддерживают.
+mysqldump справился с задачей снять дамп, но при выполнении его на целевом сервере появились ошибки:
+Cannot get geometry object from data you send to the GEOMETRY field  Диагностика Беглый поиск подводит к использованию mysqldump с ключом --hex-blob, но к результату это не приводит.</description>
+    </item>
+    
+    <item>
       <title>VSCode for php</title>
       <link>https://vitalyzhakov.github.io/post/vscode-php/</link>
       <pubDate>Tue, 19 May 2020 00:10:06 +0500</pubDate>
       
       <guid>https://vitalyzhakov.github.io/post/vscode-php/</guid>
-      <description> Работа с git по SSH Приватный ключ может быть защищён паролем, поэтому на Linux-based системах перед началом работы для использования такого ключа нужно воспользоваться командой
-ssh-add ключ  Рекомендуемые расширения  vscode-intelephense-client code-spell-checker code-spell-checker-russian После установки в readme spell checker russian написано, как добавить русский язык в проверку.  </description>
+      <description>Работа с git по SSH Приватный ключ может быть защищён паролем, поэтому на Linux-based системах перед началом работы для использования такого ключа нужно воспользоваться командой
+ssh-add ключ  Рекомендуемые расширения  vscode-intelephense-client code-spell-checker code-spell-checker-russian  После установки в readme spell checker russian написано, как добавить русский язык в проверку.</description>
     </item>
     
     <item>

@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>https://vitalyzhakov.github.io/post/migration-from-mysql-51-to-mysql-8-geometry-field/</loc>
+      <lastmod>2020-08-05T00:10:06+05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://vitalyzhakov.github.io/post/vscode-php/</loc>
       <lastmod>2020-05-19T00:10:06+05:00</lastmod>
     </url>
@@ -292,6 +301,16 @@
     
       <loc>https://vitalyzhakov.github.io/tags/ide/</loc>
       <lastmod>2020-05-19T00:10:06+05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://vitalyzhakov.github.io/tags/mysql/</loc>
+      <lastmod>2019-09-19T00:10:06+05:00</lastmod>
       <priority>0</priority>
     </url>
     
