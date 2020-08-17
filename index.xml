@@ -70,10 +70,9 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client&#34; target=&#34;_blank&#34;&gt;vscode-intelephense-client&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker&#34; target=&#34;_blank&#34;&gt;code-spell-checker&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-russian&#34; target=&#34;_blank&#34;&gt;code-spell-checker-russian&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-russian&#34; target=&#34;_blank&#34;&gt;code-spell-checker-russian&lt;/a&gt; После установки в readme spell checker russian написано, как добавить русский язык в проверку.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack&#34; target=&#34;_blank&#34;&gt;Remote development containers&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;После установки в readme spell checker russian написано, как добавить русский язык в проверку.&lt;/p&gt;
 </description>
     </item>
     

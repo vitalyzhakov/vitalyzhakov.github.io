@@ -30,8 +30,8 @@ Cannot get geometry object from data you send to the GEOMETRY field  Диагн�
       <pubDate>Tue, 19 May 2020 00:10:06 +0500</pubDate>
       
       <guid>https://vitalyzhakov.github.io/post/vscode-php/</guid>
-      <description>Работа с git по SSH Приватный ключ может быть защищён паролем, поэтому на Linux-based системах перед началом работы для использования такого ключа нужно воспользоваться командой
-ssh-add ключ  Рекомендуемые расширения  vscode-intelephense-client code-spell-checker code-spell-checker-russian  После установки в readme spell checker russian написано, как добавить русский язык в проверку.</description>
+      <description> Работа с git по SSH Приватный ключ может быть защищён паролем, поэтому на Linux-based системах перед началом работы для использования такого ключа нужно воспользоваться командой
+ssh-add ключ  Рекомендуемые расширения  vscode-intelephense-client code-spell-checker code-spell-checker-russian После установки в readme spell checker russian написано, как добавить русский язык в проверку. Remote development containers  </description>
     </item>
     
     <item>
