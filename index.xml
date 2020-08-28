@@ -12,10 +12,10 @@
     
     <item>
       <title>Cron в распределённой системе</title>
-      <link>https://vitalyzhakov.github.io/post/cron-requrements/</link>
+      <link>https://vitalyzhakov.github.io/post/cron-requirements/</link>
       <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://vitalyzhakov.github.io/post/cron-requrements/</guid>
+      <guid>https://vitalyzhakov.github.io/post/cron-requirements/</guid>
       <description>
 
 &lt;p&gt;Cron-задания часто являются одной из составляющих долгоживущего сервиса.&lt;/p&gt;
