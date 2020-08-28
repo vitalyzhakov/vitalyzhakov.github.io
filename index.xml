@@ -144,6 +144,16 @@
 &lt;li&gt;контроль ресурсов;&lt;/li&gt;
 &lt;li&gt;получаем точный код и трассировку в случае ошибки.&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;h3 id=&#34;блокировка-от-параллельного-выполнения&#34;&gt;Блокировка от параллельного выполнения&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/bash
+PROCNUM=`ps xa | grep -v grep | grep -c &amp;quot;/srv/www/data/cron.php&amp;quot;`
+# если процесс уже есть - выходим
+if [ $PROCNUM -gt 0 ]; then exit; fi
+
+/usr/local/bin/php /srv/www/data/cron.php
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
