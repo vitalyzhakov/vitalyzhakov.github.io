@@ -11,6 +11,66 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Cron в распределённой системе</title>
+      <link>https://vitalyzhakov.github.io/post/cron-requrements/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/cron-requrements/</guid>
+      <description>
+
+&lt;p&gt;Cron-задания часто являются одной из составляющих долгоживущего сервиса.&lt;/p&gt;
+
+&lt;p&gt;Могут применяться как сборщики мусора.
+Или как инициаторы заданий для воркеров.&lt;/p&gt;
+
+&lt;h2 id=&#34;проблематика&#34;&gt;Проблематика&lt;/h2&gt;
+
+&lt;p&gt;В большой распределённой системе cron-задания могут быть не рассчитаны на параллельную работу.&lt;/p&gt;
+
+&lt;p&gt;Поэтому требуется реализовать блокировку от параллельного выполнения.&lt;/p&gt;
+
+&lt;p&gt;Но начнём мы с часто совершаемой ошибки при полном цикле разработки и эксплуатации в разных отделах&lt;/p&gt;
+
+&lt;h2 id=&#34;cron-находится-в-отличном-от-кода-репо-настраивается-вручную-по-заявке&#34;&gt;cron находится в отличном от кода репо / настраивается вручную по заявке&lt;/h2&gt;
+
+&lt;p&gt;Предположу, что есть варианты, когда срок горит, а разбираться в CI/DevOps практиках лень.&lt;/p&gt;
+
+&lt;p&gt;Тогда долгосрочной эксплуатации продукта отдаётся меньший приоритет, чем быстрому запуску.&lt;/p&gt;
+
+&lt;p&gt;Как следствие - cron настраивается инженерами экплуатации в системе, к которой программистам доступа нет.&lt;/p&gt;
+
+&lt;p&gt;Для грамотной разработки и поддержки важно понимать, как работает проект сейчас (в общем случае в конкретный момент времени).&lt;/p&gt;
+
+&lt;p&gt;А так как cron - часть проекта, его работа должна быть понятной для всех (разработчиков, эксплуатации и т.д.).&lt;/p&gt;
+
+&lt;p&gt;Поэтому вывод&lt;/p&gt;
+
+&lt;h2 id=&#34;cron-должен-быть-реализован-в-проекте&#34;&gt;Cron должен быть реализован в проекте&lt;/h2&gt;
+
+&lt;p&gt;Основные агурменты за:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;конфигурация на виду у всех членов команды, а не записана в блокноте у уволенного сотрудника;&lt;/li&gt;
+&lt;li&gt;имеется возможность протестировать и внести изменения вместе с изменениями проекта.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;реализация&#34;&gt;Реализация&lt;/h2&gt;
+
+&lt;p&gt;Обычно вызов cron операций бывает:
+* асинхронным вызовом через сеть (веб-сервер или другой сигнал для запуска команды);
+- этот путь не даёт контроля над результатом выполнения cron-операции;
+- возможен, если это постановка задания в очередь, а не выполнение самого задания.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;вызовом операции в самом приложении&lt;/li&gt;
+&lt;li&gt;контроль исполнения;&lt;/li&gt;
+&lt;li&gt;контроль ресурсов;&lt;/li&gt;
+&lt;li&gt;получаем точный код и трассировку в случае ошибки.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Ошибка с пространственным полем point при миграции из mysql 5.1 до mysql 8</title>
       <link>https://vitalyzhakov.github.io/post/migration-from-mysql-51-to-mysql-8-geometry-field/</link>
       <pubDate>Wed, 05 Aug 2020 00:10:06 +0500</pubDate>
@@ -1107,120 +1167,6 @@ composer install --ignore-platform-reqs
 &lt;pre&gt;&lt;code&gt;git push origin [ветка] -f
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ol&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Замеры скорости загрузки вебсайтов</title>
-      <link>https://vitalyzhakov.github.io/post/sitespeed/</link>
-      <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/sitespeed/</guid>
-      <description>
-
-&lt;p&gt;Наиболее продвинутые компании на высококонкуретном рынке B2C понимают,
-что высокая скорость загрузки сайта положительно сказывается
-не только на имидже, но и на показателях конверсии.&lt;/p&gt;
-
-&lt;p&gt;Для того, чтобы что-то оптимизировать, нужно это замерить.
-В измерениях нам поможет инструмент под названием &lt;a href=&#34;https://www.sitespeed.io/&#34; target=&#34;_blank&#34;&gt;sitespeed.io&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;В упрощённом варианте можно использовать всего 2 машины - 1 сервер и 1 клиент.
-Машины нужны изолированные, так как на измерения клиента не должны влиять операции на сервере.&lt;/p&gt;
-
-&lt;p&gt;Если потребуется, можно нарастить количество клиентов.&lt;/p&gt;
-
-&lt;h2 id=&#34;серверная-сторона&#34;&gt;Серверная сторона&lt;/h2&gt;
-
-&lt;h3 id=&#34;требования&#34;&gt;Требования&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;docker&lt;/li&gt;
-&lt;li&gt;docker-compose&lt;/li&gt;
-&lt;li&gt;возможность откытия дополнительных портов.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Сервер состоит из СУБД &lt;code&gt;graphite&lt;/code&gt; для хранения измерений и интерфейса &lt;code&gt;grafana&lt;/code&gt; для их отображения.&lt;/p&gt;
-
-&lt;p&gt;Содержимое файла docker-compose.tmpl&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;version: &#39;2&#39;
-services:
-    graphite:
-        image: sitespeedio/graphite
-        container_name: sitespeed-graphite
-        network_mode: &amp;quot;bridge&amp;quot;
-        restart: always
-        ports:
-            - 2003:2003
-    grafana-bootstrap:
-        image: sitespeedio/grafana-bootstrap
-        container_name: sitespeed-grafana-bootstrap
-        network_mode: &amp;quot;bridge&amp;quot;
-        depends_on:
-            - grafana
-        links:
-            - grafana
-        environment:
-            - GF_PASSWORD=**                    # заменить на пароль
-            - GF_USER=*                         # заменить на имя пользователя
-    grafana:
-        image: grafana/grafana
-        container_name: sitespeed-grafana
-        network_mode: &amp;quot;bridge&amp;quot;
-        depends_on:
-            - graphite
-        links:
-            - graphite
-        environment:
-            - GF_SECURITY_ADMIN_PASSWORD=**     # заменить на пароль
-            - GF_SECURITY_ADMIN_USER=*          # заменить на имя пользователя
-            - GF_AUTH_ANONYMOUS_ENABLED=true
-            - GF_USERS_ALLOW_SIGN_UP=false
-            - GF_USERS_ALLOW_ORG_CREATE=false
-        ports:
-            - 80:3000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Входящие соединения с клиентов на порт &lt;code&gt;2003&lt;/code&gt; прокидываются в контейнер с &lt;code&gt;graphite&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Первичный запуск с инициализацией стандартных панелей sitespeed в grafana:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;    - docker-compose up -d
-    - docker-compose run --rm grafana-bootstrap
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;клиент&#34;&gt;Клиент&lt;/h2&gt;
-
-&lt;h3 id=&#34;требования-1&#34;&gt;Требования&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;docker&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Пример запуска сбора данных в crontab раз в 10 минут&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;*/10 * * * * docker run -v /etc/sitespeed.io/urls.txt:/sitespeed.io/urls.txt sitespeedio/sitespeed.io urls.txt --graphite.host=[хост с сервером]  -n 1 --speedIndex false --video false -c 3g &amp;gt;&amp;gt; /tmp/sitespeed.log
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Файл &lt;code&gt;urls.txt&lt;/code&gt; содержит список страниц, которые нужно проверить:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;https://yandex.ru
-https://мой-быстрый-сайт.рф
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Соединение должно быть фиксированным (&lt;code&gt;-c 3g&lt;/code&gt; означает иммитацию 3G),
-чтобы снизить зависимость измерений от сетевых проблем.&lt;/p&gt;
-
-&lt;h3 id=&#34;несколько-клиентов&#34;&gt;Несколько клиентов&lt;/h3&gt;
-
-&lt;p&gt;Если проект развивается и появилась возможность мониторить время загрузки страниц
-с разных провайдеров, сетей, географических зон, добавьте в crontab клиента&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;--graphite.namespace sitespeed_io.perm
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;В этом примере &lt;code&gt;perm&lt;/code&gt; означает, что замеры производятся в городе Пермь.&lt;/p&gt;
 </description>
     </item>
     

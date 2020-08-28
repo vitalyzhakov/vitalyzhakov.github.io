@@ -13,6 +13,20 @@
     
     
     <item>
+      <title>Cron в распределённой системе</title>
+      <link>https://vitalyzhakov.github.io/post/cron-requrements/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/cron-requrements/</guid>
+      <description>Cron-задания часто являются одной из составляющих долгоживущего сервиса.
+Могут применяться как сборщики мусора. Или как инициаторы заданий для воркеров.
+Проблематика В большой распределённой системе cron-задания могут быть не рассчитаны на параллельную работу.
+Поэтому требуется реализовать блокировку от параллельного выполнения.
+Но начнём мы с часто совершаемой ошибки при полном цикле разработки и эксплуатации в разных отделах
+cron находится в отличном от кода репо / настраивается вручную по заявке Предположу, что есть варианты, когда срок горит, а разбираться в CI/DevOps практиках лень.</description>
+    </item>
+    
+    <item>
       <title>Ошибка с пространственным полем point при миграции из mysql 5.1 до mysql 8</title>
       <link>https://vitalyzhakov.github.io/post/migration-from-mysql-51-to-mysql-8-geometry-field/</link>
       <pubDate>Wed, 05 Aug 2020 00:10:06 +0500</pubDate>

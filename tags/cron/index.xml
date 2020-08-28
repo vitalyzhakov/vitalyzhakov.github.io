@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cron on Инфраструктура ИТ</title>
+    <link>https://vitalyzhakov.github.io/tags/cron/</link>
+    <description>Recent content in Cron on Инфраструктура ИТ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru-ru</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Fri, 28 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://vitalyzhakov.github.io/tags/cron/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cron в распределённой системе</title>
+      <link>https://vitalyzhakov.github.io/post/cron-requrements/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/cron-requrements/</guid>
+      <description>Cron-задания часто являются одной из составляющих долгоживущего сервиса.
+Могут применяться как сборщики мусора. Или как инициаторы заданий для воркеров.
+Проблематика В большой распределённой системе cron-задания могут быть не рассчитаны на параллельную работу.
+Поэтому требуется реализовать блокировку от параллельного выполнения.
+Но начнём мы с часто совершаемой ошибки при полном цикле разработки и эксплуатации в разных отделах
+cron находится в отличном от кода репо / настраивается вручную по заявке Предположу, что есть варианты, когда срок горит, а разбираться в CI/DevOps практиках лень.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>https://vitalyzhakov.github.io/post/cron-requrements/</loc>
+      <lastmod>2020-08-28T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://vitalyzhakov.github.io/post/migration-from-mysql-51-to-mysql-8-geometry-field/</loc>
       <lastmod>2020-08-05T00:10:06+05:00</lastmod>
     </url>
@@ -251,6 +260,16 @@
     
       <loc>https://vitalyzhakov.github.io/tags/continious-delivery/</loc>
       <lastmod>2020-04-24T00:10:06+05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://vitalyzhakov.github.io/tags/cron/</loc>
+      <lastmod>2020-08-28T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
