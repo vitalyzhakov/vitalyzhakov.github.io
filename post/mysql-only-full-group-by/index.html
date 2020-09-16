@@ -231,7 +231,7 @@ ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and c
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    5 мин.
+    8 мин.
   </span>
   
 
@@ -361,7 +361,7 @@ mysql&gt; select * from t1;
 Как хорошие программисты знают, что нужно проверять даты
 в коде приложения, чтобы избежать некорректных данных или некорректных результатов.</p>
 
-<p>Далее мы показываем, как динамически проинструктировать MySQL вести себя в traditional mode
+<p>Далее мы показываем, как динамически проинструктировать MySQL вести себя в traditional режим
 для выброса исключений вместо этого:</p>
 
 <pre><code>mysql&gt; set session sql_mode='TRADITIONAL';
@@ -444,7 +444,125 @@ mysql&gt; SELECT page_url, user_id, COUNT(*) AS visits
 Мы должны рассматривать значение колонки user_id как случайный элемент из группы.</p>
 
 <p>В любом случае, правильный ответ - запрос семантически некорректен,
-Anyway, the right answer is that the query is not semantically correct, because it has no meaning to return a value from a column that is not part of the grouping function. Then the query is expected to be invalid in the traditional sql.</p>
+так как нет смысла для возвращаемого значения столбика, что не является частью функции группировки.
+Запрос будет недействительным в традиционном SQL.</p>
+
+<p>Давайте проверим это</p>
+
+<pre><code class="language-SQL">mysql&gt; SET SESSION sql_mode='ONLY_FULL_GROUP_BY';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; SELECT page_url, user_id, COUNT(*) AS visits 
+    -&gt; FROM web_log 
+    -&gt; GROUP BY page_url ORDER BY COUNT(*) DESC;
+ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause 
+and contains nonaggregated column 'test.web_log.user_id' which is not functionally 
+dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+</code></pre>
+
+<p>Как и ожидалось, у нас ошибка.</p>
+
+<p>Режим SQL <em>ONLY_FULL_GROUP_BY</em> - это часть <em>TRADITIONAL</em> режима и включен по умолчанию
+начиная с 5.7.</p>
+
+<p>Множество программистов столкнулось с разновидностью этой ошибки после миграции на последнюю версию
+MySQL.</p>
+
+<p>Теперь мы знаем, что вызывает эту ошибоку, но наше приложение всё ещё не работает.
+Какие возможные решения у нас есть, что вернуть приложение к работе?</p>
+
+<h2 id="решение-1-переписать-запрос">Решение 1 - переписать запрос</h2>
+
+<p>Так как не корректно выбирать колонку, которая не является частью группировки,
+мы можем переписать запрос без этой колонки. Очень просто.</p>
+
+<pre><code>mysql&gt; SELECT page_url, COUNT(*) AS visits 
+    -&gt; FROM web_log 
+    -&gt; GROUP BY page_url ORDER BY COUNT(*) DESC;
++-------------------+--------+
+| page_url          | visits |
++-------------------+--------+
+| /index.html       |      3 |
+| /news.php         |      2 |
+| /store_offers.php |      2 |
+| /faq.html         |      1 |
++-------------------+--------+
+</code></pre>
+
+<p>Если много ваших запросов затронуты проблемой, вы можете потенциально сделать много работы,
+чтобы найти и переписать их. Или, возможно, приложения - часть старого приложения, которое нет возможности изменить.</p>
+
+<p>Но это решение заставляет вас писать правильные запросы и пусть конфигурация вашей базы данных
+будет неумалима к таким ошибкам в терминах SQL-валидации.</p>
+
+<h2 id="решение-2-вернуть-прощающий-режим">Решение 2 - вернуть &ldquo;прощающий режим&rdquo;</h2>
+
+<p>Вы можете поменять конфигурацию MySQL сервера или подключения и вернуть &ldquo;прощающий&rdquo; режим.</p>
+
+<p>Или вы можете убрать только <em>ONLY_FULL_GROUP_BY</em> из настроек по умолчанию.
+По умолчанию SQL режим в 5.7 включает режимы: ONLY_FULL_GROUP_BY, STRINCT_TRANS_TABLES, NO_ZERO_IN_DATE, NO_ZERO_DATE, ERROR_FOR_DIVISION_BY_ZERO, NO_AUTO_CREATE_USER.</p>
+
+<pre><code>#set the complete &quot;forgiving&quot; mode
+mysql&gt; SET GLOBAL sql_mode='';
+
+# alternatively you can set sql mode to the following
+mysql&gt; SET GLOBAL sql_mode='STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_ENGINE_SUBSTITUTION';
+</code></pre>
+
+<h2 id="решение-3-использование-агрегигующих-функций">Решение 3 - использование агрегигующих функций</h2>
+
+<p>Если ваше приложение точно нуждается в получении поля user_id для какой-то корректной причины,
+или слишком сложно менять исходный код, вы можете положиться на агрегирующие функции,
+чтобы избежать изменения SQL-режима.</p>
+
+<p>Например мы можем использовать агрегирующие функции MAX(), MIN() или даже GROUP_CONCAT().</p>
+
+<pre><code class="language-SQL">mysql&gt; SET SESSION sql_mode='ONLY_FULL_GROUP_BY';
+
+mysql&gt; SELECT page_url, MAX(user_id), COUNT(*) AS visits FROM web_log GROUP BY page_url ORDER BY COUNT(*) DESC;
++-------------------+--------------+--------+
+| page_url          | MAX(user_id) | visits |
++-------------------+--------------+--------+
+| /index.html       |            3 |      3 |
+| /news.php         |            2 |      2 |
+| /store_offers.php |            3 |      2 |
+| /faq.html         |            1 |      1 |
++-------------------+--------------+--------+
+
+mysql&gt; SELECT page_url, GROUP_CONCAT(user_id), COUNT(*) AS visits FROM web_log GROUP BY page_url ORDER BY COUNT(*) DESC;
++-------------------+-----------------------+--------+
+| page_url          | GROUP_CONCAT(user_id) | visits |
++-------------------+-----------------------+--------+
+| /index.html       |                 1,2,3 |      3 |
+| /news.php         |                   1,2 |      2 |
+| /store_offers.php |                   3,2 |      2 |
+| /faq.html         |                     1 |      1 |
++-------------------+-----------------------+--------+
+</code></pre>
+
+<p>MySQL даже предоставляет специальную функцию для решения этой проблемы: ANY_VALUE().</p>
+
+<pre><code class="language-SQL">mysql&gt; SELECT page_url, ANY_VALUE(user_id), COUNT(*) AS visits FROM web_log GROUP BY page_url ORDER BY COUNT(*) DESC;
++-------------------+--------------------+--------+
+| page_url          | ANY_VALUE(user_id) | visits |
++-------------------+--------------------+--------+
+| /index.html       |                  1 |      3 |
+| /news.php         |                  1 |      2 |
+| /store_offers.php |                  3 |      2 |
+| /faq.html         |                  1 |      1 |
++-------------------+--------------------+--------+
+</code></pre>
+
+<h2 id="заключение">Заключение</h2>
+
+<p>Лично я предпочитаю решение номер 1, так как оно заставляет вас писать запросы по стандарту SQL-92.
+Следование стандартам часто считается лучшей практикой. Также хочу заметить, что это ловит часть ошибок,
+аналогично статическому анализу кода.</p>
+
+<p>Решение 2 подходит, если вы не можете поменять код приложения или переписывание всех запросов
+действительно очень сложное. Отличное решение исправить проблему за несколько секунд, хотя я настоятельно рекомендую иметь план по переписыванию запросов, которые не являются соответствую стандарту SQL-92.</p>
+
+<p>Больше деталей: <a href="https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html" target="_blank">https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html</a></p>
 
 <p>По мотивам
 <a href="https://www.percona.com/blog/2019/05/13/solve-query-failures-regarding-only_full_group_by-sql-mode/" target="_blank">https://www.percona.com/blog/2019/05/13/solve-query-failures-regarding-only_full_group_by-sql-mode/</a></p>

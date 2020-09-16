@@ -89,7 +89,7 @@ mysql&amp;gt; select * from t1;
 Как хорошие программисты знают, что нужно проверять даты
 в коде приложения, чтобы избежать некорректных данных или некорректных результатов.&lt;/p&gt;
 
-&lt;p&gt;Далее мы показываем, как динамически проинструктировать MySQL вести себя в traditional mode
+&lt;p&gt;Далее мы показываем, как динамически проинструктировать MySQL вести себя в traditional режим
 для выброса исключений вместо этого:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;mysql&amp;gt; set session sql_mode=&#39;TRADITIONAL&#39;;
@@ -172,7 +172,125 @@ mysql&amp;gt; SELECT page_url, user_id, COUNT(*) AS visits
 Мы должны рассматривать значение колонки user_id как случайный элемент из группы.&lt;/p&gt;
 
 &lt;p&gt;В любом случае, правильный ответ - запрос семантически некорректен,
-Anyway, the right answer is that the query is not semantically correct, because it has no meaning to return a value from a column that is not part of the grouping function. Then the query is expected to be invalid in the traditional sql.&lt;/p&gt;
+так как нет смысла для возвращаемого значения столбика, что не является частью функции группировки.
+Запрос будет недействительным в традиционном SQL.&lt;/p&gt;
+
+&lt;p&gt;Давайте проверим это&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-SQL&#34;&gt;mysql&amp;gt; SET SESSION sql_mode=&#39;ONLY_FULL_GROUP_BY&#39;;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&amp;gt; SELECT page_url, user_id, COUNT(*) AS visits 
+    -&amp;gt; FROM web_log 
+    -&amp;gt; GROUP BY page_url ORDER BY COUNT(*) DESC;
+ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause 
+and contains nonaggregated column &#39;test.web_log.user_id&#39; which is not functionally 
+dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Как и ожидалось, у нас ошибка.&lt;/p&gt;
+
+&lt;p&gt;Режим SQL &lt;em&gt;ONLY_FULL_GROUP_BY&lt;/em&gt; - это часть &lt;em&gt;TRADITIONAL&lt;/em&gt; режима и включен по умолчанию
+начиная с 5.7.&lt;/p&gt;
+
+&lt;p&gt;Множество программистов столкнулось с разновидностью этой ошибки после миграции на последнюю версию
+MySQL.&lt;/p&gt;
+
+&lt;p&gt;Теперь мы знаем, что вызывает эту ошибоку, но наше приложение всё ещё не работает.
+Какие возможные решения у нас есть, что вернуть приложение к работе?&lt;/p&gt;
+
+&lt;h2 id=&#34;решение-1-переписать-запрос&#34;&gt;Решение 1 - переписать запрос&lt;/h2&gt;
+
+&lt;p&gt;Так как не корректно выбирать колонку, которая не является частью группировки,
+мы можем переписать запрос без этой колонки. Очень просто.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; SELECT page_url, COUNT(*) AS visits 
+    -&amp;gt; FROM web_log 
+    -&amp;gt; GROUP BY page_url ORDER BY COUNT(*) DESC;
++-------------------+--------+
+| page_url          | visits |
++-------------------+--------+
+| /index.html       |      3 |
+| /news.php         |      2 |
+| /store_offers.php |      2 |
+| /faq.html         |      1 |
++-------------------+--------+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Если много ваших запросов затронуты проблемой, вы можете потенциально сделать много работы,
+чтобы найти и переписать их. Или, возможно, приложения - часть старого приложения, которое нет возможности изменить.&lt;/p&gt;
+
+&lt;p&gt;Но это решение заставляет вас писать правильные запросы и пусть конфигурация вашей базы данных
+будет неумалима к таким ошибкам в терминах SQL-валидации.&lt;/p&gt;
+
+&lt;h2 id=&#34;решение-2-вернуть-прощающий-режим&#34;&gt;Решение 2 - вернуть &amp;ldquo;прощающий режим&amp;rdquo;&lt;/h2&gt;
+
+&lt;p&gt;Вы можете поменять конфигурацию MySQL сервера или подключения и вернуть &amp;ldquo;прощающий&amp;rdquo; режим.&lt;/p&gt;
+
+&lt;p&gt;Или вы можете убрать только &lt;em&gt;ONLY_FULL_GROUP_BY&lt;/em&gt; из настроек по умолчанию.
+По умолчанию SQL режим в 5.7 включает режимы: ONLY_FULL_GROUP_BY, STRINCT_TRANS_TABLES, NO_ZERO_IN_DATE, NO_ZERO_DATE, ERROR_FOR_DIVISION_BY_ZERO, NO_AUTO_CREATE_USER.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#set the complete &amp;quot;forgiving&amp;quot; mode
+mysql&amp;gt; SET GLOBAL sql_mode=&#39;&#39;;
+
+# alternatively you can set sql mode to the following
+mysql&amp;gt; SET GLOBAL sql_mode=&#39;STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_ENGINE_SUBSTITUTION&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;решение-3-использование-агрегигующих-функций&#34;&gt;Решение 3 - использование агрегигующих функций&lt;/h2&gt;
+
+&lt;p&gt;Если ваше приложение точно нуждается в получении поля user_id для какой-то корректной причины,
+или слишком сложно менять исходный код, вы можете положиться на агрегирующие функции,
+чтобы избежать изменения SQL-режима.&lt;/p&gt;
+
+&lt;p&gt;Например мы можем использовать агрегирующие функции MAX(), MIN() или даже GROUP_CONCAT().&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-SQL&#34;&gt;mysql&amp;gt; SET SESSION sql_mode=&#39;ONLY_FULL_GROUP_BY&#39;;
+
+mysql&amp;gt; SELECT page_url, MAX(user_id), COUNT(*) AS visits FROM web_log GROUP BY page_url ORDER BY COUNT(*) DESC;
++-------------------+--------------+--------+
+| page_url          | MAX(user_id) | visits |
++-------------------+--------------+--------+
+| /index.html       |            3 |      3 |
+| /news.php         |            2 |      2 |
+| /store_offers.php |            3 |      2 |
+| /faq.html         |            1 |      1 |
++-------------------+--------------+--------+
+
+mysql&amp;gt; SELECT page_url, GROUP_CONCAT(user_id), COUNT(*) AS visits FROM web_log GROUP BY page_url ORDER BY COUNT(*) DESC;
++-------------------+-----------------------+--------+
+| page_url          | GROUP_CONCAT(user_id) | visits |
++-------------------+-----------------------+--------+
+| /index.html       |                 1,2,3 |      3 |
+| /news.php         |                   1,2 |      2 |
+| /store_offers.php |                   3,2 |      2 |
+| /faq.html         |                     1 |      1 |
++-------------------+-----------------------+--------+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;MySQL даже предоставляет специальную функцию для решения этой проблемы: ANY_VALUE().&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-SQL&#34;&gt;mysql&amp;gt; SELECT page_url, ANY_VALUE(user_id), COUNT(*) AS visits FROM web_log GROUP BY page_url ORDER BY COUNT(*) DESC;
++-------------------+--------------------+--------+
+| page_url          | ANY_VALUE(user_id) | visits |
++-------------------+--------------------+--------+
+| /index.html       |                  1 |      3 |
+| /news.php         |                  1 |      2 |
+| /store_offers.php |                  3 |      2 |
+| /faq.html         |                  1 |      1 |
++-------------------+--------------------+--------+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;заключение&#34;&gt;Заключение&lt;/h2&gt;
+
+&lt;p&gt;Лично я предпочитаю решение номер 1, так как оно заставляет вас писать запросы по стандарту SQL-92.
+Следование стандартам часто считается лучшей практикой. Также хочу заметить, что это ловит часть ошибок,
+аналогично статическому анализу кода.&lt;/p&gt;
+
+&lt;p&gt;Решение 2 подходит, если вы не можете поменять код приложения или переписывание всех запросов
+действительно очень сложное. Отличное решение исправить проблему за несколько секунд, хотя я настоятельно рекомендую иметь план по переписыванию запросов, которые не являются соответствую стандарту SQL-92.&lt;/p&gt;
+
+&lt;p&gt;Больше деталей: &lt;a href=&#34;https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html&#34; target=&#34;_blank&#34;&gt;https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;По мотивам
 &lt;a href=&#34;https://www.percona.com/blog/2019/05/13/solve-query-failures-regarding-only_full_group_by-sql-mode/&#34; target=&#34;_blank&#34;&gt;https://www.percona.com/blog/2019/05/13/solve-query-failures-regarding-only_full_group_by-sql-mode/&lt;/a&gt;&lt;/p&gt;
