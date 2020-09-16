@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ru-ru">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.40.3" />
+  <meta name="author" content="Жаков Виталий">
+
+  
+  
+  
+  
+    
+      
+    
+  
+  <meta name="description" content="“Что случилось с моим приложением? Я установил новую версию MySQL. Запросы, что выполнялись на старой версии теперь падают с кучей ошибок.&rdquo;
+ Многие программисты сталкиваются с этим вопросом при обновлении до версий 5.7 или 8. В этой статье мы рассмотрим один из самых частых кейсов и его решение.
+Мы говорим об этой ошибке
+ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column &#39;test.">
+
+  
+  <link rel="alternate" hreflang="ru-ru" href="https://vitalyzhakov.github.io/post/mysql-only-full-group-by/">
+
+  
+
+
+  
+
+  
+  
+  <meta name="theme-color" content="#0095eb">
+  
+  
+  
+  
+    
+  
+  
+    
+    
+      
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+      
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-18959808-11', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+
+  
+  <link rel="alternate" href="https://vitalyzhakov.github.io/index.xml" type="application/rss+xml" title="Инфраструктура ИТ">
+  <link rel="feed" href="https://vitalyzhakov.github.io/index.xml" type="application/rss+xml" title="Инфраструктура ИТ">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://vitalyzhakov.github.io/post/mysql-only-full-group-by/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@GeorgeCushen">
+  <meta property="twitter:creator" content="@GeorgeCushen">
+  
+  <meta property="og:site_name" content="Инфраструктура ИТ">
+  <meta property="og:url" content="https://vitalyzhakov.github.io/post/mysql-only-full-group-by/">
+  <meta property="og:title" content="Устранение ошибок SQL запросов в режиме ONLY_FULL_GROUP_BY | Инфраструктура ИТ">
+  <meta property="og:description" content="“Что случилось с моим приложением? Я установил новую версию MySQL. Запросы, что выполнялись на старой версии теперь падают с кучей ошибок.&rdquo;
+ Многие программисты сталкиваются с этим вопросом при обновлении до версий 5.7 или 8. В этой статье мы рассмотрим один из самых частых кейсов и его решение.
+Мы говорим об этой ошибке
+ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column &#39;test.">
+  <meta property="og:locale" content="ru-ru">
+  
+  <meta property="article:published_time" content="2020-09-16T00:10:06&#43;05:00">
+  
+  <meta property="article:modified_time" content="2020-09-16T00:10:06&#43;05:00">
+  
+
+  
+  
+
+  <title>Устранение ошибок SQL запросов в режиме ONLY_FULL_GROUP_BY | Инфраструктура ИТ</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Переключить навигацию</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">Инфраструктура ИТ</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Публикации</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Проекты</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Контакты</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Устранение ошибок SQL запросов в режиме ONLY_FULL_GROUP_BY</h1>
+
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2020-09-16 00:10:06 &#43;0500 &#43;0500" itemprop="datePublished dateModified">
+      Sep 16, 2020
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Жаков Виталий">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 мин.
+  </span>
+  
+
+  
+  
+
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=%d0%a3%d1%81%d1%82%d1%80%d0%b0%d0%bd%d0%b5%d0%bd%d0%b8%d0%b5%20%d0%be%d1%88%d0%b8%d0%b1%d0%be%d0%ba%20SQL%20%d0%b7%d0%b0%d0%bf%d1%80%d0%be%d1%81%d0%be%d0%b2%20%d0%b2%20%d1%80%d0%b5%d0%b6%d0%b8%d0%bc%d0%b5%20ONLY_FULL_GROUP_BY&amp;url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fmysql-only-full-group-by%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fmysql-only-full-group-by%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fmysql-only-full-group-by%2f&amp;title=%d0%a3%d1%81%d1%82%d1%80%d0%b0%d0%bd%d0%b5%d0%bd%d0%b8%d0%b5%20%d0%be%d1%88%d0%b8%d0%b1%d0%be%d0%ba%20SQL%20%d0%b7%d0%b0%d0%bf%d1%80%d0%be%d1%81%d0%be%d0%b2%20%d0%b2%20%d1%80%d0%b5%d0%b6%d0%b8%d0%bc%d0%b5%20ONLY_FULL_GROUP_BY"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fmysql-only-full-group-by%2f&amp;title=%d0%a3%d1%81%d1%82%d1%80%d0%b0%d0%bd%d0%b5%d0%bd%d0%b8%d0%b5%20%d0%be%d1%88%d0%b8%d0%b1%d0%be%d0%ba%20SQL%20%d0%b7%d0%b0%d0%bf%d1%80%d0%be%d1%81%d0%be%d0%b2%20%d0%b2%20%d1%80%d0%b5%d0%b6%d0%b8%d0%bc%d0%b5%20ONLY_FULL_GROUP_BY"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=%d0%a3%d1%81%d1%82%d1%80%d0%b0%d0%bd%d0%b5%d0%bd%d0%b8%d0%b5%20%d0%be%d1%88%d0%b8%d0%b1%d0%be%d0%ba%20SQL%20%d0%b7%d0%b0%d0%bf%d1%80%d0%be%d1%81%d0%be%d0%b2%20%d0%b2%20%d1%80%d0%b5%d0%b6%d0%b8%d0%bc%d0%b5%20ONLY_FULL_GROUP_BY&amp;body=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fmysql-only-full-group-by%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<blockquote>
+<p>“Что случилось с моим приложением? Я установил новую версию MySQL. Запросы, что выполнялись на старой версии теперь падают с кучей ошибок.&rdquo;</p>
+</blockquote>
+
+<p>Многие программисты сталкиваются с этим вопросом при обновлении до версий 5.7 или 8.
+В этой статье мы рассмотрим один из самых частых кейсов и его решение.</p>
+
+<p>Мы говорим об этой ошибке</p>
+
+<pre><code class="language-SQL">ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause 
+and contains nonaggregated column 'test.web_log.user_id' which is not functionally 
+dependent on columns in GROUP BY clause; this is incompatible 
+with sql_mode=only_full_group_by
+</code></pre>
+
+<p>Видели ли вы когда-либо её?</p>
+
+<h2 id="sql-mode">SQL_MODE</h2>
+
+<p>Для начала разрешите мне представить концепцию <em>SQL_MODE</em>.</p>
+
+<p>MySQL может работать используя разные SQL режимы, которые влияют
+на синтаксис запросов и валидацию.
+В зависимости от установленного значения переменной sql_mode
+запрос может быть валидным и выполняться или может получить
+ошибку валидации и не может быть выполнен.</p>
+
+<p>Старейшие версии MySQL научили пользователей писать запросы, которые
+семантически корректны, потому что разработаны для работы в “прощающем режиме”.
+Пользователи могли писать любой синтаксически правильный запрос независимо от
+соответствия SQL стандарту или сематических правил.</p>
+
+<p>Это была плохая привычка, которая была исправлена введением sql_mode, чтобы настроить MySQL
+работать более строгим способом для проверки запросов.</p>
+
+<p>Некоторые пользователи не знают об этой функции, потому что значение по умолчанию не было таким строгим. Начиная с версии 5.7, значение по умолчанию является более строгим, и по этой причине у некоторых пользователей возникают проблемы с неожиданными ошибками запросов после перехода на 5.7 или 8.0.</p>
+
+<p>Переменная <em>sql_mode</em> может быть установлена в файле конфигурации (/etc/my.cnf) или
+может быть изменена во время выполнения.
+Область действия переменной может быть GLOBAL или SESSION, поэтому может измениться
+в соответствии с целью для любого отдельного соединения.</p>
+
+<p>Переменная sql_mode может иметь несколько значений, разделённых запятой, для настройки различных поведений.
+Например, вы можете проинструктировать MySQL как обращаться с датами с нулями, как <code>0000-00-00</code>,
+чтобы дата считалась действительной или нет.</p>
+
+<p>В &ldquo;прощающем режиме&rdquo; (или если переменная sql_mode пуста), вы можете вставить такое значение без проблем.</p>
+
+<pre><code class="language-SQL"># установка sql в &quot;прощающий режим&quot; 
+mysql&gt; set session sql_mode='';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; create table t1( mydate date );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql&gt; insert into t1 values('0000-00-00');
+Query OK, 1 row affected (0.00 sec)
+
+mysql&gt; select * from t1;
++------------+
+| mydate     |
++------------+
+| 0000-00-00 |
++------------+
+1 row in set (0.00 sec)
+</code></pre>
+
+<p>Но это не правильное поведение, как заявлено в режиме TRADITIONAL.
+Как хорошие программисты знают, что нужно проверять даты
+в коде приложения, чтобы избежать некорректных данных или некорректных результатов.</p>
+
+<p>Далее мы показываем, как динамически проинструктировать MySQL вести себя в traditional mode
+для выброса исключений вместо этого:</p>
+
+<pre><code>mysql&gt; set session sql_mode='TRADITIONAL';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; insert into t1 values('0000-00-00');
+ERROR 1292 (22007): Incorrect date value: '0000-00-00' for column 'mydate' at row 
+</code></pre>
+
+<p>Существует множество режимов, которые вы можете использовать.
+Покрытие всех режимов - не цель данной статьи, поэтому обратитесь
+к <a href="https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html" target="_blank">официальной документации</a>
+за подробностями и примерами.</p>
+
+<h2 id="проблема-only-full-group-by">Проблема ONLY_FULL_GROUP_BY</h2>
+
+<p>Давайте сосредоточимся на самом частом кейсе ошибок миграции с 5.7 на 8.0.
+Как уже было сказано, в 5.7 более строгий режим, чем в 5.6, в 8.0 более строгий, чем в 5.7.</p>
+
+<p>Это работает, если вы обновляете MySQL копируя старый файл my.cnf, который не имеет специфичных настроек для переменной sql_mode. Итак, имейте в виду.</p>
+
+<p>Давайте создадим простую таблицу для хранения кликов на вебстраницах нашего сайта.
+Мы будем записывать название страницы и ID зарегистрированного пользователя.</p>
+
+<pre><code class="language-SQL">mysql&gt; create table web_log ( id int auto_increment primary key, page_url varchar(100), user_id int, ts timestamp);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql&gt; insert into web_log(page_url,user_id,ts) values('/index.html',1,'2019-04-17 12:21:32'),
+    -&gt; ('/index.html',2,'2019-04-17 12:21:35'),('/news.php',1,'2019-04-17 12:22:11'),('/store_offers.php',3,'2019-04-17 12:22:41'),
+    -&gt; ('/store_offers.php',2,'2019-04-17 12:23:04'),('/faq.html',1,'2019-04-17 12:23:22'),('/index.html',3,'2019-04-17 12:32:25'),
+    -&gt; ('/news.php',2,'2019-04-17 12:32:38');
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql&gt; select * from web_log;
++----+--------------------+---------+---------------------+
+| id | page_url           | user_id | ts                  |
++----+--------------------+---------+---------------------+
+|  1 | /index.html        |       1 | 2019-04-17 12:21:32 |
+|  2 | /index.html        |       2 | 2019-04-17 12:21:35 |
+|  3 | /news.php          |       1 | 2019-04-17 12:22:11 |
+|  4 | /store_offers.php  |       3 | 2019-04-17 12:22:41 |
+|  5 | /store_offers.html |       2 | 2019-04-17 12:23:04 |
+|  6 | /faq.html          |       1 | 2019-04-17 12:23:22 |
+|  7 | /index.html        |       3 | 2019-04-17 12:32:25 |
+|  8 | /news.php          |       2 | 2019-04-17 12:32:38 |
++----+--------------------+---------+---------------------+
+</code></pre>
+
+<p>Теперь мы хотим написать запрос для подсчёта наиболее посещаемых страниц сайта</p>
+
+<pre><code class="language-SQL"># let's turn the sql mode to &quot;forgiving&quot;
+mysql&gt; set session sql_mode='';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; SELECT page_url, user_id, COUNT(*) AS visits 
+    -&gt; FROM web_log 
+    -&gt; GROUP BY page_url ORDER BY COUNT(*) DESC;
++-------------------+---------+--------+
+| page_url          | user_id | visits |
++-------------------+---------+--------+
+| /index.html       |       1 |      3 |
+| /news.php         |       1 |      2 |
+| /store_offers.php |       3 |      2 |
+| /faq.html         |       1 |      1 |
++-------------------+---------+--------+
+4 rows in set (0.00 sec)
+</code></pre>
+
+<p>Этот запрос работает, но на самом деле не корректен.
+Легко понять, что page_url - столбик для группировки, значение, которое нас больше всего интересует
+и мы хотим, чтобы оно было уникальным для подсчёта.
+Также столбик visits понятен, это счётчик. Но как насчёт user_id?
+Что представляет эта колонка?
+Мы сгруппировали по page_url, поэтому значение, возвращаемое для user_id - только одно из значений в группе.
+Фактически не только пользователь номер 1 посетил index.html, но также пользователи 2 и 3 посетили эту страницу.
+Как нам интерпретировать значение? Это первый посетитель? Или последний?</p>
+
+<p>Мы не знаем правильного ответа!
+Мы должны рассматривать значение колонки user_id как случайный элемент из группы.</p>
+
+<p>В любом случае, правильный ответ - запрос семантически некорректен,
+Anyway, the right answer is that the query is not semantically correct, because it has no meaning to return a value from a column that is not part of the grouping function. Then the query is expected to be invalid in the traditional sql.</p>
+
+<p>По мотивам
+<a href="https://www.percona.com/blog/2019/05/13/solve-query-failures-regarding-only_full_group_by-sql-mode/" target="_blank">https://www.percona.com/blog/2019/05/13/solve-query-failures-regarding-only_full_group_by-sql-mode/</a></p>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="https://vitalyzhakov.github.io/tags/db/">DB</a>
+  
+  <a class="btn btn-primary btn-outline" href="https://vitalyzhakov.github.io/tags/percona/">percona</a>
+  
+  <a class="btn btn-primary btn-outline" href="https://vitalyzhakov.github.io/tags/mysql/">mysql</a>
+  
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3></h3>
+      <ul>
+        
+        <li><a href="/post/migration-from-mysql-51-to-mysql-8-geometry-field/">Ошибка с пространственным полем point при миграции из mysql 5.1 до mysql 8</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2018 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> 
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> 
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+    
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+
+  </body>
+</html>
+

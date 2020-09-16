@@ -11,6 +11,175 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Устранение ошибок SQL запросов в режиме ONLY_FULL_GROUP_BY</title>
+      <link>https://vitalyzhakov.github.io/post/mysql-only-full-group-by/</link>
+      <pubDate>Wed, 16 Sep 2020 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/mysql-only-full-group-by/</guid>
+      <description>
+
+&lt;blockquote&gt;
+&lt;p&gt;“Что случилось с моим приложением? Я установил новую версию MySQL. Запросы, что выполнялись на старой версии теперь падают с кучей ошибок.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Многие программисты сталкиваются с этим вопросом при обновлении до версий 5.7 или 8.
+В этой статье мы рассмотрим один из самых частых кейсов и его решение.&lt;/p&gt;
+
+&lt;p&gt;Мы говорим об этой ошибке&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-SQL&#34;&gt;ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause 
+and contains nonaggregated column &#39;test.web_log.user_id&#39; which is not functionally 
+dependent on columns in GROUP BY clause; this is incompatible 
+with sql_mode=only_full_group_by
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Видели ли вы когда-либо её?&lt;/p&gt;
+
+&lt;h2 id=&#34;sql-mode&#34;&gt;SQL_MODE&lt;/h2&gt;
+
+&lt;p&gt;Для начала разрешите мне представить концепцию &lt;em&gt;SQL_MODE&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;MySQL может работать используя разные SQL режимы, которые влияют
+на синтаксис запросов и валидацию.
+В зависимости от установленного значения переменной sql_mode
+запрос может быть валидным и выполняться или может получить
+ошибку валидации и не может быть выполнен.&lt;/p&gt;
+
+&lt;p&gt;Старейшие версии MySQL научили пользователей писать запросы, которые
+семантически корректны, потому что разработаны для работы в “прощающем режиме”.
+Пользователи могли писать любой синтаксически правильный запрос независимо от
+соответствия SQL стандарту или сематических правил.&lt;/p&gt;
+
+&lt;p&gt;Это была плохая привычка, которая была исправлена введением sql_mode, чтобы настроить MySQL
+работать более строгим способом для проверки запросов.&lt;/p&gt;
+
+&lt;p&gt;Некоторые пользователи не знают об этой функции, потому что значение по умолчанию не было таким строгим. Начиная с версии 5.7, значение по умолчанию является более строгим, и по этой причине у некоторых пользователей возникают проблемы с неожиданными ошибками запросов после перехода на 5.7 или 8.0.&lt;/p&gt;
+
+&lt;p&gt;Переменная &lt;em&gt;sql_mode&lt;/em&gt; может быть установлена в файле конфигурации (/etc/my.cnf) или
+может быть изменена во время выполнения.
+Область действия переменной может быть GLOBAL или SESSION, поэтому может измениться
+в соответствии с целью для любого отдельного соединения.&lt;/p&gt;
+
+&lt;p&gt;Переменная sql_mode может иметь несколько значений, разделённых запятой, для настройки различных поведений.
+Например, вы можете проинструктировать MySQL как обращаться с датами с нулями, как &lt;code&gt;0000-00-00&lt;/code&gt;,
+чтобы дата считалась действительной или нет.&lt;/p&gt;
+
+&lt;p&gt;В &amp;ldquo;прощающем режиме&amp;rdquo; (или если переменная sql_mode пуста), вы можете вставить такое значение без проблем.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-SQL&#34;&gt;# установка sql в &amp;quot;прощающий режим&amp;quot; 
+mysql&amp;gt; set session sql_mode=&#39;&#39;;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&amp;gt; create table t1( mydate date );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql&amp;gt; insert into t1 values(&#39;0000-00-00&#39;);
+Query OK, 1 row affected (0.00 sec)
+
+mysql&amp;gt; select * from t1;
++------------+
+| mydate     |
++------------+
+| 0000-00-00 |
++------------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Но это не правильное поведение, как заявлено в режиме TRADITIONAL.
+Как хорошие программисты знают, что нужно проверять даты
+в коде приложения, чтобы избежать некорректных данных или некорректных результатов.&lt;/p&gt;
+
+&lt;p&gt;Далее мы показываем, как динамически проинструктировать MySQL вести себя в traditional mode
+для выброса исключений вместо этого:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; set session sql_mode=&#39;TRADITIONAL&#39;;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&amp;gt; insert into t1 values(&#39;0000-00-00&#39;);
+ERROR 1292 (22007): Incorrect date value: &#39;0000-00-00&#39; for column &#39;mydate&#39; at row 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Существует множество режимов, которые вы можете использовать.
+Покрытие всех режимов - не цель данной статьи, поэтому обратитесь
+к &lt;a href=&#34;https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html&#34; target=&#34;_blank&#34;&gt;официальной документации&lt;/a&gt;
+за подробностями и примерами.&lt;/p&gt;
+
+&lt;h2 id=&#34;проблема-only-full-group-by&#34;&gt;Проблема ONLY_FULL_GROUP_BY&lt;/h2&gt;
+
+&lt;p&gt;Давайте сосредоточимся на самом частом кейсе ошибок миграции с 5.7 на 8.0.
+Как уже было сказано, в 5.7 более строгий режим, чем в 5.6, в 8.0 более строгий, чем в 5.7.&lt;/p&gt;
+
+&lt;p&gt;Это работает, если вы обновляете MySQL копируя старый файл my.cnf, который не имеет специфичных настроек для переменной sql_mode. Итак, имейте в виду.&lt;/p&gt;
+
+&lt;p&gt;Давайте создадим простую таблицу для хранения кликов на вебстраницах нашего сайта.
+Мы будем записывать название страницы и ID зарегистрированного пользователя.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-SQL&#34;&gt;mysql&amp;gt; create table web_log ( id int auto_increment primary key, page_url varchar(100), user_id int, ts timestamp);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql&amp;gt; insert into web_log(page_url,user_id,ts) values(&#39;/index.html&#39;,1,&#39;2019-04-17 12:21:32&#39;),
+    -&amp;gt; (&#39;/index.html&#39;,2,&#39;2019-04-17 12:21:35&#39;),(&#39;/news.php&#39;,1,&#39;2019-04-17 12:22:11&#39;),(&#39;/store_offers.php&#39;,3,&#39;2019-04-17 12:22:41&#39;),
+    -&amp;gt; (&#39;/store_offers.php&#39;,2,&#39;2019-04-17 12:23:04&#39;),(&#39;/faq.html&#39;,1,&#39;2019-04-17 12:23:22&#39;),(&#39;/index.html&#39;,3,&#39;2019-04-17 12:32:25&#39;),
+    -&amp;gt; (&#39;/news.php&#39;,2,&#39;2019-04-17 12:32:38&#39;);
+Query OK, 7 rows affected (0.01 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql&amp;gt; select * from web_log;
++----+--------------------+---------+---------------------+
+| id | page_url           | user_id | ts                  |
++----+--------------------+---------+---------------------+
+|  1 | /index.html        |       1 | 2019-04-17 12:21:32 |
+|  2 | /index.html        |       2 | 2019-04-17 12:21:35 |
+|  3 | /news.php          |       1 | 2019-04-17 12:22:11 |
+|  4 | /store_offers.php  |       3 | 2019-04-17 12:22:41 |
+|  5 | /store_offers.html |       2 | 2019-04-17 12:23:04 |
+|  6 | /faq.html          |       1 | 2019-04-17 12:23:22 |
+|  7 | /index.html        |       3 | 2019-04-17 12:32:25 |
+|  8 | /news.php          |       2 | 2019-04-17 12:32:38 |
++----+--------------------+---------+---------------------+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Теперь мы хотим написать запрос для подсчёта наиболее посещаемых страниц сайта&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-SQL&#34;&gt;# let&#39;s turn the sql mode to &amp;quot;forgiving&amp;quot;
+mysql&amp;gt; set session sql_mode=&#39;&#39;;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&amp;gt; SELECT page_url, user_id, COUNT(*) AS visits 
+    -&amp;gt; FROM web_log 
+    -&amp;gt; GROUP BY page_url ORDER BY COUNT(*) DESC;
++-------------------+---------+--------+
+| page_url          | user_id | visits |
++-------------------+---------+--------+
+| /index.html       |       1 |      3 |
+| /news.php         |       1 |      2 |
+| /store_offers.php |       3 |      2 |
+| /faq.html         |       1 |      1 |
++-------------------+---------+--------+
+4 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Этот запрос работает, но на самом деле не корректен.
+Легко понять, что page_url - столбик для группировки, значение, которое нас больше всего интересует
+и мы хотим, чтобы оно было уникальным для подсчёта.
+Также столбик visits понятен, это счётчик. Но как насчёт user_id?
+Что представляет эта колонка?
+Мы сгруппировали по page_url, поэтому значение, возвращаемое для user_id - только одно из значений в группе.
+Фактически не только пользователь номер 1 посетил index.html, но также пользователи 2 и 3 посетили эту страницу.
+Как нам интерпретировать значение? Это первый посетитель? Или последний?&lt;/p&gt;
+
+&lt;p&gt;Мы не знаем правильного ответа!
+Мы должны рассматривать значение колонки user_id как случайный элемент из группы.&lt;/p&gt;
+
+&lt;p&gt;В любом случае, правильный ответ - запрос семантически некорректен,
+Anyway, the right answer is that the query is not semantically correct, because it has no meaning to return a value from a column that is not part of the grouping function. Then the query is expected to be invalid in the traditional sql.&lt;/p&gt;
+
+&lt;p&gt;По мотивам
+&lt;a href=&#34;https://www.percona.com/blog/2019/05/13/solve-query-failures-regarding-only_full_group_by-sql-mode/&#34; target=&#34;_blank&#34;&gt;https://www.percona.com/blog/2019/05/13/solve-query-failures-regarding-only_full_group_by-sql-mode/&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Cron в распределённой системе</title>
       <link>https://vitalyzhakov.github.io/post/cron-requirements/</link>
       <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
@@ -1170,35 +1339,6 @@ composer install --ignore-platform-reqs
 
 &lt;p&gt;Грамотное разбиение на микросервисы даёт преимущества в виде увеличения скорости разработки.
 Но для этого нужны специалисты, способные не только писать код, но и развёртывать то, что написано.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Git rebase для удалённой ветки</title>
-      <link>https://vitalyzhakov.github.io/post/remote-rebase/</link>
-      <pubDate>Thu, 30 Aug 2018 00:10:06 +0500</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/remote-rebase/</guid>
-      <description>
-
-&lt;h2 id=&#34;командная-строка&#34;&gt;Командная строка&lt;/h2&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Клонируем репозиторий с указанием ветки, над которой будет выполнять операцию &lt;em&gt;rebase&lt;/em&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone [Адрес репозитория] -b [ветка]
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Выполняем &lt;em&gt;rebase&lt;/em&gt; локально&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git pull --rebase origin master
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Отправка данных на сервер&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git push origin [ветка] -f
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
 </description>
     </item>
     

@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>https://vitalyzhakov.github.io/post/mysql-only-full-group-by/</loc>
+      <lastmod>2020-09-16T00:10:06+05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://vitalyzhakov.github.io/post/cron-requirements/</loc>
       <lastmod>2020-08-28T00:00:00+00:00</lastmod>
     </url>
@@ -278,6 +287,16 @@
     
     <url>
     
+      <loc>https://vitalyzhakov.github.io/tags/db/</loc>
+      <lastmod>2020-09-16T00:10:06+05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://vitalyzhakov.github.io/tags/dns/</loc>
       <lastmod>2020-01-23T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -360,6 +379,16 @@
     
       <loc>https://vitalyzhakov.github.io/tags/openstreetmap/</loc>
       <lastmod>2018-05-11T00:10:06+05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://vitalyzhakov.github.io/tags/percona/</loc>
+      <lastmod>2020-09-16T00:10:06+05:00</lastmod>
       <priority>0</priority>
     </url>
     

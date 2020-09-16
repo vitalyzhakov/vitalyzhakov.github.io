@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DB on Инфраструктура ИТ</title>
+    <link>https://vitalyzhakov.github.io/tags/db/</link>
+    <description>Recent content in DB on Инфраструктура ИТ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru-ru</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Wed, 16 Sep 2020 00:10:06 +0500</lastBuildDate>
+    
+	<atom:link href="https://vitalyzhakov.github.io/tags/db/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Устранение ошибок SQL запросов в режиме ONLY_FULL_GROUP_BY</title>
+      <link>https://vitalyzhakov.github.io/post/mysql-only-full-group-by/</link>
+      <pubDate>Wed, 16 Sep 2020 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/mysql-only-full-group-by/</guid>
+      <description>“Что случилось с моим приложением? Я установил новую версию MySQL. Запросы, что выполнялись на старой версии теперь падают с кучей ошибок.&amp;rdquo;
+ Многие программисты сталкиваются с этим вопросом при обновлении до версий 5.7 или 8. В этой статье мы рассмотрим один из самых частых кейсов и его решение.
+Мы говорим об этой ошибке
+ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column &#39;test.</description>
+    </item>
+    
+  </channel>
+</rss>
