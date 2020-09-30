@@ -11,6 +11,22 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>CI/CD</title>
+      <link>https://vitalyzhakov.github.io/post/ci-cd/</link>
+      <pubDate>Wed, 30 Sep 2020 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/ci-cd/</guid>
+      <description>&lt;p&gt;Наверное, все видели стандартную восьмёрку, как выглядит CI/CD&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/ci-cd/8.png&#34; alt=&#34;Бесконечность CI/CD&#34; title=&#34;Бесконечность CI/CD&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Сегодня попробуем реализовать в деталях этот процесс на примере разработки веб-сервисов.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/ci-cd/common-scheme.png&#34; alt=&#34;Общая схема&#34; title=&#34;Общая схема&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Устранение ошибок SQL запросов в режиме ONLY_FULL_GROUP_BY</title>
       <link>https://vitalyzhakov.github.io/post/mysql-only-full-group-by/</link>
       <pubDate>Wed, 16 Sep 2020 00:10:06 +0500</pubDate>
@@ -1292,171 +1308,6 @@ composer install --ignore-platform-reqs
 
 &lt;p&gt;Важно смотреть не только итоговую статистику, но и почему она получилась такой.
 Найти, что является узким местом.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Переход от монолита к микросервисам</title>
-      <link>https://vitalyzhakov.github.io/post/microservices/</link>
-      <pubDate>Mon, 26 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/microservices/</guid>
-      <description>
-
-&lt;h2 id=&#34;проблематика-больших-монолитных-систем&#34;&gt;Проблематика больших монолитных систем&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Плохое горизонтальное масштабирование&lt;/li&gt;
-&lt;li&gt;Плохая отказоустойчивость&lt;/li&gt;
-&lt;li&gt;Сложность внедрения новых технологий&lt;/li&gt;
-&lt;li&gt;Сложность рефакторинга legacy&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;сравнение-монолита-и-микросервисов&#34;&gt;Сравнение монолита и микросервисов&lt;/h2&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;Монолит&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;Микросервисы по доменам&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/microservices/mono.png&#34; alt=&#34;Монолит&#34; /&gt;&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/microservices/services-by-domain.png&#34; alt=&#34;Микросервисы по доменам&#34; /&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;Плюсы&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;Минусы&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Горизонтальное масштабирование только нужных частей&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Дополнительная сложность в тестировании и развёртывании&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Отказоустойчивость&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Выше начальная стоимость&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Масштабирование команд&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Не всегда согласованные данные&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Гибкость стека&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Бывает трудно провести границу между сервисами&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Вам не нужны микросервисы, если&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Вы делаете стартап (MVP)&lt;/li&gt;
-&lt;li&gt;Нет или не предполагается рост нагрузки&lt;/li&gt;
-&lt;li&gt;Нет плана, как порезать сервисы на слабосвязанные;&lt;/li&gt;
-&lt;li&gt;Нет людей, которые могут реализовать процесс внесения изменений.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Вам нужны микросервисы, если&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Высокая нагрузка&lt;/li&gt;
-&lt;li&gt;Система растет&lt;/li&gt;
-&lt;li&gt;Команда растет&lt;/li&gt;
-&lt;li&gt;Нужна отказоустойчивость&lt;/li&gt;
-&lt;li&gt;Необходимо сократить TTM&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;разбиение&#34;&gt;Разбиение&lt;/h2&gt;
-
-&lt;p&gt;Не разрезайте по слоям, разрезайте по бизнес-контекстам&lt;/p&gt;
-
-&lt;h2 id=&#34;размер-сервиса&#34;&gt;Размер сервиса&lt;/h2&gt;
-
-&lt;p&gt;Размер сервиса выбирается&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;на основе бизнес-контекста;&lt;/li&gt;
-&lt;li&gt;на основе сетевых запросов (чем меньше, тем лучше);&lt;/li&gt;
-&lt;li&gt;на основе транзакций (транзакция внутри одного сервиса).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;база-данных&#34;&gt;База данных&lt;/h2&gt;
-
-&lt;p&gt;Каждый сервис взаимодействует со своими базами данных (если требуется). Выбор движка зависит от задачи.
-В идеале сервис должен быть без сохранения состояния (в литературе StateLess).&lt;/p&gt;
-
-&lt;h2 id=&#34;взаимодействие-между-сервисами&#34;&gt;Взаимодействие между сервисами&lt;/h2&gt;
-
-&lt;p&gt;Асинхронное на основе сервиса очередей (брокера сообщений).
-Протокол обмена сообщениями основан на независимом от вендора стандарте.&lt;/p&gt;
-
-&lt;h2 id=&#34;проблемы-обмена-сообщениями-и-решения&#34;&gt;Проблемы обмена сообщениями и решения&lt;/h2&gt;
-
-&lt;p&gt;Проблемы:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Нет ACID-транзакций;&lt;/li&gt;
-&lt;li&gt;Возможна несогласованность.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Решение:
-На сервере внутри реляционной субд (Postgres, к примеру) сохраняются транзакции с собственным ID события.
-Транзакция удаляется, только если она доставлена. Если транзацкция не доставлена, нужно сделать повтор операции.
-Давние события игнорируются.&lt;/p&gt;
-
-&lt;h3 id=&#34;трассировка&#34;&gt;Трассировка&lt;/h3&gt;
-
-&lt;p&gt;На основе activity Id: к каждому запросу на верхнем уровне добавляется достаточно уникальный параметр,
-который прокидывается внутрь приложений и дальше по цепочке. По нему удобно делать поиск по всем микросервисам.&lt;/p&gt;
-
-&lt;p&gt;Можно воспользоваться готовым решением, например, &lt;a href=&#34;https://opentracing.io/&#34; target=&#34;_blank&#34;&gt;https://opentracing.io/&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;развёртывание&#34;&gt;Развёртывание&lt;/h2&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;Виртуальная машина&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;Контейнер + оркестрация (k8s)&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;AutoScaling – вручную&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;AutoScaling – из коробки&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;AutoDiscovery – вручную&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;AutoDiscovery - из коробки&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Изоляция по ресурсам из коробки&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Балансировка - из коробки&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&#34;выводы&#34;&gt;Выводы&lt;/h2&gt;
-
-&lt;p&gt;Грамотное разбиение на микросервисы даёт преимущества в виде увеличения скорости разработки.
-Но для этого нужны специалисты, способные не только писать код, но и развёртывать то, что написано.&lt;/p&gt;
 </description>
     </item>
     
