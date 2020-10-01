@@ -23,6 +23,17 @@
 &lt;p&gt;Сегодня попробуем реализовать в деталях этот процесс на примере разработки веб-сервисов.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/ci-cd/common-scheme.png&#34; alt=&#34;Общая схема&#34; title=&#34;Общая схема&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;На схеме мы видим, как параллельно сдаются задачи (в виде коммитов) в master-ветку.&lt;/p&gt;
+
+&lt;p&gt;Далее принимается решение о релизе, он фиксируется, отправляется в &lt;em&gt;registry&lt;/em&gt; (магазин приложений),
+с &lt;em&gt;registry&lt;/em&gt; готовое приложение попадает в прод.&lt;/p&gt;
+
+&lt;p&gt;В исследовании (State of devops)[&lt;a href=&#34;https://services.google.com/fh/files/misc/state-of-devops-2019.pdf&#34; target=&#34;_blank&#34;&gt;https://services.google.com/fh/files/misc/state-of-devops-2019.pdf&lt;/a&gt;]&lt;/p&gt;
+
+&lt;p&gt;выделяются 4 ключевые метрики:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/ci-cd/dora-metrics.png&#34; alt=&#34;DevOps-метрики&#34; title=&#34;DevOps-метрики&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
