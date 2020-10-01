@@ -108,7 +108,7 @@ mysql&amp;gt; select * from t1;
 &lt;p&gt;Далее мы показываем, как динамически проинструктировать MySQL вести себя в traditional режим
 для выброса исключений вместо этого:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; set session sql_mode=&#39;TRADITIONAL&#39;;
+&lt;pre&gt;&lt;code class=&#34;language-SQL&#34;&gt;mysql&amp;gt; set session sql_mode=&#39;TRADITIONAL&#39;;
 Query OK, 0 rows affected (0.00 sec)
 
 mysql&amp;gt; insert into t1 values(&#39;0000-00-00&#39;);
@@ -157,8 +157,7 @@ mysql&amp;gt; select * from web_log;
 
 &lt;p&gt;Теперь мы хотим написать запрос для подсчёта наиболее посещаемых страниц сайта&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-SQL&#34;&gt;# let&#39;s turn the sql mode to &amp;quot;forgiving&amp;quot;
-mysql&amp;gt; set session sql_mode=&#39;&#39;;
+&lt;pre&gt;&lt;code class=&#34;language-SQL&#34;&gt;mysql&amp;gt; set session sql_mode=&#39;&#39;;
 Query OK, 0 rows affected (0.00 sec)
 
 mysql&amp;gt; SELECT page_url, user_id, COUNT(*) AS visits 
@@ -220,7 +219,7 @@ MySQL.&lt;/p&gt;
 &lt;p&gt;Так как не корректно выбирать колонку, которая не является частью группировки,
 мы можем переписать запрос без этой колонки. Очень просто.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; SELECT page_url, COUNT(*) AS visits 
+&lt;pre&gt;&lt;code class=&#34;language-SQL&#34;&gt;mysql&amp;gt; SELECT page_url, COUNT(*) AS visits 
     -&amp;gt; FROM web_log 
     -&amp;gt; GROUP BY page_url ORDER BY COUNT(*) DESC;
 +-------------------+--------+
@@ -246,11 +245,28 @@ MySQL.&lt;/p&gt;
 &lt;p&gt;Или вы можете убрать только &lt;em&gt;ONLY_FULL_GROUP_BY&lt;/em&gt; из настроек по умолчанию.
 По умолчанию SQL режим в 5.7 включает режимы: ONLY_FULL_GROUP_BY, STRINCT_TRANS_TABLES, NO_ZERO_IN_DATE, NO_ZERO_DATE, ERROR_FOR_DIVISION_BY_ZERO, NO_AUTO_CREATE_USER.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;#set the complete &amp;quot;forgiving&amp;quot; mode
+&lt;pre&gt;&lt;code class=&#34;language-SQL&#34;&gt;#set the complete &amp;quot;forgiving&amp;quot; mode
 mysql&amp;gt; SET GLOBAL sql_mode=&#39;&#39;;
 
 # alternatively you can set sql mode to the following
 mysql&amp;gt; SET GLOBAL sql_mode=&#39;STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_ENGINE_SUBSTITUTION&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Для yii2-приложения конфиг может выглядеть так:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;&amp;lt;?php
+
+return [
+    &#39;class&#39; =&amp;gt; &#39;yii\db\Connection&#39;,
+    &#39;dsn&#39; =&amp;gt; &#39;mysql:host=&#39; . getenv(&#39;MYSQL_HOST&#39;) . &#39;;port=&#39; . getenv(&#39;MYSQL_PORT&#39;) . &#39;;dbname=&#39; . getenv(&#39;MYSQL_DB&#39;),
+    &#39;username&#39; =&amp;gt; getenv(&#39;MYSQL_USER&#39;),
+    &#39;password&#39; =&amp;gt; getenv(&#39;MYSQL_PASSWORD&#39;),
+    &#39;charset&#39; =&amp;gt; &#39;utf8&#39;,
+    &#39;attributes&#39; =&amp;gt; [
+        PDO::ATTR_PERSISTENT =&amp;gt; true,
+        PDO::MYSQL_ATTR_INIT_COMMAND =&amp;gt; &#39;SET sql_mode=&amp;quot;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION&amp;quot;&#39;
+    ],
+];
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;решение-3-использование-агрегигующих-функций&#34;&gt;Решение 3 - использование агрегигующих функций&lt;/h2&gt;

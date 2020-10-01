@@ -364,7 +364,7 @@ mysql&gt; select * from t1;
 <p>Далее мы показываем, как динамически проинструктировать MySQL вести себя в traditional режим
 для выброса исключений вместо этого:</p>
 
-<pre><code>mysql&gt; set session sql_mode='TRADITIONAL';
+<pre><code class="language-SQL">mysql&gt; set session sql_mode='TRADITIONAL';
 Query OK, 0 rows affected (0.00 sec)
 
 mysql&gt; insert into t1 values('0000-00-00');
@@ -413,8 +413,7 @@ mysql&gt; select * from web_log;
 
 <p>Теперь мы хотим написать запрос для подсчёта наиболее посещаемых страниц сайта</p>
 
-<pre><code class="language-SQL"># let's turn the sql mode to &quot;forgiving&quot;
-mysql&gt; set session sql_mode='';
+<pre><code class="language-SQL">mysql&gt; set session sql_mode='';
 Query OK, 0 rows affected (0.00 sec)
 
 mysql&gt; SELECT page_url, user_id, COUNT(*) AS visits 
@@ -476,7 +475,7 @@ MySQL.</p>
 <p>Так как не корректно выбирать колонку, которая не является частью группировки,
 мы можем переписать запрос без этой колонки. Очень просто.</p>
 
-<pre><code>mysql&gt; SELECT page_url, COUNT(*) AS visits 
+<pre><code class="language-SQL">mysql&gt; SELECT page_url, COUNT(*) AS visits 
     -&gt; FROM web_log 
     -&gt; GROUP BY page_url ORDER BY COUNT(*) DESC;
 +-------------------+--------+
@@ -502,11 +501,28 @@ MySQL.</p>
 <p>Или вы можете убрать только <em>ONLY_FULL_GROUP_BY</em> из настроек по умолчанию.
 По умолчанию SQL режим в 5.7 включает режимы: ONLY_FULL_GROUP_BY, STRINCT_TRANS_TABLES, NO_ZERO_IN_DATE, NO_ZERO_DATE, ERROR_FOR_DIVISION_BY_ZERO, NO_AUTO_CREATE_USER.</p>
 
-<pre><code>#set the complete &quot;forgiving&quot; mode
+<pre><code class="language-SQL">#set the complete &quot;forgiving&quot; mode
 mysql&gt; SET GLOBAL sql_mode='';
 
 # alternatively you can set sql mode to the following
 mysql&gt; SET GLOBAL sql_mode='STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_ENGINE_SUBSTITUTION';
+</code></pre>
+
+<p>Для yii2-приложения конфиг может выглядеть так:</p>
+
+<pre><code class="language-php">&lt;?php
+
+return [
+    'class' =&gt; 'yii\db\Connection',
+    'dsn' =&gt; 'mysql:host=' . getenv('MYSQL_HOST') . ';port=' . getenv('MYSQL_PORT') . ';dbname=' . getenv('MYSQL_DB'),
+    'username' =&gt; getenv('MYSQL_USER'),
+    'password' =&gt; getenv('MYSQL_PASSWORD'),
+    'charset' =&gt; 'utf8',
+    'attributes' =&gt; [
+        PDO::ATTR_PERSISTENT =&gt; true,
+        PDO::MYSQL_ATTR_INIT_COMMAND =&gt; 'SET sql_mode=&quot;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION&quot;'
+    ],
+];
 </code></pre>
 
 <h2 id="решение-3-использование-агрегигующих-функций">Решение 3 - использование агрегигующих функций</h2>
