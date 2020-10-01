@@ -112,7 +112,7 @@ mysql&amp;gt; select * from t1;
 Query OK, 0 rows affected (0.00 sec)
 
 mysql&amp;gt; insert into t1 values(&#39;0000-00-00&#39;);
-ERROR 1292 (22007): Incorrect date value: &#39;0000-00-00&#39; for column &#39;mydate&#39; at row 
+ERROR 1292 (22007): Incorrect date value: &#39;0000-00-00&#39; for column &#39;mydate&#39; at row 1
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Существует множество режимов, которые вы можете использовать.
