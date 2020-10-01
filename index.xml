@@ -16,7 +16,9 @@
       <pubDate>Wed, 30 Sep 2020 00:10:06 +0500</pubDate>
       
       <guid>https://vitalyzhakov.github.io/post/ci-cd/</guid>
-      <description>&lt;p&gt;Наверное, все видели стандартную восьмёрку, как выглядит CI/CD&lt;/p&gt;
+      <description>
+
+&lt;p&gt;Наверное, все видели стандартную восьмёрку, как выглядит CI/CD&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/ci-cd/8.png&#34; alt=&#34;Бесконечность CI/CD&#34; title=&#34;Бесконечность CI/CD&#34; /&gt;&lt;/p&gt;
 
@@ -29,11 +31,65 @@
 &lt;p&gt;Далее принимается решение о релизе, он фиксируется, отправляется в &lt;em&gt;registry&lt;/em&gt; (магазин приложений),
 с &lt;em&gt;registry&lt;/em&gt; готовое приложение попадает в прод.&lt;/p&gt;
 
-&lt;p&gt;В исследовании (State of devops)[&lt;a href=&#34;https://services.google.com/fh/files/misc/state-of-devops-2019.pdf&#34; target=&#34;_blank&#34;&gt;https://services.google.com/fh/files/misc/state-of-devops-2019.pdf&lt;/a&gt;]&lt;/p&gt;
+&lt;p&gt;В исследовании &lt;a href=&#34;https://services.google.com/fh/files/misc/state-of-devops-2019.pdf&#34; target=&#34;_blank&#34;&gt;State of DevOps&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;выделяются 4 ключевые метрики:&lt;/p&gt;
+&lt;p&gt;выделяются 4 метрики производительности:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/ci-cd/dora-metrics.png&#34; alt=&#34;DevOps-метрики&#34; title=&#34;DevOps-метрики&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/ci-cd/dora-metrics.png&#34; alt=&#34;DevOps-метрики&#34; title=&#34;DevOps-метрики&#34; /&gt;.&lt;/p&gt;
+
+&lt;p&gt;Более детально они измеряются и распределены так:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/ci-cd/dora-metrics.png&#34; alt=&#34;Распределение DevOps-метрик&#34; title=&#34;Распределение DevOps-метрик&#34; /&gt;.&lt;/p&gt;
+
+&lt;p&gt;То есть&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;частоту релизов нужно повышать;&lt;/li&gt;
+&lt;li&gt;время восстановления сервиса, время для внесения изменений, частоту ошибок нужно снижать;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Начнём с самого простого, время восстановления сервиса.&lt;/p&gt;
+
+&lt;h2 id=&#34;время-восстановления-сервиса&#34;&gt;Время восстановления сервиса&lt;/h2&gt;
+
+&lt;p&gt;Каждый сервис во время деплоя регистрирует себя в &lt;code&gt;environment&lt;/code&gt; gitlab CI.&lt;/p&gt;
+
+&lt;p&gt;Чтобы время восстановления было минимальным, в магазине приложений (registry)
+сохраняется несколько предыдущих версий, помимо текущей.&lt;/p&gt;
+
+&lt;p&gt;Поэтому время восстановления stateless-сервиса состоит из:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;нажатия кнопки в CI;&lt;/li&gt;
+&lt;li&gt;скачивания образов с предыдущей версией из магазина приложений;&lt;/li&gt;
+&lt;li&gt;их запуска.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;В части случаев образ находится в кеше ноды и время скачивания в таком случае равно нулю.&lt;/p&gt;
+
+&lt;p&gt;Используя один базовый образ на несколько сервисов, необходимость скачивания есть только для слоя приложения,
+что также снижает время восстановления.&lt;/p&gt;
+
+&lt;p&gt;В любом случае при такой автоматизации восстановление stateless-приложения занимает не больше 5 минут,
+что соответствует лучшим практикам.&lt;/p&gt;
+
+&lt;h2 id=&#34;время-для-внесения-изменений&#34;&gt;Время для внесения изменений&lt;/h2&gt;
+
+&lt;h2 id=&#34;частота-ошибок&#34;&gt;Частота ошибок&lt;/h2&gt;
+
+&lt;p&gt;Здесь начинается самая интересная часть)&lt;/p&gt;
+
+&lt;p&gt;Основной упор преобразований - сдвиг влево по первой картинке всех уровней контроля качества.&lt;/p&gt;
+
+&lt;p&gt;Что нужно сдвинуть &amp;ldquo;влево&amp;rdquo;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;возможность в ветке проверить сервис целиком &lt;a href=&#34;https://vitalyzhakov.github.io/posts/sandbox-for-web-developers&#34;&gt;песочницы для веб-разработчиков&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;идентичность теста и прода (для этого могут использоваться docker-контейнеры, пронизывающие весь процесс);&lt;/li&gt;
+&lt;li&gt;статический анализ кода;&lt;/li&gt;
+&lt;li&gt;тесты: от unit до приёмочных, нагрузочное тестирование;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
@@ -172,8 +228,8 @@ mysql&amp;gt; select * from web_log;
 &lt;pre&gt;&lt;code class=&#34;language-SQL&#34;&gt;mysql&amp;gt; set session sql_mode=&#39;&#39;;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql&amp;gt; SELECT page_url, user_id, COUNT(*) AS visits 
-    -&amp;gt; FROM web_log 
+mysql&amp;gt; SELECT page_url, user_id, COUNT(*) AS visits
+    -&amp;gt; FROM web_log
     -&amp;gt; GROUP BY page_url ORDER BY COUNT(*) DESC;
 +-------------------+---------+--------+
 | page_url          | user_id | visits |
@@ -231,8 +287,8 @@ MySQL.&lt;/p&gt;
 &lt;p&gt;Так как не корректно выбирать колонку, которая не является частью группировки,
 мы можем переписать запрос без этой колонки. Очень просто.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-SQL&#34;&gt;mysql&amp;gt; SELECT page_url, COUNT(*) AS visits 
-    -&amp;gt; FROM web_log 
+&lt;pre&gt;&lt;code class=&#34;language-SQL&#34;&gt;mysql&amp;gt; SELECT page_url, COUNT(*) AS visits
+    -&amp;gt; FROM web_log
     -&amp;gt; GROUP BY page_url ORDER BY COUNT(*) DESC;
 +-------------------+--------+
 | page_url          | visits |

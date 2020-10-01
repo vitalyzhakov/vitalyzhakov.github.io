@@ -417,8 +417,8 @@ mysql&gt; select * from web_log;
 <pre><code class="language-SQL">mysql&gt; set session sql_mode='';
 Query OK, 0 rows affected (0.00 sec)
 
-mysql&gt; SELECT page_url, user_id, COUNT(*) AS visits 
-    -&gt; FROM web_log 
+mysql&gt; SELECT page_url, user_id, COUNT(*) AS visits
+    -&gt; FROM web_log
     -&gt; GROUP BY page_url ORDER BY COUNT(*) DESC;
 +-------------------+---------+--------+
 | page_url          | user_id | visits |
@@ -476,8 +476,8 @@ MySQL.</p>
 <p>Так как не корректно выбирать колонку, которая не является частью группировки,
 мы можем переписать запрос без этой колонки. Очень просто.</p>
 
-<pre><code class="language-SQL">mysql&gt; SELECT page_url, COUNT(*) AS visits 
-    -&gt; FROM web_log 
+<pre><code class="language-SQL">mysql&gt; SELECT page_url, COUNT(*) AS visits
+    -&gt; FROM web_log
     -&gt; GROUP BY page_url ORDER BY COUNT(*) DESC;
 +-------------------+--------+
 | page_url          | visits |
