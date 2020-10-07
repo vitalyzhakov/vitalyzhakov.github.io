@@ -31,7 +31,8 @@
 &lt;p&gt;Далее принимается решение о релизе, он фиксируется, отправляется в &lt;em&gt;registry&lt;/em&gt; (магазин приложений),
 с &lt;em&gt;registry&lt;/em&gt; готовое приложение попадает в прод.&lt;/p&gt;
 
-&lt;p&gt;В исследовании &lt;a href=&#34;https://services.google.com/fh/files/misc/state-of-devops-2019.pdf&#34; target=&#34;_blank&#34;&gt;State of DevOps&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;В исследованиях &lt;a href=&#34;https://services.google.com/fh/files/misc/state-of-devops-2019.pdf&#34; target=&#34;_blank&#34;&gt;State of DevOps 2019&lt;/a&gt;
+и &lt;a href=&#34;https://express42.com/upload/reports/State-of-DevOps-Russia-2020.pdf&#34; target=&#34;_blank&#34;&gt;State of DevOps Russia 2020&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;выделяются 4 метрики производительности:&lt;/p&gt;
 
