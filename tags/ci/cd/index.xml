@@ -7,25 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Wed, 30 Sep 2020 00:10:06 +0500</lastBuildDate>
+    <lastBuildDate>Thu, 15 Oct 2020 00:10:06 +0500</lastBuildDate>
     
 	<atom:link href="https://vitalyzhakov.github.io/tags/ci/cd/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>CI/CD</title>
+      <title>Схема CI/CD  для веб-разработчиков на основе open-source инструментов</title>
       <link>https://vitalyzhakov.github.io/post/ci-cd/</link>
-      <pubDate>Wed, 30 Sep 2020 00:10:06 +0500</pubDate>
+      <pubDate>Thu, 15 Oct 2020 00:10:06 +0500</pubDate>
       
       <guid>https://vitalyzhakov.github.io/post/ci-cd/</guid>
       <description>Наверное, все видели стандартную восьмёрку, как выглядит CI/CD
+Но обычно никто не рассказывает, как именно пошагово решить этот вопрос.
 Сегодня попробуем реализовать в деталях этот процесс на примере разработки веб-сервисов.
 На схеме мы видим, как параллельно сдаются задачи (в виде коммитов) в master-ветку.
 Далее принимается решение о релизе, он фиксируется, отправляется в registry (магазин приложений), с registry готовое приложение попадает в прод.
-В исследованиях State of DevOps 2019 и State of DevOps Russia 2020
-выделяются 4 метрики производительности:
-.
-Более детально они измеряются и распределены так:</description>
+Далее поэтапно рассмотрим реализацию каждого шага.
+Сердцем всей истории у нас является Gitlab и Gitab-CI.</description>
     </item>
     
   </channel>
