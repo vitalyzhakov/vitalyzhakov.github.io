@@ -13,18 +13,27 @@
     <item>
       <title>Схема CI/CD  для веб-разработчиков на основе open-source инструментов</title>
       <link>https://vitalyzhakov.github.io/post/ci-cd/</link>
-      <pubDate>Thu, 15 Oct 2020 00:10:06 +0500</pubDate>
+      <pubDate>Sat, 24 Oct 2020 00:10:06 +0500</pubDate>
       
       <guid>https://vitalyzhakov.github.io/post/ci-cd/</guid>
       <description>
 
-&lt;p&gt;Наверное, все видели стандартную восьмёрку, как выглядит CI/CD&lt;/p&gt;
+&lt;p&gt;Содержание&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Общая схема&lt;/li&gt;
+&lt;li&gt;Сервер dev с песочницами&lt;/li&gt;
+&lt;li&gt;Детализация разработки (создание ветки, непрерывный деплой и тестирование, создание merge на бота, апрув в master)&lt;/li&gt;
+&lt;li&gt;Прод с master-master репликацией, graylog, sentry, prometheus.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Наверное, все видели стандартную восьмёрку, как выглядит CI/CD:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/ci-cd/8.png&#34; alt=&#34;Бесконечность CI/CD&#34; title=&#34;Бесконечность CI/CD&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Но обычно никто не рассказывает, как именно пошагово решить этот вопрос.&lt;/p&gt;
+&lt;p&gt;Но обычно никто не рассказывает, как именно пошагово реализовать этот процесс.&lt;/p&gt;
 
-&lt;p&gt;Сегодня попробуем реализовать в деталях этот процесс на примере разработки веб-сервисов.&lt;/p&gt;
+&lt;p&gt;Сегодня детализирую этот процесс на примере разработки веб-сервисов.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/ci-cd/common-scheme.png&#34; alt=&#34;Общая схема&#34; title=&#34;Общая схема&#34; /&gt;&lt;/p&gt;
 
@@ -43,6 +52,15 @@
 
 &lt;p&gt;История с production/preproduction веткой в &lt;a href=&#34;https://docs.gitlab.com/ee/topics/gitlab_flow.html&#34; target=&#34;_blank&#34;&gt;Gitlab flow&lt;/a&gt; также кажется нам лишней, поэтому
 предлагаем вам следующую схему.&lt;/p&gt;
+
+&lt;h2 id=&#34;dev-сервер-с-песочницами-под-каждую-ветку&#34;&gt;Dev-сервер с песочницами под каждую ветку&lt;/h2&gt;
+
+&lt;p&gt;Основная фишка - предоставление песочницы под задачу со всеми нужными контейнерами для разработки быстро (в идеале в течение 1-5 минут после запроса).&lt;/p&gt;
+
+&lt;p&gt;При этом понятно, что железо стоит денег и старые песочницы ночью удаляются в автоматическом режиме.
+Без этой операции при большом количестве параллельных задач можно погрязнуть в хаосе.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/ci-cd/devScheme.png&#34; alt=&#34;Схема работы dev-сервера&#34; title=&#34;Схема работы dev-сервера&#34; /&gt;.&lt;/p&gt;
 
 &lt;p&gt;В исследованиях &lt;a href=&#34;https://services.google.com/fh/files/misc/state-of-devops-2019.pdf&#34; target=&#34;_blank&#34;&gt;State of DevOps 2019&lt;/a&gt;
 и &lt;a href=&#34;https://express42.com/upload/reports/State-of-DevOps-Russia-2020.pdf&#34; target=&#34;_blank&#34;&gt;State of DevOps Russia 2020&lt;/a&gt;&lt;/p&gt;
