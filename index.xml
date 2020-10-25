@@ -46,9 +46,9 @@
 
 &lt;p&gt;Сердцем всей истории у нас является Gitlab и Gitab-CI.&lt;/p&gt;
 
-&lt;p&gt;Git flow показался нам слишком сложным.
+&lt;p&gt;Git flow показался нам слишком сложным для поддержки из одного репозитория одного проекта на продакшне.
 &lt;a href=&#34;https://guides.github.com/introduction/flow/index.html&#34; target=&#34;_blank&#34;&gt;Github flow&lt;/a&gt; до слияния в master кидает изменения на пользователей (прод).
-Не понятно, как распараллелить работу нескольких разработчиков.&lt;/p&gt;
+Параллельность работы нескольких разработчиков остаётся не раскрытой.&lt;/p&gt;
 
 &lt;p&gt;История с production/preproduction веткой в &lt;a href=&#34;https://docs.gitlab.com/ee/topics/gitlab_flow.html&#34; target=&#34;_blank&#34;&gt;Gitlab flow&lt;/a&gt; также кажется нам лишней, поэтому
 предлагаем вам следующую схему.&lt;/p&gt;
