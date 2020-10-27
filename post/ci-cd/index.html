@@ -233,7 +233,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    4 мин.
+    5 мин.
   </span>
   
 
@@ -314,7 +314,9 @@
 <p>На схеме мы видим, как параллельно сдаются задачи (в виде коммитов) в master-ветку.</p>
 
 <p>Далее принимается решение о релизе, он фиксируется, отправляется в <em>registry</em> (магазин приложений),
-с <em>registry</em> готовое приложение попадает в прод.</p>
+с <em>registry</em> готовое приложение попадает в прод.
+Некоторое время за ним следим (в sentry) на наличие новых ошибок.
+При возникновении потребности в откате - возвращаем на предыдущий тег из gitlab environments.</p>
 
 <p>Далее поэтапно рассмотрим реализацию каждого шага.</p>
 
@@ -328,8 +330,8 @@
 
 <h2 id="dev-сервер-с-песочницами-под-каждую-ветку">Dev-сервер с песочницами под каждую ветку</h2>
 
-<p>Основная фишка - предоставление песочницы под задачу со всеми нужными контейнерами для разработки быстро (в идеале в течение 1-5 минут после запроса).
-Песочница должна максимально повторять продакшн.</p>
+<p>Основная фишка - предоставление песочницы под задачу со всеми нужными контейнерами для разработки быстро (в идеале в течение 1 минуты после запроса).
+Сервис в песочнице должна максимально повторять продакшн.</p>
 
 <p>Понятно, что железо стоит денег, поэтому старые песочницы ночью удаляются в автоматическом режиме.
 Без этой операции при большом количестве параллельных задач можно погрязнуть в хаосе.</p>
@@ -338,6 +340,41 @@
 
 <p>На этой картинке показано, что пользователи сервиса заходят через nginx на конкретную песочницу,
 которая регистрируется в nginx во время создания с помощью consul и consul-template.</p>
+
+<p>Задания исполняются с помощью gitlab-ci</p>
+
+<p>Первое задание - сборка образа</p>
+
+<pre><code class="language-yaml">Build Dev Image:
+    stage: build_dev_image
+        - docker build --build-arg WEBSERVER_IMAGE=${WEBSERVER_IMAGE} -f ./build_env/docker-compose/Dockerfile --tag ${IMAGE_ADDRESS} .
+</code></pre>
+
+<p>Второе задание - запуск сервиса</p>
+
+<pre><code class="language-bash">Deploy dev:
+    stage: deploy_dev
+    script:
+        # Для веб-сервисов нужен FQDN
+        - export FQDN=${CI_COMMIT_REF_SLUG}.${PROJECT_NAME}.${PROJECT_GROUP}.${BUILD_HOST}
+        - docker-compose -f build_env/docker-compose/docker-compose-dev.yml up -d
+        # Если хостовый конфиг nginx валидный -pass, иначе удаляем конфиг
+        - if $(consul-template -once -config consul-template.conf); then :; else rm ${PROJECT_DIR}/config/site.cfg &amp;&amp; nginx_test_failed &gt; /dev/null 2&gt;&amp;1; fi
+</code></pre>
+
+<p>Пример содержимого файла docker-compose</p>
+
+<pre><code class="language-yaml">version: '2.3'
+services:
+    web:
+        image: ${IMAGE_ADDRESS}
+        container_name: ${COMPOSE_PROJECT_NAME}
+        depends_on:
+            - mongo
+        network_mode: &quot;bridge&quot;
+        environment:
+            SERVICE_NAME: ${COMPOSE_PROJECT_NAME}
+</code></pre>
 
 <h2 id="4-прод-с-master-master-репликацией-graylog-sentry-prometheus">4. Прод с master-master репликацией, graylog, sentry, prometheus.</h2>
 
