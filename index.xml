@@ -52,7 +52,9 @@
 &lt;a href=&#34;https://guides.github.com/introduction/flow/index.html&#34; target=&#34;_blank&#34;&gt;Github flow&lt;/a&gt; до слияния в master релизит изменения на пользователей (прод).
 Параллельность работы нескольких разработчиков остаётся не раскрытой.&lt;/p&gt;
 
-&lt;p&gt;История с production/preproduction веткой в &lt;a href=&#34;https://docs.gitlab.com/ee/topics/gitlab_flow.html&#34; target=&#34;_blank&#34;&gt;Gitlab flow&lt;/a&gt; также кажется нам лишней, поэтому предлагаем вам следующую схему.&lt;/p&gt;
+&lt;p&gt;История с production/preproduction веткой в &lt;a href=&#34;https://docs.gitlab.com/ee/topics/gitlab_flow.html&#34; target=&#34;_blank&#34;&gt;Gitlab flow&lt;/a&gt; также кажется нам лишней, поэтому предлагаем вам следующую схему:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/ci-cd/tank.png&#34; alt=&#34;Flow&#34; title=&#34;Flow&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;dev-сервер-с-песочницами-под-каждую-ветку&#34;&gt;Dev-сервер с песочницами под каждую ветку&lt;/h2&gt;
 
