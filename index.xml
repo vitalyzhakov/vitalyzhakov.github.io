@@ -94,7 +94,8 @@
 
 &lt;p&gt;Без этой операции при большом количестве параллельных задач можно погрязнуть в хаосе.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/ci-cd/devScheme.png&#34; alt=&#34;Схема работы dev-сервера&#34; title=&#34;Схема работы dev-сервера&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/ci-cd/devScheme-docker.png&#34; alt=&#34;Схема работы dev-сервера&#34; title=&#34;Схема работы dev-сервера&#34; /&gt;
+&lt;img src=&#34;https://vitalyzhakov.github.io/images/ci-cd/gitlabRunner.png&#34; alt=&#34;Схема работы dev-сервера&#34; title=&#34;Схема работы dev-сервера&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;На этой картинке показано, что пользователи сервиса заходят через nginx на конкретную песочницу,
 которая регистрируется в nginx во время создания с помощью consul и consul-template.&lt;/p&gt;
