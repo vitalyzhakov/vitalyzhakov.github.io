@@ -378,9 +378,9 @@
 
 <p>Первое задание - сборка образа</p>
 
-<pre><code class="language-yaml">Build Dev Image:
+<pre><code class="language-bash">Build Dev Image:
     stage: build_dev_image
-        - docker build --build-arg WEBSERVER_IMAGE=${WEBSERVER_IMAGE} -f ./build_env/docker-compose/Dockerfile --tag ${IMAGE_ADDRESS} .
+        - docker build --tag ${IMAGE_ADDRESS} .
 </code></pre>
 
 <p>Второе задание - запуск сервиса</p>
@@ -389,10 +389,9 @@
     stage: deploy_dev
     script:
         # Для веб-сервисов нужен FQDN
-        - export FQDN=${CI_COMMIT_REF_SLUG}.${PROJECT_NAME}.${PROJECT_GROUP}.${BUILD_HOST}
-        - docker-compose -f build_env/docker-compose/docker-compose-dev.yml up -d
-        # Если хостовый конфиг nginx валидный -pass, иначе удаляем конфиг
-        - if $(consul-template -once -config consul-template.conf); then :; else rm ${PROJECT_DIR}/config/site.cfg &amp;&amp; nginx_test_failed &gt; /dev/null 2&gt;&amp;1; fi
+        - export FQDN=task-123.project.team.dev
+        - docker-compose up -d
+        - consul-template -once -config consul-template.conf
 </code></pre>
 
 <p>Пример содержимого файла docker-compose</p>
