@@ -379,19 +379,19 @@
 <p>Первое задание - сборка образа</p>
 
 <pre><code class="language-bash">Build Dev Image:
-    stage: build_dev_image
-        - docker build --tag ${IMAGE_ADDRESS} .
+  stage: build_dev_image
+    - docker build --tag ${IMAGE_ADDRESS} .
 </code></pre>
 
 <p>Второе задание - запуск сервиса</p>
 
 <pre><code class="language-bash">Deploy dev:
-    stage: deploy_dev
-    script:
-        # Для веб-сервисов нужен FQDN
-        - export FQDN=task-123.project.team.dev
-        - docker-compose up -d
-        - consul-template -once -config consul-template.conf
+  stage: deploy_dev
+  script:
+    # Для веб-сервисов нужен FQDN
+    - export FQDN=task-123.project.team.dev
+    - docker-compose up -d
+    - consul-template -config consul.conf
 </code></pre>
 
 <p>Пример содержимого файла docker-compose</p>
