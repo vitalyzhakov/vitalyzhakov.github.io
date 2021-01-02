@@ -94,7 +94,7 @@
   <meta property="og:description" content="Магистр прикладной математики и информатики">
   <meta property="og:locale" content="ru-ru">
   
-  <meta property="og:updated_time" content="2020-04-24T00:10:06&#43;05:00">
+  <meta property="og:updated_time" content="2021-01-02T00:10:06&#43;05:00">
   
 
   
@@ -206,6 +206,18 @@
   
 
   
+  
+  <div>
+    <h2><a href="https://vitalyzhakov.github.io/post/composer-2-fxp-asset-plugin/">Исправляем ошибку fxp/composer-asset-plugin incompatible после обновления до composer 2</a></h2>
+    <div class="article-style">
+      
+      После обновления менеджера пакетов PHP composer до версии 2 появляется ошибка:
+ [RuntimeException] No composer.json present in the current directory, this may be the cause of the following exception. [InvalidArgumentException] Package fxp/composer-asset-plugin at version has a PHP requirement incompatible with your PHP version, PHP extensions and Composer version  Происходит из-за несовместимости fxp/composer-asset-plugin и composer версии 2.
+Решение Удаляем старый плагин
+composer global remove fxp/composer-asset-plugin  Если появляется ошибка, связанная с папками bower или npm, добавляем в config.
+      
+    </div>
+  </div>
   
   <div>
     <h2><a href="https://vitalyzhakov.github.io/post/graylog/">Graylog</a></h2>
