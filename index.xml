@@ -53,6 +53,7 @@
             &amp;quot;type&amp;quot;: &amp;quot;composer&amp;quot;,
             &amp;quot;url&amp;quot;: &amp;quot;https://asset-packagist.org&amp;quot;
         }
+]
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Удаляем остатки fxp-asset (если есть):&lt;/p&gt;
@@ -63,6 +64,8 @@
                 &amp;quot;npm-asset-library&amp;quot;: &amp;quot;vendor/npm&amp;quot;,
                 &amp;quot;bower-asset-library&amp;quot;: &amp;quot;vendor/bower&amp;quot;
             }
+        }
+}
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
