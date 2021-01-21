@@ -20,7 +20,7 @@
 
 &lt;p&gt;После обновления менеджера пакетов PHP composer до версии 2 появляется ошибка:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;  [RuntimeException]                                                                                    
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;  [RuntimeException]                                                                                    
   No composer.json present in the current directory, this may be the cause of the following exception.
 
   [InvalidArgumentException]
@@ -33,7 +33,7 @@
 
 &lt;p&gt;Удаляем старый плагин&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;composer global remove fxp/composer-asset-plugin
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;composer global remove fxp/composer-asset-plugin
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Если появляется ошибка, связанная с папками bower или npm,
@@ -41,8 +41,8 @@
 
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;&#39;modules&#39; =&amp;gt; [ ... ],
 &#39;aliases&#39; =&amp;gt; [
-	&#39;@bower&#39; =&amp;gt; &#39;@vendor/bower-asset&#39;,
-	&#39;@npm&#39; =&amp;gt; &#39;@vendor/npm-asset&#39;,
+    &#39;@bower&#39; =&amp;gt; &#39;@vendor/bower-asset&#39;,
+    &#39;@npm&#39; =&amp;gt; &#39;@vendor/npm-asset&#39;,
 ],
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -59,12 +59,12 @@
 &lt;p&gt;Удаляем остатки fxp-asset (если есть):&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;config&amp;quot;: {
-        &amp;quot;fxp-asset&amp;quot;: {
-            &amp;quot;installer-paths&amp;quot;: {
-                &amp;quot;npm-asset-library&amp;quot;: &amp;quot;vendor/npm&amp;quot;,
-                &amp;quot;bower-asset-library&amp;quot;: &amp;quot;vendor/bower&amp;quot;
-            }
+    &amp;quot;fxp-asset&amp;quot;: {
+        &amp;quot;installer-paths&amp;quot;: {
+            &amp;quot;npm-asset-library&amp;quot;: &amp;quot;vendor/npm&amp;quot;,
+            &amp;quot;bower-asset-library&amp;quot;: &amp;quot;vendor/bower&amp;quot;
         }
+    }
 }
 &lt;/code&gt;&lt;/pre&gt;
 </description>

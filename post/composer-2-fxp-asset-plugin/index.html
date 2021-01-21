@@ -18,7 +18,7 @@
     
   
   <meta name="description" content="После обновления менеджера пакетов PHP composer до версии 2 появляется ошибка:
- [RuntimeException] No composer.json present in the current directory, this may be the cause of the following exception. [InvalidArgumentException] Package fxp/composer-asset-plugin at version has a PHP requirement incompatible with your PHP version, PHP extensions and Composer version  Происходит из-за несовместимости fxp/composer-asset-plugin и composer версии 2.
+[RuntimeException] No composer.json present in the current directory, this may be the cause of the following exception. [InvalidArgumentException] Package fxp/composer-asset-plugin at version has a PHP requirement incompatible with your PHP version, PHP extensions and Composer version  Происходит из-за несовместимости fxp/composer-asset-plugin и composer версии 2.
 Решение Удаляем старый плагин
 composer global remove fxp/composer-asset-plugin  Если появляется ошибка, связанная с папками bower или npm, добавляем в config.">
 
@@ -97,7 +97,7 @@ composer global remove fxp/composer-asset-plugin  Если появляется 
   <meta property="og:url" content="https://vitalyzhakov.github.io/post/composer-2-fxp-asset-plugin/">
   <meta property="og:title" content="Исправляем ошибку fxp/composer-asset-plugin incompatible после обновления до composer 2 | Инфраструктура ИТ">
   <meta property="og:description" content="После обновления менеджера пакетов PHP composer до версии 2 появляется ошибка:
- [RuntimeException] No composer.json present in the current directory, this may be the cause of the following exception. [InvalidArgumentException] Package fxp/composer-asset-plugin at version has a PHP requirement incompatible with your PHP version, PHP extensions and Composer version  Происходит из-за несовместимости fxp/composer-asset-plugin и composer версии 2.
+[RuntimeException] No composer.json present in the current directory, this may be the cause of the following exception. [InvalidArgumentException] Package fxp/composer-asset-plugin at version has a PHP requirement incompatible with your PHP version, PHP extensions and Composer version  Происходит из-за несовместимости fxp/composer-asset-plugin и composer версии 2.
 Решение Удаляем старый плагин
 composer global remove fxp/composer-asset-plugin  Если появляется ошибка, связанная с папками bower или npm, добавляем в config.">
   <meta property="og:locale" content="ru-ru">
@@ -295,7 +295,7 @@ composer global remove fxp/composer-asset-plugin  Если появляется 
 
 <p>После обновления менеджера пакетов PHP composer до версии 2 появляется ошибка:</p>
 
-<pre><code>  [RuntimeException]                                                                                    
+<pre><code class="language-bash">  [RuntimeException]                                                                                    
   No composer.json present in the current directory, this may be the cause of the following exception.
 
   [InvalidArgumentException]
@@ -308,7 +308,7 @@ composer global remove fxp/composer-asset-plugin  Если появляется 
 
 <p>Удаляем старый плагин</p>
 
-<pre><code>composer global remove fxp/composer-asset-plugin
+<pre><code class="language-bash">composer global remove fxp/composer-asset-plugin
 </code></pre>
 
 <p>Если появляется ошибка, связанная с папками bower или npm,
@@ -316,8 +316,8 @@ composer global remove fxp/composer-asset-plugin  Если появляется 
 
 <pre><code class="language-php">'modules' =&gt; [ ... ],
 'aliases' =&gt; [
-	'@bower' =&gt; '@vendor/bower-asset',
-	'@npm' =&gt; '@vendor/npm-asset',
+    '@bower' =&gt; '@vendor/bower-asset',
+    '@npm' =&gt; '@vendor/npm-asset',
 ],
 </code></pre>
 
@@ -334,12 +334,12 @@ composer global remove fxp/composer-asset-plugin  Если появляется 
 <p>Удаляем остатки fxp-asset (если есть):</p>
 
 <pre><code class="language-json">&quot;config&quot;: {
-        &quot;fxp-asset&quot;: {
-            &quot;installer-paths&quot;: {
-                &quot;npm-asset-library&quot;: &quot;vendor/npm&quot;,
-                &quot;bower-asset-library&quot;: &quot;vendor/bower&quot;
-            }
+    &quot;fxp-asset&quot;: {
+        &quot;installer-paths&quot;: {
+            &quot;npm-asset-library&quot;: &quot;vendor/npm&quot;,
+            &quot;bower-asset-library&quot;: &quot;vendor/bower&quot;
         }
+    }
 }
 </code></pre>
 
