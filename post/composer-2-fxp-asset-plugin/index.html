@@ -312,22 +312,22 @@ composer global remove fxp/composer-asset-plugin  Если появляется 
 </code></pre>
 
 <p>Если появляется ошибка, связанная с папками bower или npm,
-добавляем в config.php приложения алиасы до папок</p>
+добавляем в config.php приложения алиасы до соответствующих папок</p>
 
 <pre><code class="language-php">'modules' =&gt; [ ... ],
 'aliases' =&gt; [
-		'@bower' =&gt; '@vendor/bower-asset',
-		'@npm' =&gt; '@vendor/npm-asset',
+	'@bower' =&gt; '@vendor/bower-asset',
+	'@npm' =&gt; '@vendor/npm-asset',
 ],
 </code></pre>
 
 <p>В composer.json добавляем</p>
 
 <pre><code class="language-json">&quot;repositories&quot;: [
-        {
-            &quot;type&quot;: &quot;composer&quot;,
-            &quot;url&quot;: &quot;https://asset-packagist.org&quot;
-        }
+    {
+        &quot;type&quot;: &quot;composer&quot;,
+        &quot;url&quot;: &quot;https://asset-packagist.org&quot;
+    }
 ]
 </code></pre>
 

@@ -37,22 +37,22 @@
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Если появляется ошибка, связанная с папками bower или npm,
-добавляем в config.php приложения алиасы до папок&lt;/p&gt;
+добавляем в config.php приложения алиасы до соответствующих папок&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;&#39;modules&#39; =&amp;gt; [ ... ],
 &#39;aliases&#39; =&amp;gt; [
-		&#39;@bower&#39; =&amp;gt; &#39;@vendor/bower-asset&#39;,
-		&#39;@npm&#39; =&amp;gt; &#39;@vendor/npm-asset&#39;,
+	&#39;@bower&#39; =&amp;gt; &#39;@vendor/bower-asset&#39;,
+	&#39;@npm&#39; =&amp;gt; &#39;@vendor/npm-asset&#39;,
 ],
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;В composer.json добавляем&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;repositories&amp;quot;: [
-        {
-            &amp;quot;type&amp;quot;: &amp;quot;composer&amp;quot;,
-            &amp;quot;url&amp;quot;: &amp;quot;https://asset-packagist.org&amp;quot;
-        }
+    {
+        &amp;quot;type&amp;quot;: &amp;quot;composer&amp;quot;,
+        &amp;quot;url&amp;quot;: &amp;quot;https://asset-packagist.org&amp;quot;
+    }
 ]
 &lt;/code&gt;&lt;/pre&gt;
 
