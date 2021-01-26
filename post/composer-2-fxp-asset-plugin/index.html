@@ -314,6 +314,11 @@ composer global remove fxp/composer-asset-plugin  Если появляется 
 <p>Если появляется ошибка, связанная с папками bower или npm,
 добавляем в config.php приложения алиасы до соответствующих папок</p>
 
+<p>Пример ошибки</p>
+
+<pre><code class="language-bash">mito/yii2-sentry[1.0.0, ..., 1.0.2] require bower-asset/raven-js
+</code></pre>
+
 <pre><code class="language-php">'modules' =&gt; [ ... ],
 'aliases' =&gt; [
     '@bower' =&gt; '@vendor/bower-asset',

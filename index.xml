@@ -39,6 +39,11 @@
 &lt;p&gt;Если появляется ошибка, связанная с папками bower или npm,
 добавляем в config.php приложения алиасы до соответствующих папок&lt;/p&gt;
 
+&lt;p&gt;Пример ошибки&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mito/yii2-sentry[1.0.0, ..., 1.0.2] require bower-asset/raven-js
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;&#39;modules&#39; =&amp;gt; [ ... ],
 &#39;aliases&#39; =&amp;gt; [
     &#39;@bower&#39; =&amp;gt; &#39;@vendor/bower-asset&#39;,
