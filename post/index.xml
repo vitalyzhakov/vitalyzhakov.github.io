@@ -13,6 +13,17 @@
     
     
     <item>
+      <title>Исключения и библиотеки</title>
+      <link>https://vitalyzhakov.github.io/post/exception-in-libs/</link>
+      <pubDate>Thu, 11 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/exception-in-libs/</guid>
+      <description>Ответ прост)
+Если библиотека знает, как поступить с исключением, стоит обработать его в библиотеке.
+Если библиотека не знает, как поступить с исключением, стоит отдать обработку на уровень выше (в другую библиотеку или приложение).</description>
+    </item>
+    
+    <item>
       <title>Исправляем ошибку fxp/composer-asset-plugin incompatible после обновления до composer 2</title>
       <link>https://vitalyzhakov.github.io/post/composer-2-fxp-asset-plugin/</link>
       <pubDate>Sat, 02 Jan 2021 00:10:06 +0500</pubDate>

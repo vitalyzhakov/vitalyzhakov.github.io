@@ -11,6 +11,20 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Исключения и библиотеки</title>
+      <link>https://vitalyzhakov.github.io/post/exception-in-libs/</link>
+      <pubDate>Thu, 11 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/exception-in-libs/</guid>
+      <description>&lt;p&gt;Ответ прост)&lt;/p&gt;
+
+&lt;p&gt;Если библиотека знает, как поступить с исключением, стоит обработать его в библиотеке.&lt;/p&gt;
+
+&lt;p&gt;Если библиотека не знает, как поступить с исключением, стоит отдать обработку на уровень выше (в другую библиотеку или приложение).&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Исправляем ошибку fxp/composer-asset-plugin incompatible после обновления до composer 2</title>
       <link>https://vitalyzhakov.github.io/post/composer-2-fxp-asset-plugin/</link>
       <pubDate>Sat, 02 Jan 2021 00:10:06 +0500</pubDate>
@@ -1493,96 +1507,6 @@ services:
 &lt;h2 id=&#34;реализация&#34;&gt;Реализация&lt;/h2&gt;
 
 &lt;p&gt;Пример в istio &lt;a href=&#34;https://docs.flagger.app/usage/progressive-delivery&#34; target=&#34;_blank&#34;&gt;https://docs.flagger.app/usage/progressive-delivery&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Автоматическое тестирование</title>
-      <link>https://vitalyzhakov.github.io/post/autotesting/</link>
-      <pubDate>Thu, 09 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/autotesting/</guid>
-      <description>
-
-&lt;p&gt;На хорошем производстве существует входной и выходной контроль.
-Наверное, многие видели на технически сложных изделиях отметки &lt;em&gt;ОТК&lt;/em&gt;, &lt;em&gt;PASSED&lt;/em&gt;,
-&lt;em&gt;QUALITY CHECK PASSED&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Приложение, упакованное в контейнер, тоже является технически сложным изделием.
-До развёртывания в боевой среде стоит смоделировать его поведение и протестировать.&lt;/p&gt;
-
-&lt;p&gt;Протестировать можно несколькими вариантами:
-* отдать заказчику;
-* проверить самому;
-* написать карточку тестирования;
-* написать автоматический тест.&lt;/p&gt;
-
-&lt;p&gt;Рассмотрим задачу публикации предварительно подготовленной промо-страницы в сети Интернет.
-Стандартная промо-страница состоит из картинок и текста с относительно неплохим дизайном.
-Что на этой странице можно проверять?
-* код ответа веб-сервера;
-* заголовки ответа веб-сервера;
-* текст на наличие ошибок;
-* оформление;
-* анимацию;
-* и т.д.&lt;/p&gt;
-
-&lt;p&gt;Каждый ручной тест отнимает самый дорогой наш ресурс - время.
-Допустим, вы реализовали задачу по размещению внутри контейнера этой страницы.
-Как другим участникам процесса убедиться в том, что вы сделали то, что было нужно?&lt;/p&gt;
-
-&lt;p&gt;Можно сделать это вручную. А именно - содержать в электронной таблице, в базе знаний,
-документах список сценариев и каждый раз их проходить. Вручную.&lt;/p&gt;
-
-&lt;p&gt;Сомневаюсь, что найдутся 100% прилежные люди, которые в состоянии полностью пройти все сценарии (если сценариев больше 100).&lt;/p&gt;
-
-&lt;p&gt;На большом проекте количество вариантов сценариев измеряется десятками (или даже сотнями) тысяч.
-Чтобы проводить релизы несколько раз в день, нам нужны сотни прилежных людей.
-Понятно, что такого количества людей мы не найдём.&lt;/p&gt;
-
-&lt;p&gt;На этом шаге команды делятся на 2 типа:&lt;/p&gt;
-
-&lt;p&gt;1) тестируют малую часть функционала &amp;ldquo;вручную&amp;rdquo;;
-2) заменяют ручное тестирование автоматическим.&lt;/p&gt;
-
-&lt;h2 id=&#34;тестирование-вручную&#34;&gt;Тестирование вручную&lt;/h2&gt;
-
-&lt;p&gt;Например, в программе 10 вариантов развития событий. Можно ли пройти их вручную?
-Наверное, да. При этом:&lt;/p&gt;
-
-&lt;p&gt;1) кейсы должны быть описаны в понятном для сотрудника формате;
-2) сотрудник должен понимать, где кейсы хранятся, как их пополнять и удалять ненужные
-3) сотрудник должен понимать, как проходить по кейсам (как создать площадку, подобную &amp;ldquo;боевой&amp;rdquo;, откуда брать данные для тестирования и т.д.)&lt;/p&gt;
-
-&lt;h2 id=&#34;запуск-автоматических-тестов-локально&#34;&gt;Запуск автоматических тестов локально&lt;/h2&gt;
-
-&lt;p&gt;Запускаем selenium&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker run -d --shm-size=2g --network bridge --name selenium-chrome selenium/standalone-chrome
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Узнаём IP адрес созданного контейнера с selenium&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker inspect selenium-chrome
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Экспортируем переменные окружения&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export SELENIUM_CHROME_ADDRESS=IP адрес контейнера с selenium
-export FQDN=адрес веб-сервера
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Ставим зависимости&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;composer install
-#если падает с ошибкой отсутствия какой-либо зависимости, можно вызвать с ключиком --ignore-platform-reqs
-composer install --ignore-platform-reqs
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Запускаем тесты&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;./vendor/bin/codecept run
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
