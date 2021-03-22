@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>https://vitalyzhakov.github.io/post/ci-cd/</loc>
+      <lastmod>2021-03-22T00:10:06+05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://vitalyzhakov.github.io/post/exception-in-libs/</loc>
       <lastmod>2021-02-11T00:00:00+00:00</lastmod>
     </url>
@@ -25,15 +34,6 @@
     
       <loc>https://vitalyzhakov.github.io/post/db-optimization/</loc>
       <lastmod>2020-12-25T00:10:06+05:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://vitalyzhakov.github.io/post/ci-cd/</loc>
-      <lastmod>2020-10-24T00:10:06+05:00</lastmod>
     </url>
     
   
@@ -276,7 +276,7 @@
     <url>
     
       <loc>https://vitalyzhakov.github.io/tags/ci/cd/</loc>
-      <lastmod>2020-10-24T00:10:06+05:00</lastmod>
+      <lastmod>2021-03-22T00:10:06+05:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -474,7 +474,7 @@
     <url>
     
       <loc>https://vitalyzhakov.github.io/tags/</loc>
-      <lastmod>2020-10-24T00:10:06+05:00</lastmod>
+      <lastmod>2021-03-22T00:10:06+05:00</lastmod>
       <priority>0</priority>
     </url>
     

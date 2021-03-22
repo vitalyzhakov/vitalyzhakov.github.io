@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sat, 24 Oct 2020 00:10:06 +0500</lastBuildDate>
+    <lastBuildDate>Mon, 22 Mar 2021 00:10:06 +0500</lastBuildDate>
     
 	<atom:link href="https://vitalyzhakov.github.io/tags/ci/cd/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Схема CI/CD  для веб-разработчиков на основе open-source инструментов</title>
       <link>https://vitalyzhakov.github.io/post/ci-cd/</link>
-      <pubDate>Sat, 24 Oct 2020 00:10:06 +0500</pubDate>
+      <pubDate>Mon, 22 Mar 2021 00:10:06 +0500</pubDate>
       
       <guid>https://vitalyzhakov.github.io/post/ci-cd/</guid>
       <description>Содержание
