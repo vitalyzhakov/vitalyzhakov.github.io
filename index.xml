@@ -11,6 +11,61 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Системный дизайн, простой уровень</title>
+      <link>https://vitalyzhakov.github.io/post/system-design-easy/</link>
+      <pubDate>Fri, 01 Oct 2021 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/system-design-easy/</guid>
+      <description>
+
+&lt;p&gt;Рассмотрим в качестве простого примера сервис, доставляющий статическую веб страницу.&lt;/p&gt;
+
+&lt;p&gt;Факторами оценки могут быть:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;SL доступности сервиса;&lt;/li&gt;
+&lt;li&gt;Время ответа на запрос клиента;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;В самом простом варианте клиенты размещены в Москве.&lt;/p&gt;
+
+&lt;p&gt;Ограничения&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;SL виртуальной машины (SLвм) = 99.95&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Допущения&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;мы в состоянии сделать сервис доставки страниц идеальным;&lt;/li&gt;
+&lt;li&gt;нагрузкой на сервис пока пренебрежём.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Пусть сервис размещён в PRM.&lt;/p&gt;
+
+&lt;p&gt;Считаем факторы оценки&lt;/p&gt;
+
+&lt;p&gt;SL сервиса ~ SL nginx * SL вм, что примерно равно SL вм = 99.95&lt;/p&gt;
+
+&lt;p&gt;Время ответа = время генерации страницы (~1 msec) + время доставки до Москвы (~20 msec).
+Итого 21 msec.&lt;/p&gt;
+
+&lt;h2 id=&#34;география&#34;&gt;География&lt;/h2&gt;
+
+&lt;p&gt;Усложним задачу.&lt;/p&gt;
+
+&lt;p&gt;30% клиентов в Москве,
+40% клиентов в Перми,
+30% клиентов в Омске.&lt;/p&gt;
+
+&lt;p&gt;Тогда время доставки будет выглядеть как взвешенная сумма&lt;/p&gt;
+
+&lt;p&gt;Время доставки = 0,3 * 20 * 0,4 * 5 * 0,3 * 30 = 17&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Схема CI/CD  для веб-разработчиков на основе open-source инструментов</title>
       <link>https://vitalyzhakov.github.io/post/ci-cd/</link>
       <pubDate>Mon, 22 Mar 2021 00:10:06 +0500</pubDate>
@@ -1421,39 +1476,6 @@ services:
 &lt;p&gt;В предлагаемом решении в сборе участвуют cadvisior, данные собираются в prometheus.&lt;/p&gt;
 
 &lt;p&gt;Для отображения установлена grafana, в которой можно смотреть показатели во времени.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Прогрессивное развёртывание</title>
-      <link>https://vitalyzhakov.github.io/post/progressive-delivery/</link>
-      <pubDate>Mon, 30 Sep 2019 00:10:06 +0500</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/progressive-delivery/</guid>
-      <description>
-
-&lt;h2 id=&#34;проблематика&#34;&gt;Проблематика&lt;/h2&gt;
-
-&lt;p&gt;В крупные проекты вносится много (больше 10) изменений в день.&lt;/p&gt;
-
-&lt;p&gt;С целью минимизации рисков можно вносить изменения на небольшие группы пользователей,
-постепенно увеличивая долю пользователей с новой версией в зависимости от успешности / не успешности метрик.&lt;/p&gt;
-
-&lt;h2 id=&#34;метрики&#34;&gt;Метрики&lt;/h2&gt;
-
-&lt;p&gt;Как видно из постановки проблемы, успешность зависит от нескольких факторов:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;длительность принятия решения;&lt;/li&gt;
-&lt;li&gt;вероятность принятия неправильного решения;&lt;/li&gt;
-&lt;li&gt;количество изменений в единицу времени.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Выводы делаются на основе собираемых данных с сервисов (в идеале технических и бизнес-метрик).&lt;/p&gt;
-
-&lt;h2 id=&#34;реализация&#34;&gt;Реализация&lt;/h2&gt;
-
-&lt;p&gt;Пример в istio &lt;a href=&#34;https://docs.flagger.app/usage/progressive-delivery&#34; target=&#34;_blank&#34;&gt;https://docs.flagger.app/usage/progressive-delivery&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
