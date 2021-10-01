@@ -781,7 +781,7 @@ if [ $PROCNUM -gt 0 ]; then exit; fi
 
 &lt;h2 id=&#34;решение&#34;&gt;Решение&lt;/h2&gt;
 
-&lt;p&gt;Замена в файле дампа  &lt;code&gt;,binary &#39;&#39;,&lt;/code&gt; -&amp;gt; &lt;code&gt;,NULL,&lt;/code&gt; (например, с помощью mcedit).&lt;/p&gt;
+&lt;p&gt;Замена в файле дампа  &lt;code&gt;,binary &#39;&#39;,&lt;/code&gt; -&amp;gt; &lt;code&gt;,NULL,&lt;/code&gt; (например, с помощью массовой замены в &lt;code&gt;mcedit&lt;/code&gt;).&lt;/p&gt;
 
 &lt;p&gt;В моём случае также пришлось снять обязательность на поле &lt;code&gt;point&lt;/code&gt;.&lt;/p&gt;
 </description>
