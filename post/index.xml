@@ -13,6 +13,16 @@
     
     
     <item>
+      <title>Масштабирование от нуля до миллиона пользователей</title>
+      <link>https://vitalyzhakov.github.io/post/scaling-from-zero-to-millions-of-users/</link>
+      <pubDate>Wed, 10 Nov 2021 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/scaling-from-zero-to-millions-of-users/</guid>
+      <description>Настройка одного сервера Путь в тысячу миль начинается с первого шага и в проектировании сложных систем аналогично. Чтобы начать с чего-то простого, всегда запускаются на одном сервере.
+Рисунок 1-1 демонстрирует одиночный сервер, в котором всё запущено на 1 сервере: веб приложение, база данных, кеш и т.д.</description>
+    </item>
+    
+    <item>
       <title>Системный дизайн, простой уровень</title>
       <link>https://vitalyzhakov.github.io/post/system-design-easy/</link>
       <pubDate>Fri, 01 Oct 2021 00:10:06 +0500</pubDate>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="ru-ru">
 <head>
@@ -15,10 +13,15 @@
   
   
   
-  <meta name="description" content="Магистр прикладной математики и информатики">
+    
+      
+    
+  
+  <meta name="description" content="Настройка одного сервера Путь в тысячу миль начинается с первого шага и в проектировании сложных систем аналогично. Чтобы начать с чего-то простого, всегда запускаются на одном сервере.
+Рисунок 1-1 демонстрирует одиночный сервер, в котором всё запущено на 1 сервере: веб приложение, база данных, кеш и т.д.">
 
   
-  <link rel="alternate" hreflang="ru-ru" href="https://vitalyzhakov.github.io/tags/system-design/">
+  <link rel="alternate" hreflang="ru-ru" href="https://vitalyzhakov.github.io/post/scaling-from-zero-to-millions-of-users/">
 
   
 
@@ -73,15 +76,15 @@
   
 
   
-  <link rel="alternate" href="https://vitalyzhakov.github.io/tags/system-design/index.xml" type="application/rss+xml" title="Инфраструктура ИТ">
-  <link rel="feed" href="https://vitalyzhakov.github.io/tags/system-design/index.xml" type="application/rss+xml" title="Инфраструктура ИТ">
+  <link rel="alternate" href="https://vitalyzhakov.github.io/index.xml" type="application/rss+xml" title="Инфраструктура ИТ">
+  <link rel="feed" href="https://vitalyzhakov.github.io/index.xml" type="application/rss+xml" title="Инфраструктура ИТ">
   
 
   <link rel="manifest" href="/site.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="https://vitalyzhakov.github.io/tags/system-design/">
+  <link rel="canonical" href="https://vitalyzhakov.github.io/post/scaling-from-zero-to-millions-of-users/">
 
   <meta property="twitter:card" content="summary_large_image">
   
@@ -89,18 +92,21 @@
   <meta property="twitter:creator" content="@GeorgeCushen">
   
   <meta property="og:site_name" content="Инфраструктура ИТ">
-  <meta property="og:url" content="https://vitalyzhakov.github.io/tags/system-design/">
-  <meta property="og:title" content="System design | Инфраструктура ИТ">
-  <meta property="og:description" content="Магистр прикладной математики и информатики">
+  <meta property="og:url" content="https://vitalyzhakov.github.io/post/scaling-from-zero-to-millions-of-users/">
+  <meta property="og:title" content="Масштабирование от нуля до миллиона пользователей | Инфраструктура ИТ">
+  <meta property="og:description" content="Настройка одного сервера Путь в тысячу миль начинается с первого шага и в проектировании сложных систем аналогично. Чтобы начать с чего-то простого, всегда запускаются на одном сервере.
+Рисунок 1-1 демонстрирует одиночный сервер, в котором всё запущено на 1 сервере: веб приложение, база данных, кеш и т.д.">
   <meta property="og:locale" content="ru-ru">
   
-  <meta property="og:updated_time" content="2021-11-10T00:10:06&#43;05:00">
+  <meta property="article:published_time" content="2021-11-10T00:10:06&#43;05:00">
+  
+  <meta property="article:modified_time" content="2021-11-10T00:10:06&#43;05:00">
   
 
   
   
 
-  <title>System design | Инфраструктура ИТ</title>
+  <title>Масштабирование от нуля до миллиона пользователей | Инфраструктура ИТ</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
@@ -196,40 +202,137 @@
 </nav>
 
 
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
 
 
+  <div class="article-container">
+    <h1 itemprop="name">Масштабирование от нуля до миллиона пользователей</h1>
 
-<div class="universal-wrapper">
+    
 
-  <h1>System design</h1>
+<div class="article-metadata">
 
+  <span class="article-date">
+    
+    <time datetime="2021-11-10 00:10:06 &#43;0500 &#43;0500" itemprop="datePublished dateModified">
+      Nov 10, 2021
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Жаков Виталий">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    1 мин.
+  </span>
   
 
   
   
-  <div>
-    <h2><a href="https://vitalyzhakov.github.io/post/scaling-from-zero-to-millions-of-users/">Масштабирование от нуля до миллиона пользователей</a></h2>
-    <div class="article-style">
-      
-      Разработка систем, которые поддерживают миллионы пользователей достаточно сложно и это путешествие требует постоянного совершенствования и бесконечного улучшения. В этой статье мы построим систему, которая поддерживате одного пользователя и постепенно масштабируем к миллионам пользователей. После прочтения вы освоите несколько техник дизайна систем.
-      
-    </div>
-  </div>
+
   
-  <div>
-    <h2><a href="https://vitalyzhakov.github.io/post/system-design-easy/">Системный дизайн, простой уровень</a></h2>
-    <div class="article-style">
-      
-      Моделирование показателей на примере простого сервиса
-      
-    </div>
-  </div>
+  
+  
   
 
   
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=%d0%9c%d0%b0%d1%81%d1%88%d1%82%d0%b0%d0%b1%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5%20%d0%be%d1%82%20%d0%bd%d1%83%d0%bb%d1%8f%20%d0%b4%d0%be%20%d0%bc%d0%b8%d0%bb%d0%bb%d0%b8%d0%be%d0%bd%d0%b0%20%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d1%82%d0%b5%d0%bb%d0%b5%d0%b9&amp;url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fscaling-from-zero-to-millions-of-users%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fscaling-from-zero-to-millions-of-users%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fscaling-from-zero-to-millions-of-users%2f&amp;title=%d0%9c%d0%b0%d1%81%d1%88%d1%82%d0%b0%d0%b1%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5%20%d0%be%d1%82%20%d0%bd%d1%83%d0%bb%d1%8f%20%d0%b4%d0%be%20%d0%bc%d0%b8%d0%bb%d0%bb%d0%b8%d0%be%d0%bd%d0%b0%20%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d1%82%d0%b5%d0%bb%d0%b5%d0%b9"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fscaling-from-zero-to-millions-of-users%2f&amp;title=%d0%9c%d0%b0%d1%81%d1%88%d1%82%d0%b0%d0%b1%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5%20%d0%be%d1%82%20%d0%bd%d1%83%d0%bb%d1%8f%20%d0%b4%d0%be%20%d0%bc%d0%b8%d0%bb%d0%bb%d0%b8%d0%be%d0%bd%d0%b0%20%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d1%82%d0%b5%d0%bb%d0%b5%d0%b9"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=%d0%9c%d0%b0%d1%81%d1%88%d1%82%d0%b0%d0%b1%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5%20%d0%be%d1%82%20%d0%bd%d1%83%d0%bb%d1%8f%20%d0%b4%d0%be%20%d0%bc%d0%b8%d0%bb%d0%bb%d0%b8%d0%be%d0%bd%d0%b0%20%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d1%82%d0%b5%d0%bb%d0%b5%d0%b9&amp;body=https%3a%2f%2fvitalyzhakov.github.io%2fpost%2fscaling-from-zero-to-millions-of-users%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
 
+
+  
 
 </div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<h2 id="настройка-одного-сервера">Настройка одного сервера</h2>
+
+<p>Путь в тысячу миль начинается с первого шага и в проектировании сложных систем аналогично.
+Чтобы начать с чего-то простого, всегда запускаются на одном сервере.</p>
+
+<p>Рисунок 1-1 демонстрирует одиночный сервер, в котором всё запущено на 1 сервере: веб приложение, база данных, кеш и т.д.</p>
+
+<p><img src="/images/scaling-from-zero-to-millions-of-users/fugure1-1.png" alt="Рисунок 1-1" title="Рисунок 1-1" /></p>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="https://vitalyzhakov.github.io/tags/system-design/">System design</a>
+  
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3></h3>
+      <ul>
+        
+        <li><a href="/post/system-design-easy/">Системный дизайн, простой уровень</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
 <footer class="site-footer">
   <div class="container">
     <p class="powered-by">
@@ -316,6 +419,4 @@
 
   </body>
 </html>
-
-
 

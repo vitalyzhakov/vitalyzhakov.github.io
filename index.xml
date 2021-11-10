@@ -11,6 +11,25 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Масштабирование от нуля до миллиона пользователей</title>
+      <link>https://vitalyzhakov.github.io/post/scaling-from-zero-to-millions-of-users/</link>
+      <pubDate>Wed, 10 Nov 2021 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/scaling-from-zero-to-millions-of-users/</guid>
+      <description>
+
+&lt;h2 id=&#34;настройка-одного-сервера&#34;&gt;Настройка одного сервера&lt;/h2&gt;
+
+&lt;p&gt;Путь в тысячу миль начинается с первого шага и в проектировании сложных систем аналогично.
+Чтобы начать с чего-то простого, всегда запускаются на одном сервере.&lt;/p&gt;
+
+&lt;p&gt;Рисунок 1-1 демонстрирует одиночный сервер, в котором всё запущено на 1 сервере: веб приложение, база данных, кеш и т.д.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://vitalyzhakov.github.io/images/scaling-from-zero-to-millions-of-users/fugure1-1.png&#34; alt=&#34;Рисунок 1-1&#34; title=&#34;Рисунок 1-1&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Системный дизайн, простой уровень</title>
       <link>https://vitalyzhakov.github.io/post/system-design-easy/</link>
       <pubDate>Fri, 01 Oct 2021 00:10:06 +0500</pubDate>
@@ -1449,33 +1468,6 @@ services:
 &lt;p&gt;Как вы думаете, будет ли она работать?&lt;/p&gt;
 
 &lt;p&gt;PS. Правильный ответ - нет, запросы на оптимизируемый сайт не придут.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Мониторинг</title>
-      <link>https://vitalyzhakov.github.io/post/monitoring/</link>
-      <pubDate>Tue, 01 Oct 2019 00:10:06 +0500</pubDate>
-      
-      <guid>https://vitalyzhakov.github.io/post/monitoring/</guid>
-      <description>&lt;p&gt;При растущем проекте количество часто сервисов также растёт.&lt;/p&gt;
-
-&lt;p&gt;Команда вносит в них изменения, но не все изменения удаётся протестировать.&lt;/p&gt;
-
-&lt;p&gt;Иногда ошибка проникает в продуктовую среду и по ней нужно отреагировать.&lt;/p&gt;
-
-&lt;p&gt;Один из способов отслеживания - сбор метрик и своевременная реакция на них.
-Представьте, что перед вами стоит задача обеспечения здоровья жителей города.
-Возможно, стоит периодически измерять показатели здоровья каждого жителя
-(температуру, давление, уровень сахара в крови), чтобы своевременно реагировать на изменения и
-предотвращать нежелательные последствия.&lt;/p&gt;
-
-&lt;p&gt;Аналогично у команды в продакшне есть сервисы, у них свои показатели на конкретный момент времени.
-Для сбора метрик в течение определённого времени используется time series db (например, prometheus).&lt;/p&gt;
-
-&lt;p&gt;В предлагаемом решении в сборе участвуют cadvisior, данные собираются в prometheus.&lt;/p&gt;
-
-&lt;p&gt;Для отображения установлена grafana, в которой можно смотреть показатели во времени.&lt;/p&gt;
 </description>
     </item>
     
