@@ -231,7 +231,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 мин.
+    2 мин.
   </span>
   
 
@@ -314,6 +314,20 @@
 <li>Как только IP адрес получен, запрос Hypertext Transfer Protocol (HTTP) отправляется напрямую к вашему веб-серверу.</li>
 <li>Веб-сервер возвращает HTML-страницу или JSON-ответ. В общем случае может вернуть в теле ответа также изображения, видео и другие типы содержимого.</li>
 </ol>
+
+<p>Далее, давайте проверим источники траффика. Траффик к нашему вебсерверу приходит из двух источников:
+web и мобильное приложения.</p>
+
+<ul>
+<li>Web приложение: использует комбинацию серверных языков (Java, Python, etc.) для обработки
+бизнес-логики, хранения и т.д. и клиентских языков (HTML и JavaScript) для представления.</li>
+<li>Мобильное приложение: протокол HTTP - протокол коммуникаций между мобильным приложением и веб-сервером.
+JavaScript Object Notation (JSON) - общеиспользуемый фаортма для передачи данных из-за его простоты.
+Пример API ответа в формате JSON представлен ниже:</li>
+</ul>
+
+<p>GET /users/12 – Retrieve user object for id = 12
+<img src="/images/scaling-from-zero-to-millions-of-users/json-response-example.png" alt="JSON response example" title="JSON response example" /></p>
 
     </div>
 
