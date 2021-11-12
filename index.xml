@@ -47,7 +47,7 @@ web и мобильное приложения.&lt;/p&gt;
 &lt;li&gt;Web приложение: использует комбинацию серверных языков (Java, Python, etc.) для обработки
 бизнес-логики, хранения и т.д. и клиентских языков (HTML и JavaScript) для представления.&lt;/li&gt;
 &lt;li&gt;Мобильное приложение: протокол HTTP - протокол коммуникаций между мобильным приложением и веб-сервером.
-JavaScript Object Notation (JSON) - общеиспользуемый фаортма для передачи данных из-за его простоты.
+JavaScript Object Notation (JSON) - общеиспользуемый формат для передачи данных из-за его простоты.
 Пример API ответа в формате JSON представлен ниже:&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -304,7 +304,7 @@ Least-recently-used (LRU) - в первую очередь, вытесняетс
 &lt;/ul&gt;
 
 &lt;p&gt;Рисунок 1-11 показывает дизайн после добавления CDN и кеша
-&lt;img src=&#34;https://vitalyzhakov.github.io/images/scaling-from-zero-to-millions-of-users/figure1-10.png&#34; alt=&#34;Рисунок 1-11&#34; title=&#34;Рисунок 1-11&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://vitalyzhakov.github.io/images/scaling-from-zero-to-millions-of-users/figure1-11.png&#34; alt=&#34;Рисунок 1-11&#34; title=&#34;Рисунок 1-11&#34; /&gt;&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Статические ресурсы (JS, CSS, images, др.,) больше не доставляются веб-сервером. Они доставляются с CDN для лучшей производительности.&lt;/li&gt;
