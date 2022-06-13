@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>https://vitalyzhakov.github.io/post/device-passport/</loc>
+      <lastmod>2022-06-13T00:10:06+05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://vitalyzhakov.github.io/post/scaling-from-zero-to-millions-of-users/</loc>
       <lastmod>2021-11-10T00:10:06+05:00</lastmod>
     </url>
@@ -394,6 +403,16 @@
     
       <loc>https://vitalyzhakov.github.io/tags/ide/</loc>
       <lastmod>2020-05-19T00:10:06+05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://vitalyzhakov.github.io/tags/latex/</loc>
+      <lastmod>2022-06-13T00:10:06+05:00</lastmod>
       <priority>0</priority>
     </url>
     

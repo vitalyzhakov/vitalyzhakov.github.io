@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Latex on Инфраструктура ИТ</title>
+    <link>https://vitalyzhakov.github.io/tags/latex/</link>
+    <description>Recent content in Latex on Инфраструктура ИТ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru-ru</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Mon, 13 Jun 2022 00:10:06 +0500</lastBuildDate>
+    
+	<atom:link href="https://vitalyzhakov.github.io/tags/latex/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Генерация паспорта устройства</title>
+      <link>https://vitalyzhakov.github.io/post/device-passport/</link>
+      <pubDate>Mon, 13 Jun 2022 00:10:06 +0500</pubDate>
+      
+      <guid>https://vitalyzhakov.github.io/post/device-passport/</guid>
+      <description>Часто в комплекте с устройствами поставляются их паспорта, которые содержат техническую спецификацию. На производстве выпускается несколько модификаций одного и того же устройства. Как сейчас - паспорта создаются путём копирования похожего и внесения в него изменений, что приводит к человеческим ошибкам.
+Требования Основные параметры шаблона зависят от маркировки. Маркировка - это строка вида DSA XXXX DS XX XX XX, где каждый символ - выбор характеристики из словаря.
+Кроме маркировки нужно указать точные характеристики, не вынесенные в маркировку (в том числе серийный номер).</description>
+    </item>
+    
+  </channel>
+</rss>
