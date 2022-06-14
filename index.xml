@@ -55,24 +55,24 @@
 &amp;lt;template path=&amp;quot;templates/dsa.latex&amp;quot;&amp;gt;
 &amp;lt;/template&amp;gt;
 
-&amp;lt;label&amp;gt;
+&amp;lt;mark&amp;gt;
     &amp;lt;static&amp;gt;DSA-&amp;lt;static&amp;gt;
-    &amp;lt;select&amp;gt;
+    &amp;lt;select id=&amp;quot;1&amp;quot;&amp;gt;
         &amp;lt;label&amp;gt;Количество входов&amp;lt;/label&amp;gt;
         &amp;lt;option value=&amp;quot;1&amp;quot;&amp;gt;1&amp;lt;/option&amp;gt;
         &amp;lt;option value=&amp;quot;2&amp;quot;&amp;gt;2&amp;lt;/option&amp;gt;
     &amp;lt;/select&amp;gt;
-    &amp;lt;select&amp;gt;
+    &amp;lt;select id=&amp;quot;2&amp;quot;&amp;gt;
         &amp;lt;label&amp;gt;Измеряемая величина&amp;lt;/label&amp;gt;
         &amp;lt;option value=&amp;quot;1&amp;quot;&amp;gt;Измерение зазора в плоскости&amp;lt;/option&amp;gt;
         &amp;lt;option value=&amp;quot;2&amp;quot;&amp;gt;Максимальное значение в области зазора&amp;lt;/option&amp;gt;
     &amp;lt;/select&amp;gt;
-    &amp;lt;select&amp;gt;
+    &amp;lt;select id=&amp;quot;3&amp;quot;&amp;gt;
         &amp;lt;label&amp;gt;Температурный диапазон&amp;lt;/name&amp;gt;
         &amp;lt;option value=&amp;quot;1&amp;quot;&amp;gt;4-10 С&amp;lt;/option&amp;gt;
         &amp;lt;option value=&amp;quot;2&amp;quot;&amp;gt;-20 +50 С&amp;lt;/option&amp;gt;
     &amp;lt;/select&amp;gt;
-&amp;lt;/label&amp;gt;
+&amp;lt;/mark&amp;gt;
 
 &amp;lt;modification&amp;gt;
     &amp;lt;select id=&amp;quot;4&amp;quot;&amp;gt;
@@ -87,10 +87,9 @@
     &amp;lt;/select&amp;gt;
 &amp;lt;/modification&amp;gt;
 
-&amp;lt;userinput&amp;gt;
-    &amp;lt;input id=&amp;quot;8&amp;quot; name=&amp;quot;Серийный номер&amp;quot;&amp;gt;
-    &amp;lt;/input&amp;gt;
-&amp;lt;/userinput&amp;gt;
+
+&amp;lt;input id=&amp;quot;8&amp;quot; name=&amp;quot;Серийный номер&amp;quot;&amp;gt;
+&amp;lt;/input&amp;gt;
 
 ?&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
