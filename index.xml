@@ -89,8 +89,8 @@
     &amp;lt;/modification&amp;gt;
 
 
-    &amp;lt;input name=&amp;quot;8&amp;quot; name=&amp;quot;Серийный номер&amp;quot;&amp;gt;
-    &amp;lt;/input&amp;gt;
+    &amp;lt;label form=&amp;quot;8&amp;quot;&amp;gt;Серийный номер&amp;lt;/label&amp;gt;
+    &amp;lt;input name=&amp;quot;8&amp;quot;&amp;gt;&amp;lt;/input&amp;gt;
 &amp;lt;/form&amp;gt;
 
 ?&amp;gt;
